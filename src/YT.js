@@ -18,31 +18,48 @@ export default class YT extends Component {
             duration: 0,
             playbackRate: 1.0,
             loop: false,
-            timestamps: [],
-            resume: false
-
+            slideLog: [
+                        {slideTitle: 'Slide 1', pauseTime: 5.00},
+                        {slideTitle: 'Slide 2', pauseTime: 10.00},
+                        {slideTitle: 'Slide 3', pauseTime: 20.00},
+                        {slideTitle: 'Slide 4', pauseTime: 146.00}
+                    ],
+            slideCounter: 0,
+            // prevPause: 0.00,
+            // prevTitle: 'Prev Title',
+            pauseTime: 5.00, //set to duration at startup componentDidMount
+            slideTitle: 'Test Title',
+            // nextPause: 20.00,
+            // nextTitle: 'Future Title'
         }     
     }
 
-    //need to add duration as final array element
+    //slide section build
+    //need array of objects that have title, pauseTime, 
+    //display title
+    //update pause and title state on slide change
+    //button navigate to slide (next/prev object in array)
+    //need to add duration as final array element or have setState condition to set pause time to duration to prevent video to stay paused before end of video
+
+    componentDidMount(){
+        const { slideLog } = this.state
+        console.log(slideLog)
+        this.setState({
+            pauseTime: slideLog[0].pauseTime,
+            slideTitle: slideLog[0].slideTitle
+        })
+    }
 
     playPause = () => {
         this.setState({ playing: !this.state.playing })
-        console.log(this.state)
     }
 
     onPlay = () => {
-        console.log('onPlay')
         this.setState({ playing: true })
     }
 
     onPause = () => {
-        console.log('onPause')
         this.setState({ playing: false })
-    }
-
-    onSeek = () => {
-
     }
 
     onSeekMouseDown = e => {
@@ -69,7 +86,7 @@ export default class YT extends Component {
     onProgress = (played) => {
         if (!this.state.seeking) {
             this.setState(played)
-            if (played.playedSeconds > 5.00 ){
+            if (played.playedSeconds > this.state.pauseTime ){
                 this.setState({ playing: false })
             }
         }
@@ -82,16 +99,47 @@ export default class YT extends Component {
     }
 
     addStamp = () => {
-        const {timestamps} = this.state
-        const newArr = [...timestamps, this.player.getCurrentTime()]
+        const {slideLog} = this.state
+        const newObj = {slideTitle: 'Added Slide', pauseTime: this.player.getCurrentTime()}
+        const newArr = [...slideLog, newObj]
         this.setState({
-            timestamps: newArr
+            slideLog: newArr
         })
     }
+
+    handleContinue(){
+        let { slideCounter, slideLog } = this.state
+        slideCounter++
+        this.setState({
+            pauseTime: slideLog[slideCounter].pauseTime,
+            slideTitle: slideLog[slideCounter].slideTitle,
+            slideCounter: slideCounter
+        })
+        this.setState({ playing: true })
+    }
+
+    //add handlePrevious that seeks back to start time of previous slide(end time of two slides back), setsState, and plays video
+    // handlePrevious(){
+    //     this.player.seekTo(0.00)
+    //     this.setState({
+    //         pauseTime: this.state.prevPause,
+    //         slideTitle: this.state.prevTitle
+    //     })
+    //     this.setState({ playing: true })
+    // }
+
+    // handleNext(){
+    //     this.player.seekTo(this.state.pauseTime)
+    //     this.setState({
+    //         pauseTime: this.state.nextPause,
+    //         slideTitle: this.state.nextTitle
+    //     })
+    //     this.setState({ playing: true })
+    // }
   
 
     render () {
-        const {url, playing, duration, played, playedSeconds, timestamps, pip, controls, light, loop, playbackRate, volume, muted} = this.state
+        const {url, playing, duration, played, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle} = this.state
         return(
             <div>
                 <ReactPlayer
@@ -124,8 +172,11 @@ export default class YT extends Component {
                 <p>{played.toFixed(3)}</p>
                 <p>{playedSeconds.toFixed(3)}</p>
                 <button onClick={() => this.player.seekTo(0.00)}>seekTo 0.00</button>
-                <p>timestamps {timestamps}</p>
                 <button onClick={() => this.addStamp()}>log time</button>
+                <p>Title: {slideTitle}</p>
+                {/* <button onClick={() => this.handlePrevious()}>previous slide</button> */}
+                <button onClick={() => this.handleContinue()}>continue</button>
+                {/* <button onClick={() => this.handleNext()}>next Slide</button> */}
             </div>
         )
     }
