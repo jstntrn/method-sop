@@ -1,0 +1,43 @@
+.logo {
+    font-family: 'Do Hyeon', sans-serif;
+}
+
+.yel {
+    color: #FFBD00;
+}
+
+.register {
+    background: none;
+    border: 1px solid #FFBD00;
+    border-radius: 25px;
+    height: 50px;
+    width: 170px;
+    background-color: #FFBD00;
+    font-size: 15px;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif
+}
+
+.register:hover{
+    background-color: white;
+    color: #FFBD00;
+    cursor: pointer;
+}
+
+.hamburger {
+    font-size: 20px;
+    background: none;
+    border: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.header-left {
+    display: flex;
+}
