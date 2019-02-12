@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import './App.css';
-import YT from './YT'
+import routes from './routes';
+import { HashRouter as Router} from 'react-router-dom';
 
 class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <YT/>
-      </div>
+      <Router>
+        <div className="App">
+          {routes}
+        </div>
+      </Router>
     );
   }
 }
