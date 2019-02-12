@@ -19,10 +19,10 @@ export default class YT extends Component {
             playbackRate: 1.0,
             loop: false,
             slideLog: [
-                        {slideTitle: 'Slide 1', pauseTime: 5.00},
-                        {slideTitle: 'Slide 2', pauseTime: 10.00},
-                        {slideTitle: 'Slide 3', pauseTime: 20.00},
-                        {slideTitle: 'Slide 4', pauseTime: 146.00}
+                        // {slideTitle: 'Slide 1', pauseTime: 5.00},
+                        // {slideTitle: 'Slide 2', pauseTime: 10.00},
+                        // {slideTitle: 'Slide 3', pauseTime: 20.00},
+                        // {slideTitle: 'Slide 4', pauseTime: 146.00}
                     ],
             slideCounter: 0,
             // prevPause: 0.00,
@@ -30,7 +30,8 @@ export default class YT extends Component {
             pauseTime: 5.00, //set to duration at startup componentDidMount
             slideTitle: 'Test Title',
             // nextPause: 20.00,
-            // nextTitle: 'Future Title'
+            // nextTitle: 'Future Title',
+            newTitle: ''
         }     
     }
 
@@ -42,12 +43,27 @@ export default class YT extends Component {
     //need to add duration as final array element or have setState condition to set pause time to duration to prevent video to stay paused before end of video
 
     componentDidMount(){
-        const { slideLog } = this.state
-        console.log(slideLog)
+
+    }
+
+    handleChange(prop, val){
         this.setState({
-            pauseTime: slideLog[0].pauseTime,
-            slideTitle: slideLog[0].slideTitle
+            [prop]: val
         })
+    }
+
+    onStart = () => {
+        const { slideLog, duration } = this.state
+        const newObj = {
+            pauseTime: duration,
+            slideTitle: 'Add Title'
+        }
+        this.setState({
+            slideLog: [...slideLog, newObj],
+            pauseTime: duration,
+            slideTitle: 'Add Title'
+        })
+        console.log(this.state)
     }
 
     playPause = () => {
@@ -98,12 +114,28 @@ export default class YT extends Component {
         })
     }
 
-    addStamp = () => {
-        const {slideLog} = this.state
-        const newObj = {slideTitle: 'Added Slide', pauseTime: this.player.getCurrentTime()}
-        const newArr = [...slideLog, newObj]
+    addSlide = () => {
+        //copy last element to new obj
+        //copy all elements but last to new array
+        //push new object to copied array and sort
+        //push last element back onto array
+        //setState of slideLog to finalArray
+        const {slideLog, newTitle} = this.state
+        console.log({slideLog})
+        const slides = [...slideLog]
+        console.log({slides})
+        const finalObj = slides.pop();
+        console.log({finalObj})
+        const newObj = {slideTitle: newTitle, pauseTime: this.player.getCurrentTime()}
+        console.log({newObj})
+        slides.push(newObj, finalObj)
+        console.log({slides})
+        slides.sort((a, b) => {
+            return a.pauseTime - b.pauseTime
+        })
+        console.log(slides)
         this.setState({
-            slideLog: newArr
+            slideLog: slides
         })
     }
 
@@ -117,6 +149,11 @@ export default class YT extends Component {
         })
         this.setState({ playing: true })
     }
+
+    //to do
+    //slide log creation and final element to duration time
+    //forward and backward navigation
+    //video upload https://developers.google.com/youtube/v3/guides/uploading_a_video
 
     //add handlePrevious that seeks back to start time of previous slide(end time of two slides back), setsState, and plays video
     // handlePrevious(){
@@ -139,7 +176,7 @@ export default class YT extends Component {
   
 
     render () {
-        const {url, playing, duration, played, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle} = this.state
+        const {url, playing, duration, played, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle} = this.state
         return(
             <div>
                 <ReactPlayer
@@ -154,8 +191,8 @@ export default class YT extends Component {
                     playbackRate={playbackRate}
                     volume={volume}
                     muted={muted}
-                    onReady={() => console.log('onReady')}
-                    onStart={() => console.log('onStart')}
+                    onReady={this.onReady}
+                    onStart={this.onStart}
                     onPlay={this.onPlay}
                     onEnablePIP={this.onEnablePIP}
                     onDisablePIP={this.onDisablePIP}
@@ -172,7 +209,8 @@ export default class YT extends Component {
                 <p>{played.toFixed(3)}</p>
                 <p>{playedSeconds.toFixed(3)}</p>
                 <button onClick={() => this.player.seekTo(0.00)}>seekTo 0.00</button>
-                <button onClick={() => this.addStamp()}>log time</button>
+                <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
+                <button onClick={() => this.addSlide()}>new slide</button>
                 <p>Title: {slideTitle}</p>
                 {/* <button onClick={() => this.handlePrevious()}>previous slide</button> */}
                 <button onClick={() => this.handleContinue()}>continue</button>
