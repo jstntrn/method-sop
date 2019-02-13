@@ -41,7 +41,7 @@ class Home extends Component{
                     <div className='content-wrapper'>
                         <div className='content-body'>
                             <h1>Create and deploy your company's standard operating procedures</h1>
-                            <p>Method is a cloud based video-based procedure platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.</p>
+                            <p>Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.</p>
                             <button className='demo button'>CREATE A FREE DEMO</button>
                         </div>
                     </div>
@@ -96,16 +96,57 @@ Kontainer meets all GDPR data security requirements and with advanced user manag
                         <button className='reason button'>CONTACT US</button>
                     </div>
                 </div>
-                <div className='logo-wrapper'>
-                    <h1 className='logo'>method</h1>
-                    <h1 className='logo yel'>sop</h1>
+                <div className='reviews-wrapper'>
+                    <div className='reviews-overlay'>
+                        <div className='review-text'>
+                            <h3>"With Method, we've got an overview of all our procedures, and we have had a great increase in the quality of our product"</h3>
+                            <p>Bob Ross / The Joy of Painting </p>
+                        </div>
+                    </div>
+                    <div className='reviews-background'></div>
                 </div>
+
+                <div className='register-home'>
+                    <div className='register-home-content'>
+                        <h1>More than 001 companies already choose Method</h1>
+                        <div className='register-reason'>
+                            <img className='reg-image' src='https://kontainer.com/content//2018/10/14.svg' alt='reg-reason' />
+                            <p className='reg-text'>Our effective search function allows your to access your material easily and quickly.</p>
+                        </div>
+                        <div className='register-reason'>
+                            <img className='reg-image' src='https://kontainer.com/content//2018/10/7.svg' alt='reg-reason' />
+                            <p className='reg-text'>We are constantly developing Kontainer, in that way our system will always be the best possible tool for you.</p>
+                        </div>
+                        <div className='register-reason'>
+                            <img className='reg-image' src='https://kontainer.com/content//2018/10/1.svg' alt='reg-reason' />
+                            <p className='reg-text'>Kontainer has an ISAE 3402 statement that meets the requirements of the Personal Data Regulation / GDPR.</p>
+                        </div>
+                    </div>
+                    <div className='home-form-container'>
+                        <div className='home-form'>
+                            <h1>Register now - Free account</h1>
+                            <h4>Create an account that remains free, without any minimum contract period</h4>
+                            <input className='home-form-input'/>
+                            <input className='home-form-input'/>
+                            <input className='home-form-input'/>
+                            <button className='form button'>GET STARTED - FREE</button>
+                            <p className='terms'>When signing up you accept the terms and conditions</p>
+                        </div>
+                    </div>
+                </div>
+
                 <div>
                     <Menu 
                     showMenu={this.state.showMenu} 
                     closeMenu={this.handleCloseMenu}
                     />
                 </div>
+
+                <div className='logo-wrapper'>
+                    <h1 className='logo'>method</h1>
+                    <h1 className='logo yel'>sop</h1>
+                </div>
+
                 <footer>
                     <div className='footer-main'>
                         <div className='footer-content'>
