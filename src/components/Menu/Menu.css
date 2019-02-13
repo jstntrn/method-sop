@@ -1,0 +1,49 @@
+.dialogStyles {
+    width: 100%;
+    margin: 0 auto;
+    position: fixed;
+    height: 100vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    z-index: 999;
+    background-color: rgba(0,0,0,0.5);
+    padding: 10px 20px 40px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.dialogCloseButtonStyles {
+    padding-right: 50px;
+    font-size: 50px;
+    color: white;
+    cursor: pointer;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    transform: rotate(45deg);
+    font-weight: lighter;
+    align-self: flex-end;    
+}
+
+.menu-list {
+    padding-top: 100px;
+    background-color: #565761;
+    position: fixed;
+    right: 0;
+    z-index: -1;
+    width: 300px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.menu-link {
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: lighter;
+}

@@ -1,8 +1,25 @@
 import React, { Component } from 'react'
 import macbook from './../../blank-macbook.png'
 import './Home.css'
+import Menu from './../Menu/Menu'
 
 class Home extends Component{
+    constructor(props){
+        super(props)
+
+        this.state = {
+            showMenu: false
+        }
+    }
+
+    handleOpenMenu = () => {
+        this.setState({ showMenu: true })
+      }
+      
+    handleCloseMenu = () => {
+        this.setState({ showMenu: false });
+    }
+
     render(){
         return(
             <div>
@@ -16,7 +33,7 @@ class Home extends Component{
                     </div>
                     <div className='header-right'>   
                         <button className='register button'>SIGN UP FREE</button>
-                        <button className="hamburger"><i className="fas fa-bars"></i></button>
+                        <button className="hamburger" onClick={() => this.handleOpenMenu()}><i className="fas fa-bars"></i></button>
                     </div>
                 </div>
                 <div className='hero'>
@@ -57,12 +74,70 @@ Kontainer meets all GDPR data security requirements and with advanced user manag
                     </div>
 
                 </div>
+                <p className='yel' style={{fontWeight: 'bold', letterSpacing: '3px'}}>REASONS</p>
                 <div className='reasons-wrapper'>
-                    <p className='yel' style={{fontWeight: 'bold', letterSpacing: '3px'}}>REASONS</p>
-                    <div>
-
+                    <div className='reason-card'>
+                        <img className='reason-image' src='https://kontainer.com/content//2018/10/15.svg' alt='two' />
+                        <h3>Customized for your brand</h3>
+                        <p>Kontainer can be customized based on your company's logo and guidelines to support your visual identity. In addition, Kontainer can be integrated with internal and external systems to support your workflow best as possible.</p>
+                        <button className='reason button'>EXAMPLES</button>
+                    </div>
+                    <div className='reason-card'>
+                        <img className='reason-image' src='https://kontainer.com/content//2018/10/14.svg' alt='two' />
+                        <h3>Rights-determined image bank</h3>
+                        <p>Kontainer allows you to share pictures and large files with external partners and create public media galleries. You can create both users and groups with specific rights. That way, you can easily control who sees what content.</p>
+                        <button className='reason button'>MORE FEATURES</button>
+                    </div>
+                    <div className='reason-card'>
+                        <img className='reason-image' src='https://kontainer.com/content//2018/10/12.svg' alt='two' />
+                        <h3>Onboarding and support</h3>
+                        <p>With our customized onboarding program, we ensure that you and your colleagues all have a common basis and a good understanding of how best to use Kontainer. In that it way we insure that Kontainer will be the best possible tool for you! Contact us here</p>
+                        <button className='reason button'>CONTACT US</button>
                     </div>
                 </div>
+                <div className='logo-wrapper'>
+                    <h1 className='logo'>method</h1>
+                    <h1 className='logo yel'>sop</h1>
+                </div>
+                <div>
+                    <Menu 
+                    showMenu={this.state.showMenu} 
+                    closeMenu={this.handleCloseMenu}
+                    />
+                </div>
+                <footer>
+                    <div className='footer-main'>
+                        <div className='footer-content'>
+                            <p style={{fontWeight: 'bold'}}>News</p>
+                            <p>News 1</p>
+                            <p>News 2</p>
+                            <p>News 3</p>
+                            <p>News 4</p>
+                        </div>
+                        <div className='footer-content'>
+                            <p style={{fontWeight: 'bold'}}>Industries</p>
+                                <p>Industries 1</p>
+                                <p>Industries 2</p>
+                                <p>Industries 3</p>
+                                <p>Industries 4</p>
+                        </div>
+                        <div className='footer-content'>
+                            <p style={{fontWeight: 'bold'}}>Products</p>
+                                    <p>Products 1</p>
+                                    <p>Products 2</p>
+                                    <p>Products 3</p>
+                                    <p>Products 4</p>
+                        </div>
+                        <div className='footer-content'>
+                            <p style={{fontWeight: 'bold'}}>Company</p>
+                                        <p>Company 1</p>
+                                        <p>Company 2</p>
+                                        <p>Company 3</p>
+                                        <p>Company 4</p>
+                        </div>
+                    </div>
+                    <p style={{textAlign: 'left', paddingLeft: '100px'}}>Copyright 2019 Justin Tran All rights reserved</p>
+                </footer>
             </div>
         )
     }

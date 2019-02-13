@@ -1,5 +1,16 @@
+/* color palette
+#5D91FD blue
+#FFBD00 yellow
+#565761 dark grey
+#F3F3F3 light grey */
+
 .logo {
     font-family: 'Do Hyeon', sans-serif;
+}
+
+.logo-wrapper {
+    display: flex;
+    margin-left: 100px;
 }
 
 .yel {
@@ -132,4 +143,46 @@
     background-color: #FFBD00;
     color: #565761;
     cursor: pointer;
+}
+
+.reasons-wrapper{
+    display: flex;
+    justify-content: space-between;
+    padding: 50px;
+}
+
+.reason-card {
+    width: 280px;
+}
+
+.reason-image {
+    height: 80px;
+}
+
+.reason {
+    border: 1px solid #FFBD00;
+    background-color: #ffffff;
+    color: #FFBD00;
+    width: 200px;
+    height: 60px;
+    margin-top: 10px;
+    border-radius: 0px;
+}
+
+.reason:hover{
+    background-color: #FFBD00;
+    color: #565761;
+    cursor: pointer;
+}
+
+.footer-main {
+    display: flex;
+    padding: 50px 100px;
+    justify-content: space-between;
+    border-top: 1px solid #F3F3F3;
+    border-bottom: 1px solid #F3F3F3;
+}
+
+.footer-content {
+    text-align: left;
 }
