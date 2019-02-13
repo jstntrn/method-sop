@@ -47,3 +47,9 @@
     font-size: 18px;
     font-weight: lighter;
 }
+
+.highlight {
+    font-size: 24px;
+    color: #FFBD00;
+    font-weight: bold;
+}

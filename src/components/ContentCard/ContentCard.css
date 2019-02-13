@@ -6,3 +6,8 @@
 .proj-card-wrapper:hover {
     cursor: pointer;
 }
+
+.content-text {
+    text-align: left;
+    padding: 10px 40px;
+}

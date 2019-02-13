@@ -10,7 +10,7 @@ class Register extends Component{
                 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link>
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>   
                 <div className='reg-form-header'>
-                    <Link to='/'><i class="fa fa-times"></i></Link>
+                    <Link to='/' style={{ textDecoration: 'none', color: '#565761' }}><i class="fa fa-times"></i></Link>
                 </div>             
                 <div className='reg-form-container'>
                     <div className='header-left reg-logo'>

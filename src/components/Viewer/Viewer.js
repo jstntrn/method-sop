@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import './Viewer.css'
+import ContentDisplay from './../ContentDisplay/ContentDisplay'
  
 export default class Viewer extends Component {
     constructor(props){
         super(props)
         this.state = {
-            url: 'https://www.youtube.com/watch?v=iF2bJ9z__sg',
+            url: 'https://www.youtube.com/watch?v=ltCF1QNaLlo',
             pip: false,
             playing: true,
             controls: false,
@@ -172,58 +173,70 @@ export default class Viewer extends Component {
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
                 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link>
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
-                <div className='header viewer-header'>
-                    <div className='header-left'>
-                        <h1 className='logo'>method</h1>
-                        <h1 className='logo yel'>sop</h1>
+                <div className='fixed-viewer'>
+                    <div className='header viewer-header'>
+                        <div className='header-left'>
+                            <h1 className='logo'>method</h1>
+                            <h1 className='logo yel'>sop</h1>
+                        </div>
+                        <div className='header-right'>
+                            <button className="hamburger"><i className="fas fa-bars"></i></button>
+                        </div>
                     </div>
-                    <div className='header-right'>
-                        <button className="hamburger"><i className="fas fa-bars"></i></button>
+                    <div className='player-header'>
+                        {/* add dynamic slide counter */}
+                        <h2>01  02  03  04</h2>
+                        <h2>{slideTitle}</h2>
+                    </div>
+                    <div className='player-container'>
+                        <div className='nav-container'>
+                            <button className='player-nav center' onClick={() => this.handlePrevious()}><i class="fas fa-angle-left"></i></button>
+                            <button className='player-nav lower' onClick={() => this.handleZero()}><i class="fas fa-undo"></i></button>
+                        </div>
+                        <div className='player-wrapper'>
+                            <ReactPlayer
+                                ref={(player) => this.player = player}
+                                className='react-player'
+                                width='800px'
+                                height='450px'
+                                url={url}
+                                pip={pip}
+                                playing={playing}
+                                controls={controls}
+                                light={light}
+                                loop={loop}
+                                playbackRate={playbackRate}
+                                volume={volume}
+                                muted={muted}
+                                onReady={this.onReady}
+                                onStart={this.onStart}
+                                onPlay={this.onPlay}
+                                onEnablePIP={this.onEnablePIP}
+                                onDisablePIP={this.onDisablePIP}
+                                onPause={this.onPause}
+                                onSeek={e => console.log('onSeek', e)}
+                                onEnded={this.onEnded}
+                                onError={e => console.log('onError', e)}
+                                onProgress={this.onProgress}
+                                onDuration={this.onDuration}
+                            />
+                        </div>
+                        <div className='nav-container'>
+                            <button className='player-nav center' onClick={() => this.handleNext()}><i class="fas fa-angle-right"></i></button>
+                            <button className='player-nav lower' onClick={this.playPause}>{this.state.playing ? <i class="fas fa-pause"></i> : <i class="fas fa-play"></i>}</button>
+                        </div>
+                    </div>
+                    <div className='player-footer'>
+                        {/* add slider seeker */}
+                        <p>{playedSeconds.toFixed(0)}s / </p>
+                        <p>{duration}s</p>
+                        <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
+                        <button onClick={() => this.addSlide()}>create slide</button>
                     </div>
                 </div>
-                <div className='player-header'>
-                    <h2>01  02  03  04</h2>
-                    <h2>{slideTitle}</h2>
+                <div className='content-container'>
+                    <ContentDisplay className='content-body'/>
                 </div>
-                <div className='player-container'>
-                    <button className='player-nav' onClick={() => this.handlePrevious()}><i class="fas fa-angle-left"></i></button>
-                    <div className='player-wrapper'>
-                        <ReactPlayer
-                            ref={(player) => this.player = player}
-                            className='react-player'
-                            width='800px'
-                            height='450px'
-                            url={url}
-                            pip={pip}
-                            playing={playing}
-                            controls={controls}
-                            light={light}
-                            loop={loop}
-                            playbackRate={playbackRate}
-                            volume={volume}
-                            muted={muted}
-                            onReady={this.onReady}
-                            onStart={this.onStart}
-                            onPlay={this.onPlay}
-                            onEnablePIP={this.onEnablePIP}
-                            onDisablePIP={this.onDisablePIP}
-                            onPause={this.onPause}
-                            onSeek={e => console.log('onSeek', e)}
-                            onEnded={this.onEnded}
-                            onError={e => console.log('onError', e)}
-                            onProgress={this.onProgress}
-                            onDuration={this.onDuration}
-                        />
-                    </div>
-                    <button className='player-nav' onClick={() => this.handleNext()}><i class="fas fa-angle-right"></i></button>
-                </div>
-                <button onClick={this.playPause}>{this.state.playing ? 'Pause' : 'Play'}</button>
-                <p>{duration}</p>
-                <p>{played.toFixed(3)}</p>
-                <p>{playedSeconds.toFixed(3)}</p>
-                <button onClick={() => this.handleZero()}>seekTo 0.00</button>
-                <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
-                <button onClick={() => this.addSlide()}>new slide</button>
             </div>
         )
     }

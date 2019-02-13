@@ -9,12 +9,12 @@ class Menu extends Component{
             <div className="dialogStyles">
                 <h3 className="dialogCloseButtonStyles" onClick={this.props.closeMenu}>+</h3>
                 <div className='menu-list'>
-                    <Link to='/login' className='menu-link'>Login</Link>
-                    <Link to='/dashboard' className='menu-link'>Dashboard</Link>
-                    <Link to='/upload' className='menu-link'>Upload</Link>
-                    <Link to='/viewer' className='menu-link'>Viewer</Link>
+                    <Link to='/login' className='menu-link highlight'>Login</Link>
+                    <Link to='/' className='menu-link'>Integrations</Link>
+                    <Link to='/' className='menu-link'>Clients</Link>
+                    <Link to='/' className='menu-link'>Pricing</Link>
+                    <Link to='/' className='menu-link'>Contact</Link>
                 </div>
-
             </div>
 
         );

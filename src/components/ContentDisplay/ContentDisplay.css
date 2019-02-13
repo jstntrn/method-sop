@@ -1,0 +1,6 @@
+.projects-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    width: 800px;
+}
