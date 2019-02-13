@@ -1,0 +1,42 @@
+.reg-form-header {
+    width: 80%;
+    height: 10vh;
+    margin: 0 auto;
+    background-color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-size: 40px;
+    color: black;
+    text-decoration: none;
+}
+
+.reg-logo {
+    margin-top: 20px;
+}
+
+.reg-form {
+    margin-top: 10px;
+}
+
+.reg-form-container {
+    width: 80%;
+    height: 80vh;
+    background-color: #F3F3F3;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.regCloseButtonStyles {
+    padding-right: 50px;
+    font-size: 50px;
+    color: black;
+    cursor: pointer;
+    border-radius: 25px;
+    background: none;
+    border: none;
+    transform: rotate(45deg);
+    font-weight: lighter;
+}

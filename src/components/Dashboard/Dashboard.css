@@ -1,0 +1,14 @@
+.dash {
+    margin-bottom: 25px;
+}
+
+.dash-title {
+    font-size: 25px;
+    font-weight: lighter;
+    padding-left: 12px;
+    padding-top: 6px;
+}
+
+.dash-body {
+    padding: 0px 50px;
+}

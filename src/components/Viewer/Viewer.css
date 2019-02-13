@@ -1,0 +1,44 @@
+.viewer-header {
+    background-color: #F3F3F3;
+    padding: 0px 50px;
+    height: 50px;
+}
+
+.player-header {
+    padding: 0px 130px;
+    margin: 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.player-container {
+    padding: 0px 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.player-wrapper {
+    box-shadow: 1px 1px 100px 10px #dddddd;
+    margin: 0px 20px;
+    z-index: -1
+}
+
+.player-nav {
+    background: none;
+    width: 60px;
+    height: 60px;
+    color: white;
+    border: 1px solid black;
+    background-color: black;
+    border-radius: 35px;
+    font-size: 50px;
+    /* text-align: center; */
+}
+
+.player-nav:hover {
+    color: #FFBD00;
+    border: 1px solid #FFBD00;
+    background-color: #ffffff;
+    cursor: pointer
+}
