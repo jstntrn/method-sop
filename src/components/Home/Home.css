@@ -46,6 +46,10 @@
     padding-left: 15px;
 }
 
+.hamburger:hover {
+    cursor: pointer;
+}
+
 .header {
     display: flex;
     justify-content: space-between;

@@ -126,7 +126,8 @@ export default class Viewer extends Component {
         const { slideLog } = this.state
         this.setState({
             pauseTime: slideLog[0].pauseTime,
-            slideTitle: slideLog[0].slideTitle
+            slideTitle: slideLog[0].slideTitle,
+            slideCounter: 0
         })
         this.player.seekTo(0.00)
     }

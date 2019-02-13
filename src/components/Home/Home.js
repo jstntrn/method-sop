@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import macbook from './../../blank-macbook.png'
 import './Home.css'
 import Menu from './../Menu/Menu'
+import { Link } from 'react-router-dom'
 
 class Home extends Component{
     constructor(props){
@@ -31,8 +32,8 @@ class Home extends Component{
                         <h1 className='logo'>method</h1>
                         <h1 className='logo yel'>sop</h1>
                     </div>
-                    <div className='header-right'>   
-                        <button className='register button'>SIGN UP FREE</button>
+                    <div className='header-right'>
+                        <Link to='/register'><button className='register button'>SIGN UP FREE</button></Link>
                         <button className="hamburger" onClick={() => this.handleOpenMenu()}><i className="fas fa-bars"></i></button>
                     </div>
                 </div>
@@ -116,24 +117,24 @@ Kontainer meets all GDPR data security requirements and with advanced user manag
                         </div>
                         <div className='footer-content'>
                             <p style={{fontWeight: 'bold'}}>Industries</p>
-                                <p>Industries 1</p>
-                                <p>Industries 2</p>
-                                <p>Industries 3</p>
-                                <p>Industries 4</p>
+                            <p>Industries 1</p>
+                            <p>Industries 2</p>
+                            <p>Industries 3</p>
+                            <p>Industries 4</p>
                         </div>
                         <div className='footer-content'>
                             <p style={{fontWeight: 'bold'}}>Products</p>
-                                    <p>Products 1</p>
-                                    <p>Products 2</p>
-                                    <p>Products 3</p>
-                                    <p>Products 4</p>
+                            <p>Products 1</p>
+                            <p>Products 2</p>
+                            <p>Products 3</p>
+                            <p>Products 4</p>
                         </div>
                         <div className='footer-content'>
                             <p style={{fontWeight: 'bold'}}>Company</p>
-                                        <p>Company 1</p>
-                                        <p>Company 2</p>
-                                        <p>Company 3</p>
-                                        <p>Company 4</p>
+                            <p>Company 1</p>
+                            <p>Company 2</p>
+                            <p>Company 3</p>
+                            <p>Company 4</p>
                         </div>
                     </div>
                     <p style={{textAlign: 'left', paddingLeft: '100px'}}>Copyright 2019 Justin Tran All rights reserved</p>
