@@ -86,8 +86,14 @@
     width: 100%;
 }
 
-.content-body {
+.card-content-body {
     /* padding: 0px 50px; */
     margin: 0px auto;
-    background-color: red;
+}
+
+.proj-title {
+    font-size: 25px;
+    font-weight: lighter;
+    padding-left: 12px;
+    padding-top: 6px;
 }

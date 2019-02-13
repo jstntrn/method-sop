@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import ContentCard from './../ContentCard/ContentCard'
 import './ContentDisplay.css'
 
-export default class ProjectLibrary extends Component{
+export default class ContentDisplay extends Component{
     constructor(props){
         super(props)
 
@@ -19,7 +19,7 @@ export default class ProjectLibrary extends Component{
 
     render(){
         return(
-            <div className='projects-container'>
+            <div className='contents-container'>
                 {
                     this.state.contentList.map(content => (
                         <ContentCard

@@ -178,6 +178,7 @@ export default class Viewer extends Component {
                         <div className='header-left'>
                             <h1 className='logo'>method</h1>
                             <h1 className='logo yel'>sop</h1>
+                            <h1 className='proj-title'>|   Project Title</h1>
                         </div>
                         <div className='header-right'>
                             <button className="hamburger"><i className="fas fa-bars"></i></button>
@@ -235,7 +236,7 @@ export default class Viewer extends Component {
                     </div>
                 </div>
                 <div className='content-container'>
-                    <ContentDisplay className='content-body'/>
+                    <ContentDisplay className='card-content-body'/>
                 </div>
             </div>
         )
