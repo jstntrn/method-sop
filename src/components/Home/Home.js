@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import macbook from './../../blank-macbook.png'
+import screen from './../../mac-screen.png'
 import './Home.css'
 import Menu from './../Menu/Menu'
 import { Link } from 'react-router-dom'
@@ -46,6 +47,7 @@ class Home extends Component{
                         </div>
                     </div>
                     <div className='content-image'>
+                        <img className='screen' src={screen} alt='screen' />
                         <img className='comp' src={macbook} alt='macbook' />
                     </div>
                 </div>
