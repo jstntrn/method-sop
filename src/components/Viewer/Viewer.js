@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
 import './Viewer.css'
 import ContentDisplay from './../ContentDisplay/ContentDisplay'
+import CountDisplay from './../CountDisplay/CountDisplay'
  
 export default class Viewer extends Component {
     constructor(props){
@@ -167,7 +168,7 @@ export default class Viewer extends Component {
     }
 
     render () {
-        const {url, playing, duration, played, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle} = this.state
+        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle} = this.state
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
@@ -185,8 +186,10 @@ export default class Viewer extends Component {
                         </div>
                     </div>
                     <div className='player-header'>
-                        {/* add dynamic slide counter */}
-                        <h2>01  02  03  04</h2>
+                        <CountDisplay 
+                            slideLog={this.state.slideLog}
+                            slideCounter={this.state.slideCounter}
+                        />
                         <h2>{slideTitle}</h2>
                     </div>
                     <div className='player-container'>
