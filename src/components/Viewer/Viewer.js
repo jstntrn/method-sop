@@ -68,19 +68,21 @@ export default class Viewer extends Component {
         this.setState({ played: parseFloat(e.target.value) })
     }
 
-    //fix seek bugs
     onSeekMouseUp = e => {
-        const { slideLog } = this.state;
         this.setState({ seeking: false })
+        this.player.seekTo(parseFloat(e.target.value))
+    }
+
+    onSeek = e => {
+        const { slideLog } = this.state;        
         let slideIndex = slideLog.findIndex(slide => {
-            return slide.pauseTime > e.target.value;
+            return slide.pauseTime > e;
         })
         this.setState({
             pauseTime: slideLog[slideIndex].pauseTime,
             slideTitle: slideLog[slideIndex].slideTitle,
             slideCounter: slideIndex
         })
-        this.player.seekTo(parseFloat(e.target.value))
     }
 
     handleSeek = (e) => {
@@ -228,7 +230,7 @@ export default class Viewer extends Component {
                                 onEnablePIP={this.onEnablePIP}
                                 onDisablePIP={this.onDisablePIP}
                                 onPause={this.onPause}
-                                onSeek={e => console.log('onSeek', e)}
+                                onSeek={e => this.onSeek(e)}
                                 onEnded={this.onEnded}
                                 onError={e => console.log('onError', e)}
                                 onProgress={this.onProgress}

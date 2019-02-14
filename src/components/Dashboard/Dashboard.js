@@ -57,7 +57,7 @@ class Dashboard extends Component{
                         <h1 className='dash-title'>|   Dashboard</h1>
                     </div>
                     <div className='header-right'>
-                    
+                        <h1 className='dash-title'>{username}</h1>
                         <button className="hamburger" onClick={() => this.logout()}><i class="fas fa-sign-out-alt"></i></button>
                         <button className="hamburger"><i className="fas fa-bars"></i></button>
                     </div>

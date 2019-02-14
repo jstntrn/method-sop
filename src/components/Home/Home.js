@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import macbook from './../../blank-macbook.png'
-import screen from './../../mac-screen.png'
 import './Home.css'
-import Menu from './../Menu/Menu'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import axios from 'axios';
 import {updateUser} from './../../ducks/reducer'
+import Menu from './../Menu/Menu'
+import macbook from './../../blank-macbook.png'
+import screen from './../../mac-screen.png'
 
 class Home extends Component{
     constructor(props){
