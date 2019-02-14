@@ -76,9 +76,28 @@
     margin-top: 10px;
     padding: 0px 130px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     height: 20px;
+}
+
+.player-footer-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    height: 25px;
+}
+
+.player-footer-left {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 25px;
+}
+
+.progress-bar {
+    width: 400px;
+    margin-right: 10px;
 }
 
 .content-container {

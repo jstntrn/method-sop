@@ -8,7 +8,7 @@ export default class Viewer extends Component {
     constructor(props){
         super(props)
         this.state = {
-            url: 'https://www.youtube.com/watch?v=ltCF1QNaLlo',
+            url: 'https://vimeo.com/172633844',
             pip: false,
             playing: true,
             controls: false,
@@ -23,7 +23,7 @@ export default class Viewer extends Component {
             loop: false,
             slideLog: [],
             slideCounter: 0,
-            pauseTime: 5.00, //set to duration at startup componentDidMount
+            pauseTime: 0.00,
             slideTitle: 'Test Title',
             newTitle: ''
         }     
@@ -65,12 +65,22 @@ export default class Viewer extends Component {
     }
 
     onSeekChange = e => {
-    this.setState({ played: parseFloat(e.target.value) })
+        this.setState({ played: parseFloat(e.target.value) })
     }
 
+    //fix seek bugs
     onSeekMouseUp = e => {
-    this.setState({ seeking: false })
-    this.player.seekTo(parseFloat(e.target.value))
+        const { slideLog } = this.state;
+        this.setState({ seeking: false })
+        let slideIndex = slideLog.findIndex(slide => {
+            return slide.pauseTime > e.target.value;
+        })
+        this.setState({
+            pauseTime: slideLog[slideIndex].pauseTime,
+            slideTitle: slideLog[slideIndex].slideTitle,
+            slideCounter: slideIndex
+        })
+        this.player.seekTo(parseFloat(e.target.value))
     }
 
     handleSeek = (e) => {
@@ -168,7 +178,7 @@ export default class Viewer extends Component {
     }
 
     render () {
-        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle} = this.state
+        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played} = this.state
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
@@ -231,11 +241,22 @@ export default class Viewer extends Component {
                         </div>
                     </div>
                     <div className='player-footer'>
-                        {/* add slider seeker */}
-                        <p>{playedSeconds.toFixed(0)}s / </p>
-                        <p>{duration}s</p>
-                        <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
-                        <button onClick={() => this.addSlide()}>create slide</button>
+                        <div className='player-footer-left'>
+                            <input
+                            className = 'progress-bar'
+                            type='range' min={0} max={1} step='any'
+                            value={played}
+                            onMouseDown={this.onSeekMouseDown}
+                            onChange={this.onSeekChange}
+                            onMouseUp={this.onSeekMouseUp}
+                            />
+                            <p>{playedSeconds.toFixed(0)}s / </p>
+                            <p>{duration}s</p>
+                        </div>
+                        <div className='player-footer-right'>
+                            <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
+                            <button onClick={() => this.addSlide()}>create slide</button>
+                        </div>
                     </div>
                 </div>
                 <div className='content-container'>
