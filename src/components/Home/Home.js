@@ -46,10 +46,8 @@ class Home extends Component{
                             <button className='demo button'>CREATE A FREE DEMO</button>
                         </div>
                     </div>
-                    <div className='content-image'>
-                        <img className='screen' src={screen} alt='screen' />
-                        <img className='comp' src={macbook} alt='macbook' />
-                    </div>
+                    <img className='screen' src={screen} alt='screen' />
+                    <img className='comp' src={macbook} alt='macbook' />
                 </div>
                 <div className='features-wrapper'>
                     <p className='yel' style={{fontWeight: 'bold', letterSpacing: '3px'}}>FEATURES</p>

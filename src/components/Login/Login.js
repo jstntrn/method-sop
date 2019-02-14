@@ -1,8 +1,53 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { updateUser } from './../../ducks/reducer'
+import axios from 'axios'
 
 class Login extends Component{
+    constructor(props){
+        super(props)
+
+        this.state = {
+            username: '',
+            password: ''
+        }
+    }
+
+    componentDidMount(){
+        const { id } = this.props;
+        if (id) {
+            this.props.history.push('/dashboard')
+        } else {
+            axios.get('/api/user')
+            .then(res => {
+                this.props.updateUser(res.data)
+                this.props.history.push('./dashboard')
+            })
+            .catch(err => {
+
+            })
+        }
+    }
+
+    handleChange (prop, val) {
+        this.setState({
+            [prop]: val
+        })
+    }
+
+    login = () => {
+        const { username, password } = this.state
+        axios.post('/auth/login', { username, password })
+        .then(res => {
+            this.props.updateUser(res.data)
+            this.props.history.push('/dashboard');
+        })
+        .catch((err) => console.log(err))
+    }
+
     render(){
+        const { username, password } = this.state;
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
@@ -20,10 +65,10 @@ class Login extends Component{
                         <div className='home-form'>
                             <h1>Login</h1>
                             <h4>Method can be used to pass on important operational information to new hires</h4>
+                            <input className='home-form-input' value={username} onChange={(e) => this.handleChange('username', e.target.value)}/>
                             <input className='home-form-input'/>
-                            <input className='home-form-input'/>
-                            <input className='home-form-input'/>
-                            <button className='form button'>LOGIN</button>
+                            <input className='home-form-input' type='password' value={password} onChange={(e) => this.handleChange('password', e.target.value)}/>
+                            <button className='form button' onClick={this.login}>LOGIN</button>
                             <p className='terms'>When signing up you accept the terms and conditions</p>
                             <p>If you do not have an account, register <Link to='/register'>here</Link></p>
                         </div>
@@ -35,4 +80,10 @@ class Login extends Component{
     }
 }
 
-export default Login;
+function mapStateToProps(state){
+    return {
+        id: state.id
+    }
+}
+
+export default connect(mapStateToProps, {updateUser})(Login)
