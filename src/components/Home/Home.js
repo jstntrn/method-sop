@@ -4,14 +4,51 @@ import screen from './../../mac-screen.png'
 import './Home.css'
 import Menu from './../Menu/Menu'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux';
+import axios from 'axios';
+import {updateUser} from './../../ducks/reducer'
 
 class Home extends Component{
     constructor(props){
         super(props)
 
         this.state = {
-            showMenu: false
+            showMenu: false,
+            username: '',
+            password: ''
         }
+    }
+
+    componentDidMount(){
+        const { id } = this.props;
+        if (id) {
+            this.props.history.push('/dashboard')
+        } else {
+            axios.get('/api/user')
+            .then(res => {
+                this.props.updateUser(res.data)
+                this.props.history.push('./dashboard')
+            })
+            .catch(err => {
+
+            })
+        }
+    }
+
+    handleChange (prop, val) {
+        this.setState({
+            [prop]: val
+        })
+    }
+
+    register = () => {
+        const { username, password } = this.state
+        axios.post('/auth/register', { username, password })
+        .then(res => {
+            this.props.updateUser(res.data)
+            this.props.history.push('/dashboard');
+        })
+        .catch((err) => console.log(err))
     }
 
     handleOpenMenu = () => {
@@ -23,6 +60,7 @@ class Home extends Component{
     }
 
     render(){
+        const { username, password } = this.state;
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
@@ -126,10 +164,10 @@ Kontainer meets all GDPR data security requirements and with advanced user manag
                         <div className='home-form'>
                             <h1>Register now - Free account</h1>
                             <h4>Create an account that remains free, without any minimum contract period</h4>
+                            <input className='home-form-input' value={username} onChange={(e) => this.handleChange('username', e.target.value)}/>
                             <input className='home-form-input'/>
-                            <input className='home-form-input'/>
-                            <input className='home-form-input'/>
-                            <button className='form button'>GET STARTED - FREE</button>
+                            <input className='home-form-input' type='password' value={password} onChange={(e) => this.handleChange('password', e.target.value)}/>
+                            <button className='form button' onClick={this.register}>GET STARTED - FREE</button>
                             <p className='terms'>When signing up you accept the terms and conditions</p>
                         </div>
                     </div>
@@ -185,4 +223,10 @@ Kontainer meets all GDPR data security requirements and with advanced user manag
     }
 }
 
-export default Home;
+function mapStateToProps(state){
+    return {
+        id: state.id
+    }
+}
+
+export default connect(mapStateToProps, {updateUser})(Home)
