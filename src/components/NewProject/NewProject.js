@@ -19,23 +19,32 @@ class NewProject extends Component{
             userID: null
         }
     }
-
-    componentDidMount(){
+    
+    componentWillMount(){
         const {id} = this.props;
         if(!id){
             axios.get('./api/user')
             .then(res => {
                 this.props.updateUser(res.data);
                 this.setState({
-                    userID: res.data.id
+                    userID: id
                 })
-                console.log(this.state.userID)
             })
             .catch(err => {
                 this.props.history.push('/');
             })
         } else {
         }
+        this.setState({
+            userID: id
+        })
+    }
+
+    componentDidMount(){
+        const {id} = this.props;
+        this.setState({
+            userID: id
+        })
     }
 
     handleChange (prop, val) {
@@ -124,7 +133,7 @@ class NewProject extends Component{
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
-                <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link>
+                {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
                 <div className='header viewer-header dash'>
                     <div className='header-left'>
