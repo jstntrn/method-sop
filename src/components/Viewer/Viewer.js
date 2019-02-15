@@ -203,6 +203,21 @@ class Viewer extends Component {
         }
     }
 
+    //when new slide is created jump back a partial second to keep on logical slide
+    //need to pass URL and other data from project into viewer
+    //extra feature add prompt and tracker if save is necessary
+    handleSave(){
+        const { slideLog } = this.state;
+        console.log(slideLog)
+        // slideLog.map( slide => {
+            //need to find if it is a put or post
+            //could start pulling slide ids and adding them to slideLog
+            //then give the new slides a id of null
+            //then if id is null post
+            //if id exists put
+        // })
+    }
+
     render () {
         const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate} = this.state
         let createInput = (
@@ -228,8 +243,8 @@ class Viewer extends Component {
                             <h1 className='proj-title'>|   Project Title</h1>
                         </div>
                         <div className='header-right'>
-                            <button className="hamburger"><i class="far fa-save"></i></button>                          
-                            <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i class="fas fa-arrow-alt-circle-left"></i></button></Link>                            
+                            <button className="hamburger" ><i className="far fa-save"></i></button>                          
+                            <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>                            
                         </div>
                     </div>
                     <div className='player-header'>
@@ -241,8 +256,8 @@ class Viewer extends Component {
                     </div>
                     <div className='player-container'>
                         <div className='nav-container'>
-                            <button className='player-nav center' onClick={() => this.handlePrevious()}><i class="fas fa-angle-left"></i></button>
-                            <button className='player-nav lower' onClick={() => this.handleZero()}><i class="fas fa-undo"></i></button>
+                            <button className='player-nav center' onClick={() => this.handlePrevious()}><i className="fas fa-angle-left"></i></button>
+                            <button className='player-nav lower' onClick={() => this.handleZero()}><i className="fas fa-undo"></i></button>
                         </div>
                         <div className='player-wrapper'>
                             <ReactPlayer
@@ -273,8 +288,8 @@ class Viewer extends Component {
                             />
                         </div>
                         <div className='nav-container'>
-                            <button className='player-nav center' onClick={() => this.handleNext()}><i class="fas fa-angle-right"></i></button>
-                            <button className='player-nav lower' onClick={this.playPause}>{this.state.playing ? <i class="fas fa-pause"></i> : <i class="fas fa-play"></i>}</button>
+                            <button className='player-nav center' onClick={() => this.handleNext()}><i className="fas fa-angle-right"></i></button>
+                            <button className='player-nav lower' onClick={this.playPause}>{this.state.playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
                         </div>
                     </div>
                     <div className='player-footer'>

@@ -19,7 +19,7 @@ export default function CountDisplay(props){
     `
     return(
         <div className='count-wrapper'>
-            <div class='slide-counter'>
+            <div className='slide-counter'>
                 {
                     slideLog.map((slide, index) => (
                         ( index<9 ? <h2 className='count'>0{index+1}</h2> : <h2 className='count'>{index+1}</h2>)

@@ -63,7 +63,7 @@ class Home extends Component{
         const { username, password } = this.state;
         return(
             <div>
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
                 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link>
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
                 <div className='header'>
@@ -165,15 +165,15 @@ Kontainer meets all GDPR data security requirements and with advanced user manag
                             <h1>Register now - Free account</h1>
                             <h4>Create an account that remains free, without any minimum contract period</h4>
                             <div className='input-div'>
-                                <i class="fas fa-user"></i>
+                                <i className="fas fa-user"></i>
                                 <input className='home-form-input' placeholder={'username'} value={username} onChange={(e) => this.handleChange('username', e.target.value)}/>
                             </div>
                             <div className='input-div'>
-                                <i class="fas fa-envelope"></i>
+                                <i className="fas fa-envelope"></i>
                                 <input className='home-form-input' placeholder={'email'} />
                             </div>
                             <div className='input-div'>
-                                <i class="fas fa-key"></i>
+                                <i className="fas fa-key"></i>
                                 <input className='home-form-input' placeholder={'password'} type='password' value={password} onChange={(e) => this.handleChange('password', e.target.value)}/>
                             </div>
                             <button className='form button' onClick={this.register}>GET STARTED - FREE</button>

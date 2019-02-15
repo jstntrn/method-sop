@@ -46,7 +46,7 @@ class Dashboard extends Component{
     render(){
         return(
             <div>
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
+                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
                 <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link>
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
                 <div className='header viewer-header dash'>
@@ -56,10 +56,10 @@ class Dashboard extends Component{
                         <h1 className='dash-title'>|   Dashboard</h1>
                     </div>
                     <div className='header-right'>
-                        <Link to='/newproject' style={{ textDecoration: 'none'}}><button className="hamburger"><i class="fas fa-plus"></i></button></Link>
-                        <Link to='/library' style={{ textDecoration: 'none'}}><button className="hamburger"><i class="fas fa-video"></i></button></Link>
-                        <Link to='/account' style={{ textDecoration: 'none'}}><button className="hamburger"><i class="fas fa-user"></i></button></Link>
-                        <button className="hamburger" onClick={() => this.logout()}><i class="fas fa-sign-out-alt"></i></button>
+                        <Link to='/newproject' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-plus"></i></button></Link>
+                        <Link to='/library' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-video"></i></button></Link>
+                        <Link to='/account' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-user"></i></button></Link>
+                        <button className="hamburger" onClick={() => this.logout()}><i className="fas fa-sign-out-alt"></i></button>
                     </div>
                 </div>
                 <div className='dash-body'>
