@@ -10,7 +10,7 @@ class NewProject extends Component{
         super(props);
         this.state = {
             projectTitle: '',
-            projectID: null,
+            projectID: 1,
             videoID: null,
             videoURL: '',
             videoImage: '',
@@ -62,7 +62,6 @@ class NewProject extends Component{
             videoURL: val
         })
         // const { videoURL } = this.state
-        console.log(val)
         axios.get(`https://vimeo.com/api/oembed.json?url=${val}`)
         .then(res => {
             this.setState({

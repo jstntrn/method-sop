@@ -12,7 +12,8 @@ module.exports = {
     },
     getProjectVid: (req, res) => {
         const db = req.app.get('db');
-        const projectID = (Number(req.params.project));
+        const projectID = (Number(req.query.project));
+        console.log(req.query)
         db.project.get_project_video([projectID])
         .then(video => {res.status(200).send(video)})
         .catch(err => {console.log(err)})
