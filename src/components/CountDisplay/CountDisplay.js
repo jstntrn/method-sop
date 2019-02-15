@@ -22,7 +22,7 @@ export default function CountDisplay(props){
             <div className='slide-counter'>
                 {
                     slideLog.map((slide, index) => (
-                        ( index<9 ? <h2 className='count'>0{index+1}</h2> : <h2 className='count'>{index+1}</h2>)
+                        ( index<9 ? <h2 className='count' key={index}>0{index+1}</h2> : <h2 className='count' key={index}>{index+1}</h2>)
                     ))  
                 }
             </div>

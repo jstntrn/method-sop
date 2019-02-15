@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ProjectCard from './../ProjectCard/ProjectCard'
 import './ProjectLibrary.css'
-import axios from 'axios'
+// import axios from 'axios'
 
 class ProjectLibrary extends Component{
     constructor(props){
@@ -18,22 +18,22 @@ class ProjectLibrary extends Component{
     }
 
     //test and fix
-    componentDidMount(){
-        axios.get('/api/projects/:userID')
-        .then(res => {
-            this.setState({
-                projectList: res.data
-            })
-        })
-    }
+    // componentDidMount(){
+    //     axios.get('/api/projects/:userID')
+    //     .then(res => {
+    //         this.setState({
+    //             projectList: res.data
+    //         })
+    //     })
+    // }
 
     render(){
         return(
             <div className='projects-container'>
                 {
-                    this.state.projectList.map(project => (
+                    this.state.projectList.map((project, index) => (
                         <ProjectCard
-                            key={project.id}
+                            key={index}
                             title={project.title}
                             image_URL={project.image_url}
                         />
