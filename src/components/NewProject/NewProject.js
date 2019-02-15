@@ -10,6 +10,7 @@ class NewProject extends Component{
         super(props);
         this.state = {
             projectTitle: '',
+            projectID: null,
             videoID: null,
             videoURL: '',
             videoImage: '',
@@ -61,7 +62,8 @@ class NewProject extends Component{
             videoURL: val
         })
         // const { videoURL } = this.state
-        axios.get(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/121583246`)
+        console.log(val)
+        axios.get(`https://vimeo.com/api/oembed.json?url=${val}`)
         .then(res => {
             this.setState({
                 videoTitle: res.data.title,
@@ -103,6 +105,11 @@ class NewProject extends Component{
             title: projectTitle,
             image_url: videoImage
         })
+        .then(res => {
+            this.setState({
+                projectID: res.data.id
+            })
+        })
     }
 
     render(){
@@ -124,7 +131,7 @@ class NewProject extends Component{
 
         let nextBut = (
             <div>
-                {confirmed && projectTitle ? <Link to='/viewer' style={{ textDecoration: 'none' }}><button className="new-next" onClick={() => this.createProject()} disabled={ confirmed === 'false' }><i className="fas fa-arrow-right"></i></button></Link>
+                {confirmed && projectTitle ? <Link to={`/viewer/${this.state.projectID}`} style={{ textDecoration: 'none' }}><button className="new-next" onClick={() => this.createProject()} disabled={ confirmed === 'false' }><i className="fas fa-arrow-right"></i></button></Link>
                 : <div></div>}
             </div>
         )

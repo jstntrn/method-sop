@@ -20,6 +20,6 @@ export default (
         <Route path='/newproject' component={NewProject} />
         <Route path='/register' component={Register} />
         <Route path='/upload' component={UploadVideo} />
-        <Route path='/viewer' component={Viewer} />
+        <Route path='/viewer/:project' component={Viewer} />
     </Switch>
 )

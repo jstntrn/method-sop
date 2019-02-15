@@ -8,4 +8,5 @@ insert into projects (
     $2,
     $3,
     $4
-);
+)
+returning *;

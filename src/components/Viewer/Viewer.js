@@ -51,6 +51,12 @@ class Viewer extends Component {
         } else {
             // dont move
         }
+        axios.get(`/api/viewer/project?=${ this.props.match.params.project }`)
+        .then(res => {
+            this.setState({
+                url: res.data.video_url
+            })
+        })
     }
 
     handleChange(prop, val){
