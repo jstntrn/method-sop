@@ -1,0 +1,38 @@
+.new-proj-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.new-proj-input {
+    margin: 15px;
+    height: 50px;
+    width: 50%;
+    font-size: 20px;
+    text-align: center;
+}
+
+.video-lib-wrapper {
+    border-top: 1px solid #F3F3F3;
+    margin-top: 50px;
+}
+
+.new-next {
+    background: none;
+    border: 1px solid #FFBD00;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: #FFBD00;
+    color: #ffffff;
+    font-size: 35px;
+    position: absolute;
+    top: 230px;
+    right: 110px;
+}
+
+.new-next:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #FFBD00;
+}

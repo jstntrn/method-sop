@@ -66,9 +66,18 @@ class Register extends Component{
                         <div className='home-form'>
                             <h1>Register</h1>
                             <h4>Create an account that remains free, without any minimum contract period</h4>
-                            <input className='home-form-input' value={username} onChange={(e) => this.handleChange('username', e.target.value)}/>
-                            <input className='home-form-input'/>
-                            <input className='home-form-input' type='password' value={password} onChange={(e) => this.handleChange('password', e.target.value)}/>
+                            <div className='input-div'>
+                                <i class="fas fa-user"></i>
+                                <input className='home-form-input' placeholder={'username'} value={username} onChange={(e) => this.handleChange('username', e.target.value)}/>
+                            </div>
+                            <div className='input-div'>
+                                <i class="fas fa-envelope"></i>
+                                <input className='home-form-input' placeholder={'email'} />
+                            </div>
+                            <div className='input-div'>
+                                <i class="fas fa-key"></i>
+                                <input className='home-form-input' placeholder={'password'} type='password' value={password} onChange={(e) => this.handleChange('password', e.target.value)}/>
+                            </div>
                             <button className='form button' onClick={this.register}>GET STARTED - FREE</button>
                             <p className='terms'>When signing up you accept the terms and conditions</p>
                             <p>If you already have an account, login <Link to='/login'>here</Link></p>

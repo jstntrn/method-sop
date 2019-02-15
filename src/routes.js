@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Account from './components/Account/Account';
 import Dashboard from './components/Dashboard/Dashboard';
-import Editor from './components/Editor/Editor';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 import NewProject from './components/NewProject/NewProject';
@@ -16,7 +15,6 @@ export default (
         <Route exact path='/' component={Home} />
         <Route path='/account' component={Account} />
         <Route path='/dashboard' component={Dashboard} />
-        <Route path='/editor' component={Editor} />
         <Route path='/library' component={VideoLibrary} />
         <Route path='/login' component={Login} />
         <Route path='/newproject' component={NewProject} />

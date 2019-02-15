@@ -65,12 +65,18 @@ class Login extends Component{
                         <div className='home-form'>
                             <h1>Login</h1>
                             <h4>Method can be used to pass on important operational information to new hires</h4>
-                            <input className='home-form-input' value={username} onChange={(e) => this.handleChange('username', e.target.value)}/>
-                            <input className='home-form-input'/>
-                            <input className='home-form-input' type='password' value={password} onChange={(e) => this.handleChange('password', e.target.value)}/>
+                            <div className='input-div'>
+                                <i class="fas fa-user"></i>
+                                <input className='home-form-input' placeholder={'username'} value={username} onChange={(e) => this.handleChange('username', e.target.value)}/>
+                            </div>
+                            <div className='input-div'>
+                                <i class="fas fa-key"></i>
+                                <input className='home-form-input' placeholder={'password'} type='password' value={password} onChange={(e) => this.handleChange('password', e.target.value)}/>
+                            </div>
                             <button className='form button' onClick={this.login}>LOGIN</button>
                             <p className='terms'>When signing up you accept the terms and conditions</p>
                             <p>If you do not have an account, register <Link to='/register'>here</Link></p>
+                            <p>If you have forgotten your password, click <Link to='/login'>here</Link></p>
                         </div>
                     </div>
                 </div>

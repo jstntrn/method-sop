@@ -3,8 +3,12 @@ import ReactPlayer from 'react-player';
 import './Viewer.css'
 import ContentDisplay from './../ContentDisplay/ContentDisplay'
 import CountDisplay from './../CountDisplay/CountDisplay'
- 
-export default class Viewer extends Component {
+import { Link } from 'react-router-dom'
+import axios from 'axios';
+import { updateUser } from './../../ducks/reducer'
+import { connect } from 'react-redux';
+
+class Viewer extends Component {
     constructor(props){
         super(props)
         this.state = {
@@ -25,8 +29,28 @@ export default class Viewer extends Component {
             slideCounter: 0,
             pauseTime: 0.00,
             slideTitle: 'Test Title',
-            newTitle: ''
+            newTitle: '',
+            showCreate: true
         }     
+    }
+
+    componentDidMount(){
+        const {id} = this.props;
+        if(!id){
+            //double check sessions
+            axios.get('./api/user')
+            .then(res => {
+                //dont move
+                //add to redux
+                this.props.updateUser(res.data);
+            })
+            .catch(err => {
+                //boot to other page
+                this.props.history.push('/');
+            })
+        } else {
+            // dont move
+        }
     }
 
     handleChange(prop, val){
@@ -180,7 +204,17 @@ export default class Viewer extends Component {
     }
 
     render () {
-        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played} = this.state
+        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate} = this.state
+        let createInput = (
+            <div className='player-footer-right'>
+                <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
+                <button onClick={() => this.addSlide()}>create slide</button>
+            </div>
+        )
+        if (!showCreate){
+            createInput = null;
+        }
+        
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
@@ -194,7 +228,8 @@ export default class Viewer extends Component {
                             <h1 className='proj-title'>|   Project Title</h1>
                         </div>
                         <div className='header-right'>
-                            <button className="hamburger"><i className="fas fa-bars"></i></button>
+                            <button className="hamburger"><i class="far fa-save"></i></button>                          
+                            <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i class="fas fa-arrow-alt-circle-left"></i></button></Link>                            
                         </div>
                     </div>
                     <div className='player-header'>
@@ -255,10 +290,7 @@ export default class Viewer extends Component {
                             <p>{playedSeconds.toFixed(0)}s / </p>
                             <p>{duration}s</p>
                         </div>
-                        <div className='player-footer-right'>
-                            <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
-                            <button onClick={() => this.addSlide()}>create slide</button>
-                        </div>
+                        {createInput}
                     </div>
                 </div>
                 <div className='content-container'>
@@ -268,3 +300,13 @@ export default class Viewer extends Component {
         )
     }
 }
+
+function mapStateToProps(state){
+    const { id, username } = state
+    return {
+        id,
+        username,
+    };
+};
+
+export default connect(mapStateToProps, {updateUser})(Viewer)

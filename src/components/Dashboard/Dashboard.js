@@ -3,7 +3,8 @@ import './Dashboard.css'
 import ProjectLibrary from './../ProjectLibrary/ProjectLibrary'
 import { connect } from 'react-redux';
 import axios from 'axios';
-import {updateUser} from './../../ducks/reducer'
+import { updateUser } from './../../ducks/reducer'
+import { Link } from 'react-router-dom'
 
 class Dashboard extends Component{
 
@@ -43,8 +44,6 @@ class Dashboard extends Component{
     }
 
     render(){
-        const { username } = this.props;
-
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous"/>
@@ -57,9 +56,10 @@ class Dashboard extends Component{
                         <h1 className='dash-title'>|   Dashboard</h1>
                     </div>
                     <div className='header-right'>
-                        <h1 className='dash-title'>{username}</h1>
+                        <Link to='/newproject' style={{ textDecoration: 'none'}}><button className="hamburger"><i class="fas fa-plus"></i></button></Link>
+                        <Link to='/library' style={{ textDecoration: 'none'}}><button className="hamburger"><i class="fas fa-video"></i></button></Link>
+                        <Link to='/account' style={{ textDecoration: 'none'}}><button className="hamburger"><i class="fas fa-user"></i></button></Link>
                         <button className="hamburger" onClick={() => this.logout()}><i class="fas fa-sign-out-alt"></i></button>
-                        <button className="hamburger"><i className="fas fa-bars"></i></button>
                     </div>
                 </div>
                 <div className='dash-body'>
