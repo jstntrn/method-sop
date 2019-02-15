@@ -8,4 +8,5 @@ insert into videos (
     $2,
     $3,
     $4
-);
+) 
+returning *;

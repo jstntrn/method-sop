@@ -4,7 +4,7 @@ const massive = require('massive');
 const { SERVER_PORT, DB_CONNECTION, SESSION_SECRET } = process.env;
 const ac = require('./controllers/authController');
 // const cc = require('./controllers/contentController');
-// const pc = require('./controllers/projController');
+const pc = require('./controllers/projController');
 // const sc = require('./controllers/slideController');
 const vc = require('./controllers/vidController');
 const session = require('express-session');
@@ -32,7 +32,8 @@ app.post('/auth/logout', ac.logout);
 app.get('/api/user', ac.getUser);
 
 //project data
-
+// app.get('/api/projects/:id', pc.getProjects);
+app.post('/api/project', pc.createProject);
 
 //video data
 app.post('/api/video', vc.createVideo)

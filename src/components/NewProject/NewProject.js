@@ -10,6 +10,7 @@ class NewProject extends Component{
         super(props);
         this.state = {
             projectTitle: '',
+            videoID: null,
             videoURL: '',
             videoImage: '',
             videoTitle: '',
@@ -28,6 +29,7 @@ class NewProject extends Component{
                 this.setState({
                     userID: res.data.id
                 })
+                console.log(this.state.userID)
             })
             .catch(err => {
                 this.props.history.push('/');
@@ -46,12 +48,10 @@ class NewProject extends Component{
         //create button on URL input to invoke
         //do api request to vimeo to pull data and set state
         //display video and title on new project screen
-        console.log(this.state)
         this.setState({
             videoURL: val
         })
         // const { videoURL } = this.state
-        console.log(this.state)
         axios.get(`https://vimeo.com/api/oembed.json?url=https://vimeo.com/121583246`)
         .then(res => {
             this.setState({
@@ -59,7 +59,6 @@ class NewProject extends Component{
                 videoImage: res.data.thumbnail_url,
                 showVideo: true
             })
-            console.log(this.state)
         })
         .catch(err => {console.log(err)})
     }
@@ -77,6 +76,7 @@ class NewProject extends Component{
         })
         .then(res => {
             this.setState({
+                videoID: res.data[0].id,
                 confirmed: true
             })
         })
@@ -87,10 +87,12 @@ class NewProject extends Component{
     createProject () {
         //next button is invoked and prject data is posted to table
         //routed to viewer which pulls project id data
-        const { slideTitle, videoID } = this.state;
+        const { projectTitle, videoID, userID, videoImage } = this.state;
         axios.post('/api/project', {
-           slideTitle,
-           videoID
+            video_id: videoID,
+            user_id: userID,
+            title: projectTitle,
+            image_url: videoImage
         })
     }
 
@@ -110,6 +112,14 @@ class NewProject extends Component{
         if(!showVideo){
             currentVid = null;
         }
+
+        let nextBut = (
+            <div>
+                {confirmed && projectTitle ? <Link to='/viewer' style={{ textDecoration: 'none' }}><button className="new-next" onClick={() => this.createProject()} disabled={ confirmed === 'false' }><i className="fas fa-arrow-right"></i></button></Link>
+                : <div></div>}
+            </div>
+        )
+        
 
         return(
             <div>
@@ -132,7 +142,7 @@ class NewProject extends Component{
                         <input className='new-proj-input' value={projectTitle} onChange={(e) => this.handleChange('projectTitle', e.target.value)} />
                         <h2>Video URL</h2>
                         <input className='new-proj-input' value={videoURL} onChange={(e) => this.handleURL(e.target.value)} />
-                        <Link to='/viewer' style={{ textDecoration: 'none' }}><button className="new-next" onClick={() => this.createProject()} disabled={ confirmed === 'false' }><i className="fas fa-arrow-right"></i></button></Link>
+                        {nextBut}
                     </div>
                     {currentVid}
                     <div className='video-lib-wrapper'>
