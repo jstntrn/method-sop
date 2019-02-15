@@ -11,10 +11,11 @@ class NewProject extends Component{
         this.state = {
             projectTitle: '',
             videoURL: '',
-            videoID: null,
             videoImage: '',
             videoTitle: '',
             showVideo: false,
+            confirmed: false,
+            userID: null
         }
     }
 
@@ -24,6 +25,9 @@ class NewProject extends Component{
             axios.get('./api/user')
             .then(res => {
                 this.props.updateUser(res.data);
+                this.setState({
+                    userID: res.data.id
+                })
             })
             .catch(err => {
                 this.props.history.push('/');
@@ -61,16 +65,19 @@ class NewProject extends Component{
     }
 
     confirmVideo () {
+        //**** fix userID load time null value
         //have confirm video button appear
         //if yes, post video to video table and show next button
-        const { videoURL } = this.state;
+        const { videoURL, videoTitle, videoImage, userID } = this.state;
         axios.post('/api/video', {
             videoURL,
-
+            videoTitle,
+            videoImage,
+            userID
         })
         .then(res => {
             this.setState({
-                videoID: res.data.id
+                confirmed: true
             })
         })
     }
@@ -88,12 +95,16 @@ class NewProject extends Component{
     }
 
     render(){
-        const { projectTitle, videoURL, videoImage, videoTitle, showVideo} = this.state;
+        const { projectTitle, videoURL, videoImage, videoTitle, showVideo, confirmed} = this.state;
 
         let currentVid = (
             <div>
                 <img src={videoImage} alt='video thumbnail' />
                 <h2>{videoTitle}</h2>
+                <div>
+                    {confirmed ? <i className="fas fa-thumbs-up" style={{color: '#FFBD00', fontSize: '50px'}}></i>
+                    : <button className='vid-confirm' onClick={() => this.confirmVideo()} disabled={ confirmed === 'true' }><i className="fas fa-check"></i></button>}
+                </div>
             </div>
         )
         if(!showVideo){
@@ -121,7 +132,7 @@ class NewProject extends Component{
                         <input className='new-proj-input' value={projectTitle} onChange={(e) => this.handleChange('projectTitle', e.target.value)} />
                         <h2>Video URL</h2>
                         <input className='new-proj-input' value={videoURL} onChange={(e) => this.handleURL(e.target.value)} />
-                        <Link to='/viewer' style={{ textDecoration: 'none' }}><button className="new-next" onClick={() => this.createProject()}><i className="fas fa-arrow-right"></i></button></Link>
+                        <Link to='/viewer' style={{ textDecoration: 'none' }}><button className="new-next" onClick={() => this.createProject()} disabled={ confirmed === 'false' }><i className="fas fa-arrow-right"></i></button></Link>
                     </div>
                     {currentVid}
                     <div className='video-lib-wrapper'>

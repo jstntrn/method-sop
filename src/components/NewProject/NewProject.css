@@ -36,3 +36,20 @@
     background-color: #ffffff;
     color: #FFBD00;
 }
+
+.vid-confirm {
+    background: none;
+    border: 1px solid #FFBD00;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background-color: #FFBD00;
+    color: #ffffff;
+    font-size: 35px;
+}
+
+.vid-confirm:hover {
+    cursor: pointer;
+    background-color: #ffffff;
+    color: #FFBD00;
+}

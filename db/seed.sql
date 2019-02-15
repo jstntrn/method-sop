@@ -13,6 +13,9 @@ create table videos (
     thumbnail varchar
 );
 
+alter table videos
+add column title varchar;
+
 create table projects (
     id serial primary key,
     video_id integer,
