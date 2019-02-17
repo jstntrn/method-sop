@@ -8,11 +8,13 @@ import axios from 'axios';
 import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
 
+// https://vimeo.com/172633844
+
 class Viewer extends Component {
     constructor(props){
         super(props)
         this.state = {
-            url: 'https://vimeo.com/172633844',
+            url: '',
             pip: false,
             playing: true,
             controls: false,
@@ -37,24 +39,16 @@ class Viewer extends Component {
     componentDidMount(){
         const {id} = this.props;
         if(!id){
-            //double check sessions
             axios.get('./api/user')
             .then(res => {
-                //dont move
-                //add to redux
                 this.props.updateUser(res.data);
             })
             .catch(err => {
-                //boot to other page
                 this.props.history.push('/');
             })
         } else {
-            // dont move
         }
-        // console.log(this.props.match.params)
-        // const project = Number(this.props.match.params.project)
-        // console.log(project)
-        axios.get(`/api/viewer?project=4`)
+        axios.get(`/api/viewer?project=${this.props.match.params.project}`)
         .then(res => {
             console.log(res.data)
             this.setState({

@@ -139,7 +139,6 @@ class NewProject extends Component{
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
-                {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
                 <div className='header viewer-header dash'>
                     <div className='header-left'>
@@ -164,6 +163,7 @@ class NewProject extends Component{
                         <h2>Video Library</h2>
                     </div>
                 </div>
+                {/* <Viewer videoURL={videoURL}/> */}
             </div>
         )
     }
