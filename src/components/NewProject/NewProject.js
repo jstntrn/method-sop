@@ -5,12 +5,14 @@ import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
 import './NewProject.css'
 
+//problems to fix: video control functions weren't working with projectID 50, also new the projectID needs to be set before link is clicked
+
 class NewProject extends Component{
     constructor(props){
         super(props);
         this.state = {
             projectTitle: '',
-            projectID: 1,
+            projectID: 84,
             videoID: null,
             videoURL: '',
             videoImage: '',
@@ -163,7 +165,6 @@ class NewProject extends Component{
                         <h2>Video Library</h2>
                     </div>
                 </div>
-                {/* <Viewer videoURL={videoURL}/> */}
             </div>
         )
     }
