@@ -8,8 +8,6 @@ import axios from 'axios';
 import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
 
-// https://vimeo.com/172633844
-
 class Viewer extends Component {
     constructor(props){
         super(props)
@@ -30,13 +28,15 @@ class Viewer extends Component {
             slideLog: [],
             slideCounter: 0,
             pauseTime: 0.00,
-            slideTitle: 'Test Title',
+            slideTitle: 'Loading',
             newTitle: '',
             showCreate: true,
-            projectTitle: ''
+            projectTitle: '',
+            continueHighlight: false
         }     
     }
 
+    //add async await to fix duration loading etc.
     componentDidMount(){
         const {id} = this.props;
         if(!id){
@@ -55,25 +55,49 @@ class Viewer extends Component {
                 url: res.data[0].video_url,
                 projectTitle: res.data[0].title
             })
+            axios.get(`/api/slides/${this.props.match.params.project}`)
+            .then(res => {
+                if(res.data.length === 0){
+                    const { slideLog, duration } = this.state
+                    const newObj = {
+                        id: null,
+                        title: 'Slide',
+                        pause_time: duration
+                    }
+                    this.setState({
+                        slideLog: [...slideLog, newObj],
+                        pauseTime: duration,
+                        slideTitle: 'Slide'
+                    })
+                } else {
+                    this.setState({
+                        slideLog: res.data,
+                        pauseTime: res.data[0].pause_time,
+                        slideTitle: res.data[0].title
+                    })
+                }
+            })
         })
+    }
+
+    onStart = () => {
+        // console.log('onStart')
+        // const { slideLog, duration } = this.state
+        // const newObj = {
+        //     pauseTime: duration,
+        //     slideTitle: 'Slide'
+        // }
+        // this.setState({
+        //     slideLog: [...slideLog, newObj],
+        //     pauseTime: duration,
+        //     slideTitle: 'Slide'
+        // })
+        console.log('onStart')
     }
 
     handleChange(prop, val){
         this.setState({
             [prop]: val
-        })
-    }
-
-    onStart = () => {
-        const { slideLog, duration } = this.state
-        const newObj = {
-            pauseTime: duration,
-            slideTitle: 'Slide'
-        }
-        this.setState({
-            slideLog: [...slideLog, newObj],
-            pauseTime: duration,
-            slideTitle: 'Slide'
         })
     }
 
@@ -117,7 +141,10 @@ class Viewer extends Component {
     handleSeek = (e) => {
         this.setState({ seeking: true })
         this.setState({ played: parseFloat(e.target.value) })
-        this.setState({ seeking: false })
+        this.setState({ 
+            seeking: false,
+            continueHighlight: false
+        })
         this.player.seekTo(parseFloat(e.target.value))
     }
 
@@ -126,7 +153,10 @@ class Viewer extends Component {
         if (!this.state.seeking) {
             this.setState(played)
             if (played.playedSeconds > this.state.pauseTime ){
-                this.setState({ playing: false })
+                this.setState({ 
+                    playing: false,
+                    continueHighlight: true
+                })
             }
         }
     }
@@ -142,10 +172,10 @@ class Viewer extends Component {
         let counter = slideCounter
         const slides = [...slideLog]
         const finalObj = slides.pop();
-        const newObj = {slideTitle: newTitle, pauseTime: this.player.getCurrentTime()}
+        const newObj = {id: null, pause_time: this.player.getCurrentTime(), title: newTitle}
         slides.push(newObj, finalObj)
         slides.sort((a, b) => {
-            return a.pauseTime - b.pauseTime
+            return a.pause_time - b.pause_time
         })
         counter++
         this.setState({
@@ -153,17 +183,8 @@ class Viewer extends Component {
             newTitle: '',
             slideCounter: counter
         })
-    }
-
-    handleContinue(){
-        let { slideCounter, slideLog } = this.state
-        slideCounter++
-        this.setState({
-            pauseTime: slideLog[slideCounter].pauseTime,
-            slideTitle: slideLog[slideCounter].slideTitle,
-            slideCounter: slideCounter
-        })
-        this.setState({ playing: true })
+        
+        console.log(this.state.slideLog)
     }
 
     handleZero(){
@@ -171,7 +192,8 @@ class Viewer extends Component {
         this.setState({
             pauseTime: slideLog[0].pauseTime,
             slideTitle: slideLog[0].slideTitle,
-            slideCounter: 0
+            slideCounter: 0,
+            continueHighlight: false
         })
         this.player.seekTo(0.00)
     }
@@ -183,7 +205,8 @@ class Viewer extends Component {
             this.setState({
                 pauseTime: slideLog[slideCounter].pauseTime,
                 slideTitle: slideLog[slideCounter].slideTitle,
-                slideCounter: slideCounter
+                slideCounter: slideCounter,
+                continueHighlight: false
             })
             if(slideCounter > 0){
                 slideCounter--
@@ -194,6 +217,7 @@ class Viewer extends Component {
         }
     }
 
+    //getting issue with pauseTime of undefined sometimes when 
     handleNext(){
         let { slideLog, slideCounter } = this.state
         if(slideCounter < slideLog.length-1){
@@ -203,7 +227,8 @@ class Viewer extends Component {
                 pauseTime: slideLog[slideCounter].pauseTime,
                 slideTitle: slideLog[slideCounter].slideTitle,
                 slideCounter: slideCounter,
-                playing: true
+                playing: true,
+                continueHighlight: false
             })
         }
     }
@@ -211,20 +236,45 @@ class Viewer extends Component {
     //when new slide is created jump back a partial second to keep on logical slide
     //need to pass URL and other data from project into viewer
     //extra feature add prompt and tracker if save is necessary
+    //need to finish handleSave and get slides at componentDidMount
     handleSave(){
         const { slideLog } = this.state;
         console.log(slideLog)
-        // slideLog.map( slide => {
-            //need to find if it is a put or post
-            //could start pulling slide ids and adding them to slideLog
-            //then give the new slides a id of null
-            //then if id is null post
-            //if id exists put
-        // })
+        slideLog.map( (slide, index) => {
+            if (slide.id === null){
+                axios.post(`/api/slide/${this.props.match.params.project}`, {
+                    pause_time: slide.pause_time,
+                    title: slide.title
+                })
+                .then(res => {
+                    console.log(res)
+                    const newLog = slideLog.map((slide, i) => {
+                        if (i === index){
+                          return {
+                            id: res.data.id,
+                            pause_time: slide.pause_time,
+                            title: slide.title
+                          }
+                        } else {
+                          return {
+                            id: slide.id,
+                            pause_time: slide.pause_time,
+                            title: slide.title
+                          }
+                        }
+                      });
+                    this.setState({
+                        slideLog: newLog
+                    })
+                })
+            }
+            console.log(slideLog)
+            return console.log('project saved')
+        })
     }
 
     render () {
-        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate, projectTitle} = this.state
+        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate, projectTitle, continueHighlight} = this.state
         let createInput = (
             <div className='player-footer-right'>
                 <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
@@ -248,7 +298,7 @@ class Viewer extends Component {
                             <h1 className='proj-title'>|   {projectTitle}</h1>
                         </div>
                         <div className='header-right'>
-                            <button className="hamburger" ><i className="far fa-save"></i></button>                          
+                            <button className="hamburger" onClick={() => this.handleSave()} ><i className="far fa-save"></i></button>                          
                             <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>                            
                         </div>
                     </div>
@@ -293,7 +343,11 @@ class Viewer extends Component {
                             />
                         </div>
                         <div className='nav-container'>
-                            <button className='player-nav center' onClick={() => this.handleNext()}><i className="fas fa-angle-right"></i></button>
+                            
+                            {
+                                (continueHighlight ? <button className='player-nav center continue' onClick={() => this.handleNext()}><i className="fas fa-angle-right"></i></button>
+                                : <button className='player-nav center' onClick={() => this.handleNext()}><i className="fas fa-angle-right"></i></button>)
+                            }
                             <button className='player-nav lower' onClick={this.playPause}>{this.state.playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
                         </div>
                     </div>

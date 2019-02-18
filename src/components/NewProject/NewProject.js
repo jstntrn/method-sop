@@ -65,15 +65,23 @@ class NewProject extends Component{
             videoURL: val
         })
         // const { videoURL } = this.state
-        axios.get(`https://vimeo.com/api/oembed.json?url=${val}`)
-        .then(res => {
+        if(val.includes('vimeo')){
+            axios.get(`https://vimeo.com/api/oembed.json?url=${val}`)
+            .then(res => {
+                this.setState({
+                    videoTitle: res.data.title,
+                    videoImage: res.data.thumbnail_url,
+                    showVideo: true
+                })
+            })
+            .catch(err => {console.log(err)})
+        } else if (val.includes('youtube')){
             this.setState({
-                videoTitle: res.data.title,
-                videoImage: res.data.thumbnail_url,
                 showVideo: true
             })
-        })
-        .catch(err => {console.log(err)})
+        } else {
+            alert('Please enter a vimeo or youtube URL')
+        }
     }
 
     confirmVideo () {

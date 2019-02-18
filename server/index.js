@@ -5,7 +5,7 @@ const { SERVER_PORT, DB_CONNECTION, SESSION_SECRET } = process.env;
 const ac = require('./controllers/authController');
 // const cc = require('./controllers/contentController');
 const pc = require('./controllers/projController');
-// const sc = require('./controllers/slideController');
+const sc = require('./controllers/slideController');
 const vc = require('./controllers/vidController');
 const session = require('express-session');
 
@@ -42,6 +42,7 @@ app.delete('/api/project/:id', pc.deleteProject);
 app.post('/api/video', vc.createVideo)
 
 //slide data
-
+app.get('/api/slides/:project', sc.getSlides)
+app.post('/api/slide/:project', sc.createSlide)
 
 //content card data
