@@ -1,8 +1,27 @@
 .proj-card-wrapper {
     margin: 10px;
     box-shadow: 1px 1px 100px 5px #dddddd;
+    width: 22%;
+    min-width: 200px;
 }
 
 .proj-card-wrapper:hover {
     cursor: pointer;
+}
+
+.proj-image {
+    width: 100%
+}
+
+.proj-delete {
+    background: none;
+    border: none;
+    font-size: 24px;
+    margin-bottom: 10px;
+    width: 30px;
+}
+
+.proj-delete:hover {
+    cursor: pointer;
+    color: #FFBD00;
 }

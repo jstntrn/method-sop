@@ -1,10 +1,14 @@
-.proj-card-wrapper {
+.cont-card-wrapper {
     margin: 10px;
     box-shadow: 1px 1px 100px 5px #dddddd;
 }
 
-.proj-card-wrapper:hover {
+.cont-card-wrapper:hover {
     cursor: pointer;
+}
+
+.proj-title-wrapper {
+    overflow-wrap: normal;
 }
 
 .content-text {

@@ -32,7 +32,8 @@ class Viewer extends Component {
             pauseTime: 0.00,
             slideTitle: 'Test Title',
             newTitle: '',
-            showCreate: true
+            showCreate: true,
+            projectTitle: ''
         }     
     }
 
@@ -50,9 +51,9 @@ class Viewer extends Component {
         }
         axios.get(`/api/viewer?project=${this.props.match.params.project}`)
         .then(res => {
-            console.log(res.data)
             this.setState({
-                url: res.data[0].video_url
+                url: res.data[0].video_url,
+                projectTitle: res.data[0].title
             })
         })
     }
@@ -223,7 +224,7 @@ class Viewer extends Component {
     }
 
     render () {
-        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate} = this.state
+        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate, projectTitle} = this.state
         let createInput = (
             <div className='player-footer-right'>
                 <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
@@ -244,7 +245,7 @@ class Viewer extends Component {
                         <div className='header-left'>
                             <h1 className='logo'>method</h1>
                             <h1 className='logo yel'>sop</h1>
-                            <h1 className='proj-title'>|   Project Title</h1>
+                            <h1 className='proj-title'>|   {projectTitle}</h1>
                         </div>
                         <div className='header-right'>
                             <button className="hamburger" ><i className="far fa-save"></i></button>                          

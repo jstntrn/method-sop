@@ -10,26 +10,38 @@ class Dashboard extends Component{
 
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            userID: null,
+            editing: false,
+        }
+    }
+
+    
+    componentWillMount(){
+        const {id} = this.props;
+        if(!id){
+            axios.get('./api/user')
+            .then(res => {
+                this.props.updateUser(res.data);
+                this.setState({
+                    userID: id
+                })
+            })
+            .catch(err => {
+                this.props.history.push('/');
+            })
+        } else {
+        }
+        this.setState({
+            userID: id
+        })
     }
 
     componentDidMount(){
         const {id} = this.props;
-        if(!id){
-            //double check sessions
-            axios.get('./api/user')
-            .then(res => {
-                //dont move
-                //add to redux
-                this.props.updateUser(res.data);
-            })
-            .catch(err => {
-                //boot to other page
-                this.props.history.push('/');
-            })
-        } else {
-            // dont move
-        }
+        this.setState({
+            userID: id
+        })
     }
     
     logout(){
@@ -43,8 +55,14 @@ class Dashboard extends Component{
         })
     }
 
+    toggleEdit(){
+        this.setState({
+            editing: !this.state.editing
+        })
+    }
+
     render(){
-        return(
+            return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
                 {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
@@ -57,13 +75,14 @@ class Dashboard extends Component{
                     </div>
                     <div className='header-right'>
                         <Link to='/newproject' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-plus"></i></button></Link>
+                        <button className="hamburger" onClick={() => this.toggleEdit()}><i className="fas fa-pencil-alt"></i></button>
                         <Link to='/library' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-video"></i></button></Link>
                         <Link to='/account' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-user"></i></button></Link>
                         <button className="hamburger" onClick={() => this.logout()}><i className="fas fa-sign-out-alt"></i></button>
                     </div>
                 </div>
                 <div className='dash-body'>
-                    <ProjectLibrary />
+                    <ProjectLibrary userID={this.state.userID} editing={this.state.editing} />
                 </div>
             </div>
         )

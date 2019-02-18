@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios';
 import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
@@ -12,14 +12,15 @@ class NewProject extends Component{
         super(props);
         this.state = {
             projectTitle: '',
-            projectID: 84,
+            projectID: 50,
             videoID: null,
             videoURL: '',
             videoImage: '',
             videoTitle: '',
             showVideo: false,
             confirmed: false,
-            userID: null
+            userID: null,
+            projectCreated: false
         }
     }
     
@@ -108,13 +109,16 @@ class NewProject extends Component{
         })
         .then(res => {
             this.setState({
-                projectID: res.data.id
+                projectID: res.data[0].id,
+            })
+            this.setState({
+                projectCreated: true
             })
         })
     }
 
     render(){
-        const { projectTitle, videoURL, videoImage, videoTitle, showVideo, confirmed} = this.state;
+        const { projectTitle, videoURL, videoImage, videoTitle, showVideo, confirmed, projectCreated} = this.state;
 
         let currentVid = (
             <div>
@@ -129,10 +133,13 @@ class NewProject extends Component{
         if(!showVideo){
             currentVid = null;
         }
+        if (projectCreated === true){
+            return <Redirect to={`/viewer/${this.state.projectID}`}/>
+        }
 
         let nextBut = (
             <div>
-                {confirmed && projectTitle ? <Link to={`/viewer/${this.state.projectID}`} style={{ textDecoration: 'none' }}><button className="new-next" onClick={() => this.createProject()} disabled={ confirmed === 'false' }><i className="fas fa-arrow-right"></i></button></Link>
+                {confirmed && projectTitle ? <button className="new-next" onClick={() => this.createProject()} disabled={ confirmed === 'false' }><i className="fas fa-arrow-right"></i></button>
                 : <div></div>}
             </div>
         )

@@ -34,7 +34,9 @@ app.get('/api/user', ac.getUser);
 //project data
 // app.get('/api/projects/:id', pc.getProjects);
 app.post('/api/project', pc.createProject);
-app.get('/api/viewer/', pc.getProjectVid)
+app.get('/api/viewer/', pc.getProjectVid);
+app.get('/api/projects/:user', pc.getProjects);
+app.delete('/api/project/:id', pc.deleteProject);
 
 //video data
 app.post('/api/video', vc.createVideo)
