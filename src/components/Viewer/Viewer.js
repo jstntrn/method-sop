@@ -240,7 +240,7 @@ class Viewer extends Component {
     handleSave(){
         const { slideLog } = this.state;
         console.log(slideLog)
-        slideLog.map( (slide, index) => {
+        let newLog = slideLog.map( slide => {
             if (slide.id === null){
                 axios.post(`/api/slide/${this.props.match.params.project}`, {
                     pause_time: slide.pause_time,
@@ -248,29 +248,25 @@ class Viewer extends Component {
                 })
                 .then(res => {
                     console.log(res)
-                    const newLog = slideLog.map((slide, i) => {
-                        if (i === index){
-                          return {
-                            id: res.data.id,
-                            pause_time: slide.pause_time,
-                            title: slide.title
-                          }
-                        } else {
-                          return {
-                            id: slide.id,
-                            pause_time: slide.pause_time,
-                            title: slide.title
-                          }
-                        }
-                      });
-                    this.setState({
-                        slideLog: newLog
-                    })
+                    return {
+                        id: res.data.id,
+                        pause_time: slide.pause_time,
+                        title: slide.title
+                    }
                 })
             }
-            console.log(slideLog)
-            return console.log('project saved')
+            return slide
         })
+        console.log(newLog)
+        newLog.sort((a, b) => {
+            return a.pause_time - b.pause_time
+        })
+        console.log(newLog)
+        
+        this.setState({
+            slideLog: newLog
+        })
+        console.log(this.state.slideLog)
     }
 
     render () {
