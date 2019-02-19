@@ -38,6 +38,7 @@ class Viewer extends Component {
 
     //add async await to fix duration loading etc.
     componentDidMount(){
+        console.log('mounted')
         const {id} = this.props;
         if(!id){
             axios.get('./api/user')
@@ -70,10 +71,14 @@ class Viewer extends Component {
                         slideTitle: 'Slide'
                     })
                 } else {
+                    const resSlides = [...res.data]
+                    resSlides.sort((a, b) => {
+                        return a.pause_time - b.pause_time
+                    })
                     this.setState({
-                        slideLog: res.data,
-                        pauseTime: res.data[0].pause_time,
-                        slideTitle: res.data[0].title
+                        slideLog: resSlides,
+                        pauseTime: resSlides[0].pause_time,
+                        slideTitle: resSlides[0].title
                     })
                 }
             })
@@ -81,17 +86,6 @@ class Viewer extends Component {
     }
 
     onStart = () => {
-        // console.log('onStart')
-        // const { slideLog, duration } = this.state
-        // const newObj = {
-        //     pauseTime: duration,
-        //     slideTitle: 'Slide'
-        // }
-        // this.setState({
-        //     slideLog: [...slideLog, newObj],
-        //     pauseTime: duration,
-        //     slideTitle: 'Slide'
-        // })
         console.log('onStart')
     }
 
@@ -132,8 +126,8 @@ class Viewer extends Component {
             return slide.pauseTime > e;
         })
         this.setState({
-            pauseTime: slideLog[slideIndex].pauseTime,
-            slideTitle: slideLog[slideIndex].slideTitle,
+            pauseTime: slideLog[slideIndex].pause_time,
+            slideTitle: slideLog[slideIndex].title,
             slideCounter: slideIndex
         })
     }
@@ -183,15 +177,13 @@ class Viewer extends Component {
             newTitle: '',
             slideCounter: counter
         })
-        
-        console.log(this.state.slideLog)
     }
 
     handleZero(){
         const { slideLog } = this.state
         this.setState({
-            pauseTime: slideLog[0].pauseTime,
-            slideTitle: slideLog[0].slideTitle,
+            pauseTime: slideLog[0].pause_time,
+            slideTitle: slideLog[0].title,
             slideCounter: 0,
             continueHighlight: false
         })
@@ -203,14 +195,14 @@ class Viewer extends Component {
         if(slideCounter > 0){
             slideCounter--
             this.setState({
-                pauseTime: slideLog[slideCounter].pauseTime,
-                slideTitle: slideLog[slideCounter].slideTitle,
+                pauseTime: slideLog[slideCounter].pause_time,
+                slideTitle: slideLog[slideCounter].title,
                 slideCounter: slideCounter,
                 continueHighlight: false
             })
             if(slideCounter > 0){
                 slideCounter--
-                this.player.seekTo(slideLog[slideCounter].pauseTime)
+                this.player.seekTo(slideLog[slideCounter].pause_time)
             } else {
                 this.player.seekTo(0.00)
             }
@@ -221,11 +213,11 @@ class Viewer extends Component {
     handleNext(){
         let { slideLog, slideCounter } = this.state
         if(slideCounter < slideLog.length-1){
-            this.player.seekTo(slideLog[slideCounter].pauseTime)
+            this.player.seekTo(slideLog[slideCounter].pause_time)
             slideCounter++
             this.setState({
-                pauseTime: slideLog[slideCounter].pauseTime,
-                slideTitle: slideLog[slideCounter].slideTitle,
+                pauseTime: slideLog[slideCounter].pause_time,
+                slideTitle: slideLog[slideCounter].title,
                 slideCounter: slideCounter,
                 playing: true,
                 continueHighlight: false
@@ -239,7 +231,6 @@ class Viewer extends Component {
     //need to finish handleSave and get slides at componentDidMount
     handleSave(){
         const { slideLog } = this.state;
-        console.log(slideLog)
         let newLog = slideLog.map( slide => {
             if (slide.id === null){
                 axios.post(`/api/slide/${this.props.match.params.project}`, {
@@ -247,7 +238,6 @@ class Viewer extends Component {
                     title: slide.title
                 })
                 .then(res => {
-                    console.log(res)
                     return {
                         id: res.data.id,
                         pause_time: slide.pause_time,
@@ -257,16 +247,12 @@ class Viewer extends Component {
             }
             return slide
         })
-        console.log(newLog)
         newLog.sort((a, b) => {
             return a.pause_time - b.pause_time
         })
-        console.log(newLog)
-        
         this.setState({
             slideLog: newLog
         })
-        console.log(this.state.slideLog)
     }
 
     render () {
