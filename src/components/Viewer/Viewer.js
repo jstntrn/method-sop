@@ -37,7 +37,7 @@ class Viewer extends Component {
     }
 
     //add async await to fix duration loading etc.
-    componentDidMount(){
+    async componentDidMount(){
         console.log('mounted')
         const {id} = this.props;
         if(!id){
@@ -50,39 +50,51 @@ class Viewer extends Component {
             })
         } else {
         }
+        console.log(this.state.duration)
         axios.get(`/api/viewer?project=${this.props.match.params.project}`)
         .then(res => {
             this.setState({
                 url: res.data[0].video_url,
                 projectTitle: res.data[0].title
             })
-            axios.get(`/api/slides/${this.props.match.params.project}`)
+            // const dur = await this.player.getDuration()
+            // console.log(dur)
+            axios.get(`https://vimeo.com/api/oembed.json?url=${this.state.url}`)
             .then(res => {
-                if(res.data.length === 0){
-                    const { slideLog, duration } = this.state
-                    const newObj = {
-                        id: null,
-                        title: 'Slide',
-                        pause_time: duration
+                this.setState({
+                    duration: res.data.duration,
+                })
+                console.log(this.state.duration)
+                axios.get(`/api/slides/${this.props.match.params.project}`)
+                .then(res => {
+                    if(res.data.length === 0){
+                        const { slideLog, duration } = this.state
+                        const newObj = {
+                            id: null,
+                            title: 'Slide',
+                            pause_time: duration
+                        }
+                        this.setState({
+                            slideLog: [...slideLog, newObj],
+                            pauseTime: duration,
+                            slideTitle: 'Slide'
+                        })
+                    } else {
+                        const resSlides = [...res.data]
+                        resSlides.sort((a, b) => {
+                            return a.pause_time - b.pause_time
+                        })
+                        this.setState({
+                            slideLog: resSlides,
+                            pauseTime: resSlides[0].pause_time,
+                            slideTitle: resSlides[0].title
+                        })
+                        console.log(resSlides)
                     }
-                    this.setState({
-                        slideLog: [...slideLog, newObj],
-                        pauseTime: duration,
-                        slideTitle: 'Slide'
-                    })
-                } else {
-                    const resSlides = [...res.data]
-                    resSlides.sort((a, b) => {
-                        return a.pause_time - b.pause_time
-                    })
-                    this.setState({
-                        slideLog: resSlides,
-                        pauseTime: resSlides[0].pause_time,
-                        slideTitle: resSlides[0].title
-                    })
-                }
+                })
             })
         })
+        .catch(err => {console.log(err)})
     }
 
     onStart = () => {
