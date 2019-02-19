@@ -16,7 +16,6 @@ class Dashboard extends Component{
         }
     }
 
-    
     componentWillMount(){
         const {id} = this.props;
         if(!id){
@@ -24,24 +23,17 @@ class Dashboard extends Component{
             .then(res => {
                 this.props.updateUser(res.data);
                 this.setState({
-                    userID: id
+                    userID: res.data.id
                 })
             })
             .catch(err => {
                 this.props.history.push('/');
             })
         } else {
+            this.setState({
+                userID: id
+            })
         }
-        this.setState({
-            userID: id
-        })
-    }
-
-    componentDidMount(){
-        const {id} = this.props;
-        this.setState({
-            userID: id
-        })
     }
     
     logout(){
@@ -82,7 +74,12 @@ class Dashboard extends Component{
                     </div>
                 </div>
                 <div className='dash-body'>
+                    {/* {
+                        (this.state.userID ? <ProjectLibrary userID={this.state.userID} editing={this.state.editing} />
+                        : <div>Loading</div>)
+                    } */}
                     <ProjectLibrary userID={this.state.userID} editing={this.state.editing} />
+                    
                 </div>
             </div>
         )

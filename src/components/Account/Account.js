@@ -13,19 +13,14 @@ class Account extends Component{
     componentDidMount(){
         const {id} = this.props;
         if(!id){
-            //double check sessions
             axios.get('./api/user')
             .then(res => {
-                //dont move
-                //add to redux
                 this.props.updateUser(res.data);
             })
             .catch(err => {
-                //boot to other page
                 this.props.history.push('/');
             })
         } else {
-            // dont move
         }
     }
 

@@ -14,12 +14,25 @@ class ProjectLibrary extends Component{
 
     //test and fix
     componentDidMount(){
-        axios.get(`/api/projects/${this.props.userID}`)
-        .then(res => {
-            this.setState({
-                projectList: res.data
+        const {id} = this.props;
+        if(!id){
+            axios.get('./api/user')
+            .then(res => {
+                axios.get(`/api/projects/${res.data.id}`)
+                .then(res => {
+                    this.setState({
+                        projectList: res.data
+                    })
+                })
             })
-        })
+        } else {
+            axios.get(`/api/projects/${id}`)
+            .then(res => {
+                this.setState({
+                    projectList: res.data
+                })
+            })
+        }
     }
 
     deleteProject = (id) => {

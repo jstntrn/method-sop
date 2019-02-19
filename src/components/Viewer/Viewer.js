@@ -38,7 +38,6 @@ class Viewer extends Component {
 
     //add async await to fix duration loading etc.
     async componentDidMount(){
-        console.log('mounted')
         const {id} = this.props;
         if(!id){
             axios.get('./api/user')
@@ -50,21 +49,17 @@ class Viewer extends Component {
             })
         } else {
         }
-        console.log(this.state.duration)
         axios.get(`/api/viewer?project=${this.props.match.params.project}`)
         .then(res => {
             this.setState({
                 url: res.data[0].video_url,
                 projectTitle: res.data[0].title
             })
-            // const dur = await this.player.getDuration()
-            // console.log(dur)
             axios.get(`https://vimeo.com/api/oembed.json?url=${this.state.url}`)
             .then(res => {
                 this.setState({
                     duration: res.data.duration,
                 })
-                console.log(this.state.duration)
                 axios.get(`/api/slides/${this.props.match.params.project}`)
                 .then(res => {
                     if(res.data.length === 0){
@@ -89,7 +84,6 @@ class Viewer extends Component {
                             pauseTime: resSlides[0].pause_time,
                             slideTitle: resSlides[0].title
                         })
-                        console.log(resSlides)
                     }
                 })
             })
@@ -219,6 +213,7 @@ class Viewer extends Component {
                 this.player.seekTo(0.00)
             }
         }
+
     }
 
     //getting issue with pauseTime of undefined sometimes when 
@@ -235,6 +230,7 @@ class Viewer extends Component {
                 continueHighlight: false
             })
         }
+
     }
 
     //when new slide is created jump back a partial second to keep on logical slide
