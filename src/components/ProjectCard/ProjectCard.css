@@ -25,3 +25,13 @@
     cursor: pointer;
     color: #FFBD00;
 }
+
+.proj-card-input {
+    width: 80%
+}
+
+.title-update-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 7px 10px;
+}

@@ -26,5 +26,13 @@ module.exports = {
         db.project.delete_project([projectID])
         .then(projects => {res.status(200).send(projects)})
         .catch(err => {console.log(err)})
+    },
+    editTitle: (req, res) => {
+        const db = req.app.get('db');
+        const projectID = Number(req.params.id);
+        const { title } = req.body;
+        db.project.edit_project_title([title, projectID])
+        .then(projects => {res.status(200).send(projects)})
+        .catch(err => {console.log(err)})
     }
 }

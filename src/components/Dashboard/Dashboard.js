@@ -47,7 +47,7 @@ class Dashboard extends Component{
         })
     }
 
-    toggleEdit(){
+    toggleEdit = () => {
         this.setState({
             editing: !this.state.editing
         })
@@ -78,7 +78,7 @@ class Dashboard extends Component{
                         (this.state.userID ? <ProjectLibrary userID={this.state.userID} editing={this.state.editing} />
                         : <div>Loading</div>)
                     } */}
-                    <ProjectLibrary userID={this.state.userID} editing={this.state.editing} />
+                    <ProjectLibrary userID={this.state.userID} editing={this.state.editing} toggleEdit={this.toggleEdit} />
                     
                 </div>
             </div>

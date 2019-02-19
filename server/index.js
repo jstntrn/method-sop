@@ -37,6 +37,7 @@ app.post('/api/project', pc.createProject);
 app.get('/api/viewer/', pc.getProjectVid);
 app.get('/api/projects/:user', pc.getProjects);
 app.delete('/api/project/:id', pc.deleteProject);
+app.put('/api/project/:id', pc.editTitle);
 
 //video data
 app.post('/api/video', vc.createVideo)

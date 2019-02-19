@@ -47,6 +47,15 @@ class ProjectLibrary extends Component{
         })
     }
 
+    updateLibrary = () => {
+        axios.get(`/api/projects/${this.props.userID}`)
+        .then(res => {
+            this.setState({
+                projectList: res.data
+            })
+        })
+    }   
+
     render(){
         return(
             <div className='projects-container'>
@@ -59,6 +68,8 @@ class ProjectLibrary extends Component{
                             image_URL={project.image_url}
                             editing={this.props.editing}
                             deleteProjFn={this.deleteProject}
+                            toggleEdit={this.props.toggleEdit}
+                            updateLibrary={this.updateLibrary}
                         />
                     ))
                 }
