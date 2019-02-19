@@ -123,7 +123,7 @@ class Viewer extends Component {
     onSeek = e => {
         const { slideLog } = this.state;        
         let slideIndex = slideLog.findIndex(slide => {
-            return slide.pauseTime > e;
+            return slide.pause_time > e;
         })
         this.setState({
             pauseTime: slideLog[slideIndex].pause_time,
