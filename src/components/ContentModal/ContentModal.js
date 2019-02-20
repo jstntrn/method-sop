@@ -7,7 +7,7 @@ export default class ContentModal extends Component{
         super(props)
 
         this.state = {
-            type: '',
+            type: 'text',
             title: '',
             content: ''
         }
@@ -40,14 +40,24 @@ export default class ContentModal extends Component{
     }
 
     render(){
-        const { type, title, content } = this.state
+        const { title, content } = this.state
         return(
-            <div>
-                <input className='modal-type' value={type} onChange={(e) => this.handleChange('type', e.target.value)} />
-                <input className='modal-title' value={title} onChange={(e) => this.handleChange('title', e.target.value)} />
-                <input className='modal-content' value={content} onChange={(e) => this.handleChange('content', e.target.value)} />
-                <button onClick={() => this.handleCancel()}>Cancel</button>
-                <button onClick={() => this.handleCreate()}>Create</button>
+            <div className='modal-wrapper'>
+                <button className='modal-button cancel' onClick={() => this.handleCancel()}><i className="fas fa-times"></i></button>
+                <div className='modal-inputs'>
+                    <div className='modal-top'>
+                        <select name='type' onChange={(e) => this.handleChange('type', e.target.value)} >
+                            <option value='text'>Text</option>
+                            <option value='url'>URL</option>
+                            <option value='doc'>Document</option>
+                            <option value='img'>Image</option>
+                            <option value='pdf'>PDF</option>
+                        </select>
+                        <input className='modal-title' value={title} placeholder={'title'} onChange={(e) => this.handleChange('title', e.target.value)} />
+                    </div>
+                    <textarea className='modal-content' value={content} placeholder={'content'} onChange={(e) => this.handleChange('content', e.target.value)} />
+                </div>
+                <button className='modal-button create' onClick={() => this.handleCreate()}><i class="fas fa-check"></i></button>
             </div>
         )
     }

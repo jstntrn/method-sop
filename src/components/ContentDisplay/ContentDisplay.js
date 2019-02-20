@@ -19,7 +19,6 @@ export default class ContentDisplay extends Component{
         if (this.props.slideID !== prevState.slideID){
             axios.get(`/api/content/${this.props.slideID}`)
             .then(res => {
-                console.log(res.data)
                 this.setState({
                     slideID: this.props.slideID,
                     contentList: res.data
@@ -50,16 +49,6 @@ export default class ContentDisplay extends Component{
         return(
             <div className='contents-container'>
                 {
-                    this.state.contentList.map(content => (
-                    <ContentCard
-                    key={content.id}
-                    type={content.type}
-                    title={content.title}
-                    content={content.content}
-                    />
-                    ))
-                }
-                {
                     (showModal ?
                     <ContentModal createModal={this.createModal} updateDisplay={this.updateDisplay} slideID={slideID} />
                     :
@@ -72,6 +61,16 @@ export default class ContentDisplay extends Component{
                         :
                         <div></div>)
                     )
+                }
+                {
+                    this.state.contentList.map(content => (
+                    <ContentCard
+                    key={content.id}
+                    type={content.type}
+                    title={content.title}
+                    content={content.content}
+                    />
+                    ))
                 }
             </div>
         )

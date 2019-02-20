@@ -1,6 +1,7 @@
 .cont-card-wrapper {
     margin: 10px;
     box-shadow: 1px 1px 100px 5px #dddddd;
+    width: 800px;
 }
 
 .cont-card-wrapper:hover {
