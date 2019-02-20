@@ -49,3 +49,4 @@ app.post('/api/slide/:project', sc.createSlide)
 //content card data
 app.post('/api/content/:slide', cc.createContent)
 app.get('/api/content/:slide', cc.getSlideContent)
+app.delete('/api/content/:id', cc.deleteContent)

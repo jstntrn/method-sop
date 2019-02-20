@@ -1,8 +1,9 @@
 .contents-container {
-    display: flex;
+    /* display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    width: 800px;
+    align-items: center;
+    flex-direction: column;
+    width: 800px; */
 }
 
 .add-content-wrapper {

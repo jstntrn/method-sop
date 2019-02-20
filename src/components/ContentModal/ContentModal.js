@@ -57,7 +57,7 @@ export default class ContentModal extends Component{
                     </div>
                     <textarea className='modal-content' value={content} placeholder={'content'} onChange={(e) => this.handleChange('content', e.target.value)} />
                 </div>
-                <button className='modal-button create' onClick={() => this.handleCreate()}><i class="fas fa-check"></i></button>
+                <button className='modal-button create' onClick={() => this.handleCreate()}><i className="fas fa-check"></i></button>
             </div>
         )
     }

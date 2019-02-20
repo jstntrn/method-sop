@@ -4,10 +4,6 @@
     width: 800px;
 }
 
-.cont-card-wrapper:hover {
-    cursor: pointer;
-}
-
 .proj-title-wrapper {
     overflow-wrap: normal;
 }
