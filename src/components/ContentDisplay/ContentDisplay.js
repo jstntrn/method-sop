@@ -1,33 +1,77 @@
 import React, { Component } from 'react'
 import ContentCard from './../ContentCard/ContentCard'
 import './ContentDisplay.css'
+import axios from 'axios'
+import ContentModal from './../ContentModal/ContentModal'
 
 export default class ContentDisplay extends Component{
     constructor(props){
         super(props)
 
         this.state = {
-            contentList: [
-                {content_id: 1, type: 'INSTRUCTIONS', content: 'Use the arrows to navigate the slides. Use the restart button to jump to the beginning of the video. Use the play/pause button to pause the video. Use the create slide input to create a slide with a new title.'},
-                {content_id: 2, type: 'PARTS', content: 'Use the arrows to navigate the slides. Use the restart button to jump to the beginning of the video. Use the play/pause button to pause the video. Use the create slide input to create a slide with a new title.'},
-                {content_id: 3, type: 'TOOLS', content: 'Use the arrows to navigate the slides. Use the restart button to jump to the beginning of the video. Use the play/pause button to pause the video. Use the create slide input to create a slide with a new title.'},
-                {content_id: 4, type: 'MECHANICAL DRAWINGS', content: 'Use the arrows to navigate the slides. Use the restart button to jump to the beginning of the video. Use the play/pause button to pause the video. Use the create slide input to create a slide with a new title.'},
-                {content_id: 5, type: 'ELECTRICAL SCHEMATICS', content: 'Use the arrows to navigate the slides. Use the restart button to jump to the beginning of the video. Use the play/pause button to pause the video. Use the create slide input to create a slide with a new title.'},
-            ]
+            slideID: 22,
+            contentList: [],
+            showModal: false
         }
     }
 
+    componentDidUpdate(prevState){
+        if (this.props.slideID !== prevState.slideID){
+            axios.get(`/api/content/${this.props.slideID}`)
+            .then(res => {
+                console.log(res.data)
+                this.setState({
+                    slideID: this.props.slideID,
+                    contentList: res.data
+                })
+            })
+        }
+    }
+
+    updateDisplay = () => {
+        axios.get(`/api/content/${this.state.slideID}`)
+        .then(res => {
+            console.log(res.data)
+            this.setState({
+                contentList: res.data
+            })
+        })
+    }
+
+    createModal = () => {
+        this.setState({
+            showModal: !this.state.showModal
+        })
+    }
+
     render(){
+        const { showCreate } = this.props
+        const { showModal, slideID } = this.state
         return(
             <div className='contents-container'>
                 {
                     this.state.contentList.map(content => (
-                        <ContentCard
-                            key={content.content_id}
-                            type={content.type}
-                            content={content.content}
-                        />
+                    <ContentCard
+                    key={content.id}
+                    type={content.type}
+                    title={content.title}
+                    content={content.content}
+                    />
                     ))
+                }
+                {
+                    (showModal ?
+                    <ContentModal createModal={this.createModal} updateDisplay={this.updateDisplay} slideID={slideID} />
+                    :
+                    (showCreate ? 
+                        <button className='add-content-wrapper' onClick={() => this.createModal()}>
+                            <div>
+                                <h4>+ADD CONTENT CARD</h4>
+                            </div>
+                        </button>
+                        :
+                        <div></div>)
+                    )
                 }
             </div>
         )

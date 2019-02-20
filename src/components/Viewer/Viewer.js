@@ -32,7 +32,8 @@ class Viewer extends Component {
             newTitle: '',
             showCreate: true,
             projectTitle: '',
-            continueHighlight: false
+            continueHighlight: false,
+            slideID: null
         }     
     }
 
@@ -72,7 +73,8 @@ class Viewer extends Component {
                         this.setState({
                             slideLog: [...slideLog, newObj],
                             pauseTime: duration,
-                            slideTitle: 'Slide'
+                            slideTitle: 'Slide',
+                            slideID: null
                         })
                     } else {
                         const resSlides = [...res.data]
@@ -82,7 +84,8 @@ class Viewer extends Component {
                         this.setState({
                             slideLog: resSlides,
                             pauseTime: resSlides[0].pause_time,
-                            slideTitle: resSlides[0].title
+                            slideTitle: resSlides[0].title,
+                            slideID: resSlides[0].id
                         })
                     }
                 })
@@ -134,7 +137,8 @@ class Viewer extends Component {
         this.setState({
             pauseTime: slideLog[slideIndex].pause_time,
             slideTitle: slideLog[slideIndex].title,
-            slideCounter: slideIndex
+            slideCounter: slideIndex,
+            slideID: slideLog[slideIndex].id
         })
     }
 
@@ -191,7 +195,8 @@ class Viewer extends Component {
             pauseTime: slideLog[0].pause_time,
             slideTitle: slideLog[0].title,
             slideCounter: 0,
-            continueHighlight: false
+            continueHighlight: false,
+            slideID: slideLog[0].id
         })
         this.player.seekTo(0.00)
     }
@@ -204,7 +209,8 @@ class Viewer extends Component {
                 pauseTime: slideLog[slideCounter].pause_time,
                 slideTitle: slideLog[slideCounter].title,
                 slideCounter: slideCounter,
-                continueHighlight: false
+                continueHighlight: false,
+                slideID: slideLog[slideCounter].id
             })
             if(slideCounter > 0){
                 slideCounter--
@@ -227,7 +233,8 @@ class Viewer extends Component {
                 slideTitle: slideLog[slideCounter].title,
                 slideCounter: slideCounter,
                 playing: true,
-                continueHighlight: false
+                continueHighlight: false,
+                slideID: slideLog[slideCounter].id
             })
         }
 
@@ -263,8 +270,14 @@ class Viewer extends Component {
         })
     }
 
+    toggleCreate = () => {
+        this.setState({
+            showCreate: !this.state.showCreate
+        })
+    }
+
     render () {
-        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate, projectTitle, continueHighlight} = this.state
+        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate, projectTitle, continueHighlight, slideID} = this.state
         let createInput = (
             <div className='player-footer-right'>
                 <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
@@ -274,7 +287,6 @@ class Viewer extends Component {
         if (!showCreate){
             createInput = null;
         }
-        
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
@@ -288,6 +300,7 @@ class Viewer extends Component {
                             <h1 className='proj-title'>|   {projectTitle}</h1>
                         </div>
                         <div className='header-right'>
+                        <button className="hamburger" onClick={() => this.toggleCreate()}><i className="fas fa-pencil-alt"></i></button>
                             <button className="hamburger" onClick={() => this.handleSave()} ><i className="far fa-save"></i></button>                          
                             <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>                            
                         </div>
@@ -358,7 +371,7 @@ class Viewer extends Component {
                     </div>
                 </div>
                 <div className='content-container'>
-                    <ContentDisplay className='card-content-body'/>
+                    <ContentDisplay className='card-content-body' slideID={slideID} showCreate={showCreate} />
                 </div>
             </div>
         )

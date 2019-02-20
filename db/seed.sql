@@ -46,3 +46,6 @@ create table content_cards (
 {project_id:1, title: 'Door Assembly', image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiT1rBCqDIOhVwHzQUYKnBgAyZV9zBlp5MpPAaGY0zC9JThF4Z'},
 {project_id:2, title: 'Suspension Install', image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOC1ECpbdbkTsDg2MDXRQz0cpOGsbgMDOtAMA6Zbp_Q3Y6R0AY8A'},
 {project_id:3, title: 'Engine Assembly', image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTJQ8QV_XI5POuJI2mXtWnJRHRd-orrsh9lBQPl9WE2A2AEI-ZD'}     
+
+
+insert into content_cards ( slide_id, type, title, content ) values ( 22, 'text', 'INSTRUCTIONS', 'Use the arrows to navigate the slides. Use the restart button to jump to the beginning of the video. Use the play/pause button to pause the video. Use the create slide input to create a slide with a new title.' );

@@ -3,7 +3,7 @@ require('dotenv').config();
 const massive = require('massive');
 const { SERVER_PORT, DB_CONNECTION, SESSION_SECRET } = process.env;
 const ac = require('./controllers/authController');
-// const cc = require('./controllers/contentController');
+const cc = require('./controllers/contentController');
 const pc = require('./controllers/projController');
 const sc = require('./controllers/slideController');
 const vc = require('./controllers/vidController');
@@ -47,3 +47,5 @@ app.get('/api/slides/:project', sc.getSlides)
 app.post('/api/slide/:project', sc.createSlide)
 
 //content card data
+app.post('/api/content/:slide', cc.createContent)
+app.get('/api/content/:slide', cc.getSlideContent)
