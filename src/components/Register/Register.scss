@@ -1,3 +1,5 @@
+@import './../variables';
+
 .reg-form-header {
     width: 80%;
     height: 10vh;
@@ -22,7 +24,7 @@
 .reg-form-container {
     width: 80%;
     height: 80vh;
-    background-color: #F3F3F3;
+    background-color: $light;
     margin: auto;
     display: flex;
     flex-direction: column;
@@ -31,12 +33,14 @@
 
 .regCloseButtonStyles {
     padding-right: 50px;
-    font-size: 50px;
     color: black;
     cursor: pointer;
     border-radius: 25px;
     background: none;
     border: none;
     transform: rotate(45deg);
-    font-weight: lighter;
+    font: {
+        size: 50px;
+        weight: lighter;
+    }
 }

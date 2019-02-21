@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Register.css'
+import './Register.scss'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateUser } from './../../ducks/reducer'

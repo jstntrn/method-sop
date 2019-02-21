@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Menu.css'
+import './Menu.scss'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
@@ -22,14 +22,16 @@ const MenuWrapper = styled.div`
 
 const CloseButton = styled.h3`
     padding-right: 50px;
-    font-size: 50px;
     color: white;
     border-radius: 50%;
     background: none;
     border: none;
     transform: rotate(45deg);
-    font-weight: lighter;
     align-self: flex-end;
+    font: {
+        size: 50px;
+        weight: lighter;
+    }
     &:hover {
         cursor: pointer;
     }

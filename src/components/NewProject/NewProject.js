@@ -3,7 +3,7 @@ import { Link, Redirect } from 'react-router-dom'
 import axios from 'axios';
 import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
-import './NewProject.css'
+import './NewProject.scss'
 
 //problems to fix: video control functions weren't working with projectID 50, also new the projectID needs to be set before link is clicked
 

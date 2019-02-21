@@ -1,8 +1,4 @@
-/* color palette
-#5D91FD blue
-#FFBD00 yellow
-#565761 dark grey
-#F3F3F3 light grey */
+@import './../variables';
 
 .logo {
     font-family: 'Do Hyeon', sans-serif;
@@ -14,7 +10,7 @@
 }
 
 .yel {
-    color: #FFBD00;
+    color: $yellow;
 }
 
 .button {
@@ -22,21 +18,21 @@
     border-radius: 25px;
     height: 40px;
     width: 170px;
-    font-size: 12px;
-    font-weight: lighter;
-    font-family: Arial, Helvetica, sans-serif;
+    font: {
+        size: 12px;
+        weight: lighter;
+        family: Arial, Helvetica, sans-serif;
+    }
     letter-spacing: 3px
 }
 
 .register {
-    border: 1px solid #FFBD00;
-    background-color: #FFBD00;
-}
-
-.register:hover{
-    background-color: white;
-    color: #FFBD00;
-    cursor: pointer;
+    @include y-solid-button
+    &:hover{
+        cursor: pointer;
+        background-color: white;
+        color: $yellow;
+    }
 }
 
 .hamburger {
@@ -44,10 +40,9 @@
     background: none;
     border: none;
     padding-left: 15px;
-}
-
-.hamburger:hover {
-    cursor: pointer;
+    &:hover{
+        cursor: pointer;
+    }
 }
 
 .header {
@@ -96,22 +91,21 @@
 }
 
 .demo {
-    border: 1px solid #565761;
-    background-color: #565761;
+    border: 1px solid $dark;
+    background-color: $dark;
     color: white;
     width: 250px;
     margin-top: 10px;
+    &:hover{
+        cursor: pointer;
+        background-color: white;
+        color: $dark;
+    }
 }
 /* 
 .content-image {
     overflow: hidden;
 } */
-
-.demo:hover{
-    background-color: white;
-    color: #565761;
-    cursor: pointer;
-}
 
 .features-wrapper{
     padding-top: 20px;
@@ -119,7 +113,7 @@
 }
 
 .feature-background{
-    background-color: #F3F3F3;
+    background-color: $light;
     height: 1000px;
     width: 100%;
     margin-top: 50px;
@@ -147,19 +141,16 @@
 }
 
 .feature {
-    border: 1px solid #FFBD00;
-    background-color: #F3F3F3;
-    color: #FFBD00;
+    @include y-border-button
     width: 350px;
     height: 60px;
     margin-top: 10px;
     border-radius: 0px;
-}
-
-.feature:hover{
-    background-color: #FFBD00;
-    color: #565761;
-    cursor: pointer;
+    &:hover{
+        cursor: pointer;
+        background-color: $yellow;
+        color: $dark;
+    }
 }
 
 .reasons-wrapper{
@@ -177,19 +168,16 @@
 }
 
 .reason {
-    border: 1px solid #FFBD00;
-    background-color: #ffffff;
-    color: #FFBD00;
+    @include y-border-button
     width: 200px;
     height: 60px;
     margin-top: 10px;
     border-radius: 0px;
-}
-
-.reason:hover {
-    background-color: #FFBD00;
-    color: #565761;
-    cursor: pointer;
+    &:hover{
+        cursor: pointer;
+        background-color: $yellow;
+        color: $dark;
+    }
 }
 
 .reviews-wrapper {
@@ -258,7 +246,7 @@
     min-width: 400px;
     height: 650px;
     box-shadow: 1px 1px 100px 1px #dddddd;
-    background-color: #F3F3F3;
+    background-color: $light;
 }
 
 .home-form {
@@ -285,20 +273,17 @@
 }
 
 .form {
-    border: 1px solid #FFBD00;
-    background-color: #FFBD00;
-    color: #ffffff;
+    @include y-solid-button
     width: 300px;
     height: 60px;
     margin-top: 10px;
     border-radius: 30px;
     margin: 20px 0px;
-}
-
-.form:hover{
-    background-color: #ffffff;
-    color: #FFBD00;
-    cursor: pointer;
+    &:hover{
+        cursor: pointer;
+        background-color: #ffffff;
+        color: $yellow;
+    }
 }
 
 .terms {
@@ -306,15 +291,12 @@
     font-size: 10px;
 }
 
-
-
-
 .footer-main {
     display: flex;
     padding: 50px 100px;
     justify-content: space-between;
-    border-top: 1px solid #F3F3F3;
-    border-bottom: 1px solid #F3F3F3;
+    border-top: 1px solid $light;
+    border-bottom: 1px solid $light;
 }
 
 .footer-content {

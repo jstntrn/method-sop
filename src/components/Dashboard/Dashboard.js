@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Dashboard.css'
+import './Dashboard.scss'
 import ProjectLibrary from './../ProjectLibrary/ProjectLibrary'
 import { connect } from 'react-redux';
 import axios from 'axios';

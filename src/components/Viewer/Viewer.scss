@@ -1,3 +1,5 @@
+@import './../variables';
+
 .fixed-viewer {
     position: fixed;
     width: 100%;
@@ -5,7 +7,7 @@
 }
 
 .viewer-header {
-    background-color: #F3F3F3;
+    background-color: $light;
     padding: 0px 50px;
     height: 50px;
     display: fixed;
@@ -53,23 +55,16 @@
     border-radius: 35px;
     font-size: 50px;
     /* text-align: center; */
-}
-
-.player-nav:hover {
-    color: #FFBD00;
-    border: 1px solid #FFBD00;
-    background-color: #ffffff;
-    cursor: pointer
+    &:hover{
+        cursor: pointer;
+        color: $yellow;
+        border: 1px solid $yellow;
+        background-color: #ffffff;
+    }
 }
 
 .center {
     margin-bottom: 125px;
-}
-
-.continue{
-    /* background-color: #5D91FD;
-    border: 1px solid #ffffff;
-    color: #ffffff; */
 }
 
 .lower {
@@ -121,8 +116,10 @@
 }
 
 .proj-title {
-    font-size: 25px;
-    font-weight: lighter;
+    font: {
+        size: 25px;
+        weight: lighter;
+    }
     padding-left: 12px;
     padding-top: 6px;
 }

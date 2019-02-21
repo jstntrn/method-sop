@@ -1,3 +1,5 @@
+@import './../variables';
+
 .modal-wrapper {
     display: flex;
     margin: 10px;
@@ -7,8 +9,8 @@
 }
 
 .modal-inputs {
-    border: 1px solid #5D91FD;
-    background-color: #5D91FD;
+    border: 1px solid $blue;
+    background-color: $blue;
     border-radius: 10px;
     color: #ffffff;
     width: 550px;
@@ -39,22 +41,17 @@ select {
     height: 100px;
     width: 100px;
     border-radius: 50px;
-    border: 1px solid #FFBD00;
-    background-color: #FFBD00;
+    border: 1px solid $yellow;
+    background-color: $yellow;
     color: #ffffff;
     font-size: 50px;
-}
-
-.modal-button:hover {
-    cursor: pointer;
+    &:hover{
+        cursor: pointer;
+    }
 }
 
 .cancel {
-    background-color: #F3F3F3;
-    border: 1px solid #5D91FD;
-    color: #5D91FD;
-}
-
-.create {
-
+    background-color: $light;
+    border: 1px solid $blue;
+    color: $blue;
 }

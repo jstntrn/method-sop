@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './Home.css'
+import './Home.scss'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux';
 import axios from 'axios';
@@ -93,8 +93,8 @@ class Home extends Component{
                         <div className='feature-container'>
                             <img className='feature-image' src='https://kontainer.com/content//2018/07/ss-1-768x783.png' alt='one' />
                             <div className='feature-content'>
-                                <p>GDPR APPROVED SECURITY</p>
-                                <h2>Simple and safe storage of pictures and files</h2>
+                                <p>SUPER SIMPLE SOP CREATOR</p>
+                                <h2>Method is the quickest way to create hyper-detailed SOPs</h2>
                                 <p>When you store and share large files, images and videos with external partners, the press or internally between departments, it's important that it's safe. 
 Kontainer meets all GDPR data security requirements and with advanced user management, you can easily control which users are allowed to view, share and download files and images from your Kontainer.</p>
                                 <button className='feature button'>READ MORE ABOUT SECURE FILE SHARING</button>
@@ -102,8 +102,8 @@ Kontainer meets all GDPR data security requirements and with advanced user manag
                         </div>
                         <div className='feature-container'>
                             <div className='feature-content'>
-                                <p>GDPR APPROVED SECURITY</p>
-                                <h2>Simple and safe storage of pictures and files</h2>
+                                <p>CLOUD SECURITY</p>
+                                <h2>Your SOPs are secure and accessible from the cloud</h2>
                                 <p>When you store and share large files, images and videos with external partners, the press or internally between departments, it's important that it's safe. 
 Kontainer meets all GDPR data security requirements and with advanced user management, you can easily control which users are allowed to view, share and download files and images from your Kontainer.</p>
                                 <button className='feature button'>READ MORE ABOUT SECURE FILE SHARING</button>

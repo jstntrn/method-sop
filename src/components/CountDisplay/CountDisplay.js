@@ -1,5 +1,5 @@
 import React from 'react'
-import './CountDisplay.css'
+import './CountDisplay.scss'
 import styled from 'styled-components'
 
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './ProjectCard.css'
+import './ProjectCard.scss'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
 

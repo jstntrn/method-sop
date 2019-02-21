@@ -1,0 +1,19 @@
+@import './../variables';
+
+.menu-link {
+    padding: 15px;
+    color: white;
+    text-decoration: none;
+    font: {
+        size: 18px;
+        weight: lighter;
+    }
+}
+
+.highlight {
+    color: $yellow;
+    font: {
+        size: 24px;
+        weight: bold;
+    }
+}

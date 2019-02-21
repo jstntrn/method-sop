@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactPlayer from 'react-player';
-import './Viewer.css'
+import './Viewer.scss'
 import ContentDisplay from './../ContentDisplay/ContentDisplay'
 import CountDisplay from './../CountDisplay/CountDisplay'
 import { Link } from 'react-router-dom'

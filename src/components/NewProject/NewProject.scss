@@ -1,3 +1,5 @@
+@import './../variables';
+
 .new-proj-input-wrapper {
     display: flex;
     flex-direction: column;
@@ -13,43 +15,41 @@
 }
 
 .video-lib-wrapper {
-    border-top: 1px solid #F3F3F3;
+    border-top: 1px solid $light;
     margin-top: 50px;
 }
 
 .new-next {
     background: none;
-    border: 1px solid #FFBD00;
+    border: 1px solid $yellow;
     width: 60px;
     height: 60px;
     border-radius: 30px;
-    background-color: #FFBD00;
+    background-color: $yellow;
     color: #ffffff;
     font-size: 35px;
     position: absolute;
     top: 230px;
     right: 110px;
-}
-
-.new-next:hover {
-    cursor: pointer;
-    background-color: #ffffff;
-    color: #FFBD00;
+    &:hover{
+        cursor: pointer;
+        background-color: #ffffff;
+        color: $yellow;
+    }
 }
 
 .vid-confirm {
     background: none;
-    border: 1px solid #FFBD00;
+    border: 1px solid $yellow;
     width: 60px;
     height: 60px;
     border-radius: 30px;
-    background-color: #FFBD00;
+    background-color: $yellow;
     color: #ffffff;
     font-size: 35px;
-}
-
-.vid-confirm:hover {
-    cursor: pointer;
-    background-color: #ffffff;
-    color: #FFBD00;
+    &:hover{
+        cursor: pointer;
+        background-color: #ffffff;
+        color: $yellow;
+    }
 }

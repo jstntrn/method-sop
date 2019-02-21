@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ContentCard from './../ContentCard/ContentCard'
-import './ContentDisplay.css'
+import './ContentDisplay.scss'
 import axios from 'axios'
 import ContentModal from './../ContentModal/ContentModal'
 
@@ -47,7 +47,6 @@ export default class ContentDisplay extends Component{
         const { showModal, slideID } = this.state
         return(
             <div className='contents-container'>
-                
                 {
                     (showModal ?
                     <ContentModal createModal={this.createModal} updateDisplay={this.updateDisplay} slideID={slideID} />
@@ -62,7 +61,6 @@ export default class ContentDisplay extends Component{
                         <div></div>)
                     )
                 }
-
                 {
                     this.state.contentList.map(content => (
                     <ContentCard

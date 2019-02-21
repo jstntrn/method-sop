@@ -1,3 +1,5 @@
+@import './../variables';
+
 .contents-container {
     /* display: flex;
     flex-wrap: wrap;
@@ -8,19 +10,17 @@
 
 .add-content-wrapper {
     background: none;
-    border: 1px solid #5D91FD;
+    border: 1px solid $blue;
     border-radius: 25px;
     margin: 10px;
     box-shadow: 1px 1px 100px 5px #dddddd;
     background-color: #ffffff;
-    color: #5D91FD;
+    color: $blue;
     width: 800px;
     height: 50px;
+    &:hover{
+        cursor: pointer;
+        background-color: $blue;
+        color: #ffffff
+    }
 }
-
-.add-content-wrapper:hover {
-    cursor: pointer;
-    background-color: #5D91FD;
-    color: #ffffff
-}
-

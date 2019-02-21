@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import ProjectCard from './../ProjectCard/ProjectCard'
-import './ProjectLibrary.css'
+import './ProjectLibrary.scss'
 import axios from 'axios'
 
 class ProjectLibrary extends Component{

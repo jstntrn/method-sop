@@ -12,10 +12,9 @@
 .content-delete {
     background: none;
     border: none;
-}
-
-.content-delete:hover {
-    cursor: pointer;
+    &:hover{
+        cursor: pointer;
+    }
 }
 
 .content-title {
@@ -24,4 +23,9 @@
 .content-text {
     text-align: left;
     padding: 0px 40px;
+}
+
+.content-image {
+    padding: 0px 40px;
+    width: 700px;
 }

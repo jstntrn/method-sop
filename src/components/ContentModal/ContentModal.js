@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ContentModal.css'
+import './ContentModal.scss'
 import axios from  'axios'
 
 export default class ContentModal extends Component{

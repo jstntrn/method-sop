@@ -1,0 +1,18 @@
+//primary color palette
+$blue: #5D91FD;
+$yellow: #FFBD00;
+$dark: #565761;
+$light: #F3F3F3;
+
+//yellow button
+@mixin y-border-button {
+    border: 1px solid $yellow;
+    background-color: #ffffff;
+    color: $yellow;
+}
+
+@mixin y-solid-button {
+    border: 1px solid $yellow;
+    background-color: $yellow;
+    color: #ffffff;
+}

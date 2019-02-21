@@ -3,8 +3,10 @@
 }
 
 .dash-title {
-    font-size: 25px;
-    font-weight: lighter;
+    font: {
+        size: 25px;
+        weight: lighter;
+    }
     padding-left: 12px;
     padding-top: 6px;
 }
