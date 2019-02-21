@@ -4,10 +4,6 @@ import axios from 'axios'
 
 export default class ContentCard extends Component{
 
-    constructor(props){
-        super(props)
-    }
-
     handleDelete(){
         const { id, updateDisplay } = this.props
         axios.delete(`/api/content/${id}`)
@@ -17,12 +13,14 @@ export default class ContentCard extends Component{
     }
 
     render(){
-        const { title, content } = this.props
+        const { title, content, showCreate } = this.props
         return(
             <div className='cont-card-wrapper'>
                 <div style={{ textDecoration: 'none', color: '#565761' }}>
-                    <button onClick={() => this.handleDelete()}><i className="fa fa-trash" aria-hidden="true"></i></button>
-                    <h3>{title}</h3>
+                    {
+                        ( showCreate ? <button className='content-delete' onClick={() => this.handleDelete()}><i className="fa fa-trash" aria-hidden="true"></i></button> : <div></div>)
+                    }
+                    <h3 className='content-title'>{title}</h3>
                     <p className='content-text'>{content}</p>
                 </div>
             </div>

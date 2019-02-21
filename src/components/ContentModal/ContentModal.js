@@ -52,6 +52,7 @@ export default class ContentModal extends Component{
                             <option value='doc'>Document</option>
                             <option value='img'>Image</option>
                             <option value='pdf'>PDF</option>
+                            <option value='code'>Code</option>
                         </select>
                         <input className='modal-title' value={title} placeholder={'title'} onChange={(e) => this.handleChange('title', e.target.value)} />
                     </div>

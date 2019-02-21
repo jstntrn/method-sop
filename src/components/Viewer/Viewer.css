@@ -107,10 +107,10 @@
 }
 
 .content-container {
-    position: relative;
+    position: absolute;
     display: flex;
     justify-content: center;
-    top: 620px;
+    top: 610px;
     z-index: -2;
     width: 100%;
 }

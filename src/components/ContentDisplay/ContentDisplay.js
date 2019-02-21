@@ -50,18 +50,6 @@ export default class ContentDisplay extends Component{
             <div className='contents-container'>
                 
                 {
-                    this.state.contentList.map(content => (
-                    <ContentCard
-                    key={content.id}
-                    id={content.id}
-                    type={content.type}
-                    title={content.title}
-                    content={content.content}
-                    updateDisplay={this.updateDisplay}
-                    />
-                    ))
-                }
-                {
                     (showModal ?
                     <ContentModal createModal={this.createModal} updateDisplay={this.updateDisplay} slideID={slideID} />
                     :
@@ -74,6 +62,20 @@ export default class ContentDisplay extends Component{
                         :
                         <div></div>)
                     )
+                }
+
+                {
+                    this.state.contentList.map(content => (
+                    <ContentCard
+                    key={content.id}
+                    id={content.id}
+                    type={content.type}
+                    title={content.title}
+                    content={content.content}
+                    updateDisplay={this.updateDisplay}
+                    showCreate={showCreate}
+                    />
+                    ))
                 }
             </div>
         )

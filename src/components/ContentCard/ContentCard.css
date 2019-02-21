@@ -1,5 +1,6 @@
 .cont-card-wrapper {
     margin: 10px;
+    padding: 10px;
     box-shadow: 1px 1px 100px 5px #dddddd;
     width: 800px;
 }
@@ -8,7 +9,19 @@
     overflow-wrap: normal;
 }
 
+.content-delete {
+    background: none;
+    border: none;
+}
+
+.content-delete:hover {
+    cursor: pointer;
+}
+
+.content-title {
+    margin: 10px 0px 0px;
+}
 .content-text {
     text-align: left;
-    padding: 10px 40px;
+    padding: 0px 40px;
 }
