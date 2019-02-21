@@ -68,8 +68,8 @@ class Dashboard extends Component{
                     <div className='header-right'>
                         <Link to='/newproject' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-plus"></i></button></Link>
                         <button className="hamburger" onClick={() => this.toggleEdit()}><i className="fas fa-pencil-alt"></i></button>
-                        <Link to='/library' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-video"></i></button></Link>
-                        <Link to='/account' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-user"></i></button></Link>
+                        {/* <Link to='/library' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-video"></i></button></Link>
+                        <Link to='/account' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-user"></i></button></Link> */}
                         <button className="hamburger" onClick={() => this.logout()}><i className="fas fa-sign-out-alt"></i></button>
                     </div>
                 </div>

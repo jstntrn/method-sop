@@ -30,7 +30,6 @@ export default class ContentDisplay extends Component{
     updateDisplay = () => {
         axios.get(`/api/content/${this.state.slideID}`)
         .then(res => {
-            console.log(res.data)
             this.setState({
                 contentList: res.data
             })
