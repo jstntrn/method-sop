@@ -2,8 +2,8 @@ module.exports = {
     createContent: (req, res) => {
         const db = req.app.get('db');
         const { slide } = req.params;
-        const { type, title, content } = req.body
-        db.content.create_content([ slide, type, title, content ])
+        const { type, title, content, url } = req.body
+        db.content.create_content([ slide, type, title, content, url ])
         .then(content => {res.status(200).send(content)})
         .catch(err => console.log(err))
     },

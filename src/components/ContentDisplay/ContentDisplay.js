@@ -69,6 +69,7 @@ export default class ContentDisplay extends Component{
                     type={content.type}
                     title={content.title}
                     content={content.content}
+                    url={content.url}
                     updateDisplay={this.updateDisplay}
                     showCreate={showCreate}
                     />

@@ -13,7 +13,7 @@ export default class ContentCard extends Component{
     }
 
     render(){
-        const { type, title, content, showCreate } = this.props
+        const { type, title, content, showCreate, url } = this.props
         let cardBody = (<div></div>)
         switch(type){
             case 'text':
@@ -22,11 +22,13 @@ export default class ContentCard extends Component{
             case 'url':
                 cardBody = (<p className='content-text'>{content}</p>);
                 break;
-            case 'doc':
-                cardBody = (<p className='content-text'>{content}</p>);
-                break;
             case 'img':
-                cardBody = (<img className='content-image' src={content} alt='card'/>);
+                cardBody = (
+                    <div>
+                        <p className='content-text'>{content}</p>
+                        <img className='content-image' src={url} alt='card'/>
+                    </div>
+                    );
                 break;
             case 'pdf':
                 cardBody = (<p className='content-text'>{content}</p>);

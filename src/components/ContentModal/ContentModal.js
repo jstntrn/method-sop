@@ -10,7 +10,8 @@ export default class ContentModal extends Component{
             type: 'text',
             title: '',
             content: '',
-            url: ''
+            url: '',
+            uploadDisplay: false
         }
     }
 
@@ -27,11 +28,12 @@ export default class ContentModal extends Component{
 
     handleCreate(){
         const { slideID, createModal, updateDisplay } = this.props
-        const { type, title, content } = this.state
+        const { type, title, content, url } = this.state
         axios.post(`/api/content/${slideID}`, {
             type: type,
             title: title,
-            content: content
+            content: content,
+            url: url
         })
         .then(res => {
             updateDisplay()
@@ -82,7 +84,9 @@ export default class ContentModal extends Component{
         // 1) signedRequest, 2) file (taken from above), and 3) url where the image will go 
         const { signedRequest, url } = response.data 
         this.uploadFile(signedRequest, file, url)
-
+        this.setState({
+            uploadDisplay: true
+        })
         }).catch( err => {
         // just catches the error of something went wrong on the server end
         console.log(err)
@@ -90,7 +94,29 @@ export default class ContentModal extends Component{
     }
 
     render(){
-        const { title, content } = this.state
+        const { title, content, type, url, uploadDisplay } = this.state
+        let uploadViewer = (<div></div>)
+        //change to evaluate upload extensions instead of type
+        switch(type){
+            case 'text':
+                uploadViewer = (<p className='content-text'>{content}</p>);
+                break;
+            case 'url':
+                uploadViewer = (<p className='content-text'>{content}</p>);
+                break;
+            case 'img':
+                uploadViewer = (<img className='content-image' src={url} alt='uploaded'/>);
+                break;
+            case 'pdf':
+                uploadViewer = (<p className='content-text'>{content}</p>);
+                break;
+            case 'code':
+                uploadViewer = (<pre className='content-text'>{content}</pre>);
+                break;
+            default:
+                uploadViewer = (<p className='content-text'>{content}</p>);
+                break;
+        }
         return(
             <div className='modal-wrapper'>
                 <button className='modal-button cancel' onClick={() => this.handleCancel()}><i className="fas fa-times"></i></button>
@@ -99,7 +125,6 @@ export default class ContentModal extends Component{
                         <select name='type' onChange={(e) => this.handleChange('type', e.target.value)} >
                             <option value='text'>Text</option>
                             <option value='url'>URL</option>
-                            <option value='doc'>Document</option>
                             <option value='img'>Image</option>
                             <option value='pdf'>PDF</option>
                             <option value='code'>Code</option>
@@ -109,7 +134,14 @@ export default class ContentModal extends Component{
                     <textarea className='modal-content' value={content} placeholder={'content'} onChange={(e) => this.handleChange('content', e.target.value)} />
                     <div className='modal-upload-wrapper'>
                         <input className='modal-upload' type='file' name='file-upload' onChange={this.getSignedRequest}></input>
-                        <img src={this.state.url} alt='uploaded-image' />
+                        {/* add way to show different types of uploads image pdf etc */}
+                        {
+                            (uploadDisplay ? 
+                            <div>{uploadViewer}</div>
+                            :
+                            <div></div>
+                            )
+                        }
                     </div>
                 </div>
                 <button className='modal-button create' onClick={() => this.handleCreate()}><i className="fas fa-check"></i></button>
