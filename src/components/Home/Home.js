@@ -81,7 +81,7 @@ class Home extends Component{
                         <div className='content-body'>
                             <h1>Create and deploy your company's standard operating procedures</h1>
                             <p>Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.</p>
-                            <button className='demo button'>CREATE A FREE DEMO</button>
+                            <Link to='/register'><button className='demo button'>CREATE A FREE DEMO</button></Link>
                         </div>
                     </div>
                     <img className='screen' src={screen} alt='screen' />
@@ -94,19 +94,17 @@ class Home extends Component{
                             <img className='feature-image' src='https://kontainer.com/content//2018/07/ss-1-768x783.png' alt='one' />
                             <div className='feature-content'>
                                 <p>SUPER SIMPLE SOP CREATOR</p>
-                                <h2>Method is the quickest way to create hyper-detailed SOPs</h2>
-                                <p>When you store and share large files, images and videos with external partners, the press or internally between departments, it's important that it's safe. 
-Kontainer meets all GDPR data security requirements and with advanced user management, you can easily control which users are allowed to view, share and download files and images from your Kontainer.</p>
-                                <button className='feature button'>READ MORE ABOUT SECURE FILE SHARING</button>
+                                <h2>Method is the quickest way to create super effective SOPs</h2>
+                                <p>Method allows you to combine video, documents, code, images, and other media types to create standard operating procedures. All of this without having to do time consuming video editing and document formatting. The flexibility of the Method platform makes it useful for every department in an organization.</p>
+                                <button className='feature button'>READ MORE ABOUT OUR STANDARD OPERATION PROCEDURE CREATOR</button>
                             </div>
                         </div>
                         <div className='feature-container'>
                             <div className='feature-content'>
-                                <p>CLOUD SECURITY</p>
+                                <p>SIMPLE AND SECURE FILE MANAGEMENT</p>
                                 <h2>Your SOPs are secure and accessible from the cloud</h2>
-                                <p>When you store and share large files, images and videos with external partners, the press or internally between departments, it's important that it's safe. 
-Kontainer meets all GDPR data security requirements and with advanced user management, you can easily control which users are allowed to view, share and download files and images from your Kontainer.</p>
-                                <button className='feature button'>READ MORE ABOUT SECURE FILE SHARING</button>
+                                <p>Method makes it easy to manage permissions for each project. Method makes it easy to access important procedures whenever they are needed. Projects can be nested in order to create relationships and dependencies between procedures.</p>
+                                <button className='feature button'>READ MORE ABOUT OUR FILE MANAGEMENT SYSTEM</button>
                             </div>
                             <img className='feature-image' src='https://kontainer.com/content//2018/10/baum-design.jpg' alt='two' />
                         </div>
@@ -117,20 +115,20 @@ Kontainer meets all GDPR data security requirements and with advanced user manag
                 <div className='reasons-wrapper'>
                     <div className='reason-card'>
                         <img className='reason-image' src='https://kontainer.com/content//2018/10/15.svg' alt='two' />
-                        <h3>Customized for your brand</h3>
-                        <p>Kontainer can be customized based on your company's logo and guidelines to support your visual identity. In addition, Kontainer can be integrated with internal and external systems to support your workflow best as possible.</p>
+                        <h3>Increase operating consistency</h3>
+                        <p>Using Method to deploy standard operating procedures has proven to increase retention and transparency across organizations. Our video based platform provides greater detail in how operations should be performed.</p>
                         <button className='reason button'>EXAMPLES</button>
                     </div>
                     <div className='reason-card'>
                         <img className='reason-image' src='https://kontainer.com/content//2018/10/14.svg' alt='two' />
-                        <h3>Rights-determined image bank</h3>
-                        <p>Kontainer allows you to share pictures and large files with external partners and create public media galleries. You can create both users and groups with specific rights. That way, you can easily control who sees what content.</p>
-                        <button className='reason button'>MORE FEATURES</button>
+                        <h3>Save money and time</h3>
+                        <p>Writing standard operating procedures are time-consuming and our normally written by higher salary persons. Method makes building standard operating procedures faster and uniform for every department.</p>
+                        <button className='reason button'>SEE DATA</button>
                     </div>
                     <div className='reason-card'>
                         <img className='reason-image' src='https://kontainer.com/content//2018/10/12.svg' alt='two' />
                         <h3>Onboarding and support</h3>
-                        <p>With our customized onboarding program, we ensure that you and your colleagues all have a common basis and a good understanding of how best to use Kontainer. In that it way we insure that Kontainer will be the best possible tool for you! Contact us here</p>
+                        <p>With our customized onboarding program, we ensure that you and your colleagues all have a common basis and a good understanding of how best to use Method. In that way we insure that Method will be the best possible tool for you!</p>
                         <button className='reason button'>CONTACT US</button>
                     </div>
                 </div>
@@ -146,18 +144,18 @@ Kontainer meets all GDPR data security requirements and with advanced user manag
 
                 <div className='register-home'>
                     <div className='register-home-content'>
-                        <h1>More than 001 companies already choose Method</h1>
+                        <h1>More than 1000 organizations already choose Method</h1>
                         <div className='register-reason'>
                             <img className='reg-image' src='https://kontainer.com/content//2018/10/14.svg' alt='reg-reason' />
-                            <p className='reg-text'>Our effective search function allows your to access your material easily and quickly.</p>
+                            <p className='reg-text'>Method is the best way to build operating procedure resources.</p>
                         </div>
                         <div className='register-reason'>
                             <img className='reg-image' src='https://kontainer.com/content//2018/10/7.svg' alt='reg-reason' />
-                            <p className='reg-text'>We are constantly developing Kontainer, in that way our system will always be the best possible tool for you.</p>
+                            <p className='reg-text'>Method is effective for any organization size and can scale as you scale.</p>
                         </div>
                         <div className='register-reason'>
                             <img className='reg-image' src='https://kontainer.com/content//2018/10/1.svg' alt='reg-reason' />
-                            <p className='reg-text'>Kontainer has an ISAE 3402 statement that meets the requirements of the Personal Data Regulation / GDPR.</p>
+                            <p className='reg-text'>Method exceeds file security standards to protect your operating practices.</p>
                         </div>
                     </div>
                     <div className='home-form-container'>
