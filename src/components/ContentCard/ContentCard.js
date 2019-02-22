@@ -20,18 +20,27 @@ export default class ContentCard extends Component{
                 cardBody = (<p className='content-text'>{content}</p>);
                 break;
             case 'url':
-                cardBody = (<p className='content-text'>{content}</p>);
+                cardBody = (
+                    <div>
+                        <a href={content} target='_blank' rel='noopener noreferrer'><p className='content-text'>{content}</p></a>
+                    </div>
+                    );
                 break;
             case 'img':
                 cardBody = (
                     <div>
                         <p className='content-text'>{content}</p>
-                        <img className='content-image' src={url} alt='card'/>
+                        <a href={url} target='_blank' rel='noopener noreferrer'><img className='content-image' src={url} alt='card'/></a>
                     </div>
                     );
                 break;
             case 'pdf':
-                cardBody = (<p className='content-text'>{content}</p>);
+                cardBody = (
+                    <div>
+                        <p className='content-text'>{content}</p>
+                        <a href={url} target='_blank' rel='noopener noreferrer'><p className='content-text'>{content}</p></a>
+                    </div>
+                );
                 break;
             case 'code':
                 cardBody = (<pre className='content-text'>{content}</pre>);

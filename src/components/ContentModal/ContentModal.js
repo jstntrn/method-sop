@@ -96,7 +96,7 @@ export default class ContentModal extends Component{
     render(){
         const { title, content, type, url, uploadDisplay } = this.state
         let uploadViewer = (<div></div>)
-        //change to evaluate upload extensions instead of type
+        //change to evaluate upload extensions instead of type, fix conditions on what to show, display default loading and fix styling on upload card
         switch(type){
             case 'text':
                 uploadViewer = (<p className='content-text'>{content}</p>);
@@ -117,6 +117,7 @@ export default class ContentModal extends Component{
                 uploadViewer = (<p className='content-text'>{content}</p>);
                 break;
         }
+        //change input fields and upload availability based on type
         return(
             <div className='modal-wrapper'>
                 <button className='modal-button cancel' onClick={() => this.handleCancel()}><i className="fas fa-times"></i></button>

@@ -40,7 +40,8 @@ create table content_cards (
     foreign key(slide_id) references slides(id),
     type varchar,
     title varchar,
-    content varchar
+    content varchar,
+    url varchar
 );
 
 {project_id:1, title: 'Door Assembly', image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiT1rBCqDIOhVwHzQUYKnBgAyZV9zBlp5MpPAaGY0zC9JThF4Z'},
