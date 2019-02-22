@@ -13,7 +13,7 @@
     background-color: $blue;
     border-radius: 10px;
     color: #ffffff;
-    width: 550px;
+    width: 600px;
     height: 160px;
 }
 
@@ -29,22 +29,33 @@ select {
 .modal-title {
     margin: 10px;
     height: 25px;
-    width: 400px;
+    width: 450px;
 }
 
 .modal-content {
-    width: 500px;
-    height: 80px;
+    width: 550px;
+    height: 50px;
+}
+
+.modal-upload-wrapper {
+    width: 550px;
+    height: 20px;
+}
+
+.modal-upload {
+    position: relative;
+    left: -125px;
+    margin-top: 5px;
 }
 
 .modal-button {
-    height: 100px;
-    width: 100px;
-    border-radius: 50px;
+    height: 80px;
+    width: 80px;
+    border-radius: 40px;
     border: 1px solid $yellow;
     background-color: $yellow;
     color: #ffffff;
-    font-size: 50px;
+    font-size: 40px;
     &:hover{
         cursor: pointer;
     }
