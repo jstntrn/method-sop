@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import {updateUser} from './../../ducks/reducer'
 import Menu from './../Menu/Menu'
-import macbook from './../../blank-macbook.png'
-import screen from './../../mac-screen.png'
+import macbook from './../../macbook.png'
 
 class Home extends Component{
     constructor(props){
@@ -84,7 +83,6 @@ class Home extends Component{
                             <Link to='/register'><button className='demo button'>CREATE A FREE DEMO</button></Link>
                         </div>
                     </div>
-                    <img className='screen' src={screen} alt='screen' />
                     <img className='comp' src={macbook} alt='macbook' />
                 </div>
                 <div className='features-wrapper'>

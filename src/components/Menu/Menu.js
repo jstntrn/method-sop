@@ -20,14 +20,7 @@ const MenuWrapper = styled.div`
     align-content: center;
 `
 
-const CloseButton = styled.h3`
-    padding-right: 50px;
-    color: white;
-    border-radius: 50%;
-    background: none;
-    border: none;
-    transform: rotate(45deg);
-    align-self: flex-end;
+const CloseButton = styled.h1`
     font: {
         size: 50px;
         weight: lighter;
@@ -35,6 +28,16 @@ const CloseButton = styled.h3`
     &:hover {
         cursor: pointer;
     }
+    padding-right: 50px;
+    color: white;
+    border-radius: 50%;
+    background: none;
+    border: none;
+    transform: rotate(45deg);
+    align-self: flex-end;
+    position: absolute;
+    top: 60px;
+    right: 25px;
 `
 
 const MenuList = styled.div`

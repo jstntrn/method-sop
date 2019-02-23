@@ -64,30 +64,21 @@
 
 .hero {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     overflow: hidden;
+    position: relative;
 }
 
 .content-body {
     text-align: left;
-    padding-left: 80px;
-    width:160%;
-    max-width: 800px;
-    overflow: hidden;
-}
-.screen {
-    height: 270px;
-    position: relative;
-    left: 340px;
-    padding-top: 20px; 
+    padding: 0 50px;
+    min-width: 500px;
 }
 
 .comp {
-    height: 350px;
     position: relative;
-    top: 0px;
-    right: 200px;
-    padding-top: 50px; 
+    height: 350px;
 }
 
 .demo {
@@ -102,10 +93,6 @@
         color: $dark;
     }
 }
-/* 
-.content-image {
-    overflow: hidden;
-} */
 
 .features-wrapper{
     padding-top: 20px;
@@ -119,10 +106,6 @@
     margin-top: 50px;
     padding-top: 50px;
     /* transform: rotate(-3deg) */
-}
-
-.reasons-wrapper {
-    margin-top: 80px;
 }
 
 .feature-container {
@@ -157,6 +140,7 @@
     display: flex;
     justify-content: space-between;
     padding: 50px;
+    margin-top: 80px;
 }
 
 .reason-card {
@@ -165,6 +149,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    margin: 0 10px;
 }
 
 .reason-image {
