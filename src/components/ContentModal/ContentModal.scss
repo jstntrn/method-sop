@@ -3,7 +3,7 @@
 .modal-wrapper {
     display: flex;
     margin: 10px;
-    width: 800px;
+    width: 700px;
     justify-content: space-between;
     align-items: center;
 }
@@ -13,7 +13,7 @@
     background-color: $blue;
     border-radius: 10px;
     color: #ffffff;
-    width: 600px;
+    width: 500px;
     height: 160px;
 }
 
@@ -29,11 +29,11 @@ select {
 .modal-title {
     margin: 10px;
     height: 25px;
-    width: 450px;
+    width: 380px;
 }
 
 .modal-content {
-    width: 550px;
+    width: 460px;
     height: 50px;
 }
 
@@ -47,7 +47,7 @@ select {
 
 .modal-upload {
     position: relative;
-    left: -125px;
+    left: -130px;
     margin-top: 5px;
 }
 

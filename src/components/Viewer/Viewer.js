@@ -293,7 +293,7 @@ class Viewer extends Component {
                 {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
                 <div className='fixed-viewer'>
-                    <div className='header viewer-header'>
+                    <div className='viewer-header'>
                         <div className='header-left'>
                             <h1 className='logo'>method</h1>
                             <h1 className='logo yel'>sop</h1>
@@ -321,8 +321,8 @@ class Viewer extends Component {
                             <ReactPlayer
                                 ref={(player) => this.player = player}
                                 className='react-player'
-                                width='800px'
-                                height='450px'
+                                width='700px'
+                                height='394px'
                                 url={url}
                                 pip={pip}
                                 playing={playing}

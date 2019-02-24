@@ -3,7 +3,6 @@
 .logo {
     font-family: 'Do Hyeon', sans-serif;
     transition: 0.2s;
-    margin: 10px 0;;
 }
 
 .logo-wrapper {
@@ -27,6 +26,10 @@
     }
     letter-spacing: 3px;
     transition: 0.2s;
+}
+
+h1 {
+    margin: 10px 0 15px;
 }
 
 .register {
@@ -63,11 +66,13 @@
 
 .header-left {
     display: flex;
+    align-items: center;
 }
 
 .header-right {
     display: flex;
     align-items: center;
+    padding-top: 10px;
 }
 
 .hero {

@@ -6,19 +6,29 @@
     background-color: #ffffff;
 }
 
+h2 {
+    margin: 0;
+}
+
 .viewer-header {
     background-color: $light;
     padding: 0px 50px;
     height: 50px;
-    display: fixed;
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: 0.2s;
+    background-color: #ffffff;
+    z-index: 999;
+    margin-bottom: 20px;
 }
 
 .player-header {
     padding: 0px 130px;
-    margin: 0px;
+    margin: 0px auto;
     display: flex;
     justify-content: space-between;
+    width: 700px;
 }
 
 .count {
@@ -28,7 +38,7 @@
 .player-container {
     padding: 0px 50px;
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
 }
 
@@ -42,7 +52,7 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    height: 450px;
+    height: 394px;
 }
 
 .player-nav {
@@ -74,12 +84,13 @@
 }
 
 .player-footer {
-    margin-top: 10px;
+    margin: 10px auto 0px;
     padding: 0px 130px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 20px;
+    width: 700px;
 }
 
 .player-footer-right {
@@ -97,7 +108,7 @@
 }
 
 .progress-bar {
-    width: 400px;
+    width: 300px;
     margin-right: 10px;
 }
 
@@ -105,7 +116,7 @@
     position: absolute;
     display: flex;
     justify-content: center;
-    top: 610px;
+    top: 530px;
     z-index: -2;
     width: 100%;
 }
@@ -121,5 +132,4 @@
         weight: lighter;
     }
     padding-left: 12px;
-    padding-top: 6px;
 }
