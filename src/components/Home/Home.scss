@@ -2,6 +2,8 @@
 
 .logo {
     font-family: 'Do Hyeon', sans-serif;
+    transition: 0.2s;
+    margin: 10px 0;;
 }
 
 .logo-wrapper {
@@ -23,7 +25,8 @@
         weight: lighter;
         family: Arial, Helvetica, sans-serif;
     }
-    letter-spacing: 3px
+    letter-spacing: 3px;
+    transition: 0.2s;
 }
 
 .register {
@@ -46,11 +49,16 @@
 }
 
 .header {
+    position: sticky;
+    top: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 50px;
-
+    padding: 0px 50px;
+    transition: 0.2s;
+    background-color: #ffffff;
+    z-index: 999;
+    margin-bottom: 20px;
 }
 
 .header-left {
@@ -72,8 +80,8 @@
 
 .content-body {
     text-align: left;
-    padding: 0 50px;
-    min-width: 500px;
+    padding: 0 30px 0 50px;
+    min-width: 470px;
 }
 
 .comp {
@@ -290,4 +298,90 @@
 
 .footer-content {
     text-align: left;
+}
+
+.copyright {
+    text-align: 'left';
+    padding-left: '100px';
+}
+
+@media (max-width: 450px) {
+    .header {
+        padding: 0px 25px;
+    }
+    .button {
+        height: 50px;
+        width: 200px;
+    }
+    .register {
+        display: none;
+    }
+    .hero {
+        flex-direction: column-reverse;
+    }
+    .comp {
+        height: 200px;
+    }
+    .content-body {
+        text-align: center;
+        padding: 0 50px;
+        min-width: 300px;
+    }
+    .feature {
+        width: 300px;
+    }
+    .footer-main {
+        display: none;
+        align-items: center;
+    }
+    .feature-background {
+        height: 900px;
+    }
+    .feature-container {
+        flex-direction: column;
+    }
+    .feature-image {
+        display: none;
+    }
+    .reasons-wrapper {
+        flex-direction: column;
+        padding: 50px 25px;
+        align-items: center;
+    }
+    .reason-card {
+        margin: 20px auto;
+    }
+    .review-text {
+        padding: 0px 50px;
+    }
+    .register-home-content {
+        margin: 10px;
+    }
+    .reg-text {
+        padding: 0px 10px;
+    }
+    .register-home {
+        flex-direction: column;
+    }
+    .home-form-container {
+        margin: 30px auto;
+        max-width: 270px;
+        min-width: 270px;
+    }
+    .input-div{
+        width: 220px;
+    }
+    .home-form-input {
+        width: 170px;
+    }
+    footer {
+        margin: 0px auto;
+    }
+    .lower-logo {
+        margin: 0px;
+        justify-content: center;
+    }
+    .copyright {
+        text-align: 'center';
+    }
 }

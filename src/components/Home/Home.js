@@ -58,6 +58,16 @@ class Home extends Component{
         this.setState({ showMenu: false });
     }
 
+    scrollFunction = () => {
+        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+            document.getElementById("header").style.fontSize = "1em";
+            document.getElementById("register").style.height = "30px";
+          } else {
+            document.getElementById("header").style.fontSize = "1.5em";
+            document.getElementById("register").style.height = "40px";
+          }
+    }
+
     render(){
         const { username, password } = this.state;
         return(
@@ -65,13 +75,14 @@ class Home extends Component{
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
                 {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
-                <div className='header'>
+                {window.onscroll = () => {this.scrollFunction()}}
+                <div className='header' id='header'>
                     <div className='header-left'>
                         <h1 className='logo'>method</h1>
                         <h1 className='logo yel'>sop</h1>
                     </div>
                     <div className='header-right'>
-                        <Link to='/register'><button className='register button'>SIGN UP FREE</button></Link>
+                        <Link to='/register'><button className='register button' id='register'>SIGN UP FREE</button></Link>
                         <button className="hamburger" onClick={() => this.handleOpenMenu()}><i className="fas fa-bars"></i></button>
                     </div>
                 </div>
@@ -185,11 +196,11 @@ class Home extends Component{
                     />
                 </div>
 
-                <div className='logo-wrapper'>
+
+                <div className='logo-wrapper lower-logo'>
                     <h1 className='logo'>method</h1>
                     <h1 className='logo yel'>sop</h1>
                 </div>
-
                 <footer>
                     <div className='footer-main'>
                         <div className='footer-content'>
@@ -221,7 +232,7 @@ class Home extends Component{
                             <p>Company 4</p>
                         </div>
                     </div>
-                    <p style={{textAlign: 'left', paddingLeft: '100px'}}>Copyright 2019 Justin Tran All rights reserved</p>
+                    <p className='copyright'>Copyright 2019 Justin Tran All rights reserved</p>
                 </footer>
             </div>
         )
