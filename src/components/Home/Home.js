@@ -6,6 +6,8 @@ import axios from 'axios';
 import {updateUser} from './../../ducks/reducer'
 import Menu from './../Menu/Menu'
 import macbook from './../../macbook.png'
+import dashboard from './../../dashboard.png'
+import newproject from './../../newproject.png'
 
 class Home extends Component{
     constructor(props){
@@ -100,7 +102,7 @@ class Home extends Component{
                     <p className='yel' style={{fontWeight: 'bold', letterSpacing: '3px'}}>FEATURES</p>
                     <div className='feature-background'>
                         <div className='feature-container'>
-                            <img className='feature-image' src='https://kontainer.com/content//2018/07/ss-1-768x783.png' alt='one' />
+                            <img className='feature-image' src={newproject} alt='one' />
                             <div className='feature-content'>
                                 <p>SUPER SIMPLE SOP CREATOR</p>
                                 <h2>Method is the quickest way to create super effective SOPs</h2>
@@ -115,7 +117,7 @@ class Home extends Component{
                                 <p>Method makes it easy to manage permissions for each project. Method makes it easy to access important procedures whenever they are needed. Projects can be nested in order to create relationships and dependencies between procedures.</p>
                                 <button className='feature button'>READ MORE ABOUT OUR FILE MANAGEMENT SYSTEM</button>
                             </div>
-                            <img className='feature-image' src='https://kontainer.com/content//2018/10/baum-design.jpg' alt='two' />
+                            <img className='feature-image' src={dashboard} alt='two' />
                         </div>
                     </div>
 
