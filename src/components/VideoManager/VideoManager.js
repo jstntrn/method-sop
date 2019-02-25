@@ -1,39 +1,32 @@
 import React, { Component } from 'react'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
-import './NewProject.scss'
-import VideoLibrary from '../VideoLibrary/VideoLibrary';
+import VideoLibrary from './../VideoLibrary/VideoLibrary'
+import './../ProjectLibrary/ProjectLibrary.scss'
 
-//problems to fix: video control functions weren't working with projectID 50, also new the projectID needs to be set before link is clicked
-
-class NewProject extends Component{
+class VideoManager extends Component{
     constructor(props){
         super(props);
         this.state = {
-            projectTitle: '',
-            projectID: 50,
             videoID: null,
             videoURL: '',
             videoImage: '',
             videoTitle: '',
             showVideo: false,
-            confirmed: false,
+            vidAdded: false,
             userID: null,
-            projectCreated: false
+            videoList: []
         }
     }
-    
+
     componentWillMount(){
         const {id} = this.props;
         if(!id){
             axios.get('./api/user')
             .then(res => {
                 this.props.updateUser(res.data);
-                this.setState({
-                    userID: id
-                })
             })
             .catch(err => {
                 this.props.history.push('/');
@@ -100,37 +93,15 @@ class NewProject extends Component{
         })
     }
 
-    //add get request to pull projects for user in dashboard(Project Library componentDidMount)
-    //finish code, await, async, and endpoints
-    createProject () {
-        //next button is invoked and prject data is posted to table
-        //routed to viewer which pulls project id data
-        const { projectTitle, videoID, userID, videoImage } = this.state;
-        axios.post('/api/project', {
-            video_id: videoID,
-            user_id: userID,
-            title: projectTitle,
-            image_url: videoImage
-        })
-        .then(res => {
-            this.setState({
-                projectID: res.data[0].id,
-            })
-            this.setState({
-                projectCreated: true
-            })
-        })
-    }
-
     render(){
-        const { projectTitle, videoURL, videoImage, videoTitle, showVideo, confirmed, projectCreated} = this.state;
-
+        const { videoURL, videoImage, videoTitle, showVideo, confirmed, vidAdded } = this.state;
+        
         let currentVid = (
             <div>
                 <img src={videoImage} alt='video thumbnail' />
                 <h2>{videoTitle}</h2>
                 <div>
-                    {confirmed ? <i className="fas fa-thumbs-up" style={{color: '#FFBD00', fontSize: '50px'}}></i>
+                    {vidAdded ? <i className="fas fa-thumbs-up" style={{color: '#FFBD00', fontSize: '50px'}}></i>
                     : <button className='vid-confirm' onClick={() => this.confirmVideo()} disabled={ confirmed === 'true' }><i className="fas fa-check"></i></button>}
                 </div>
             </div>
@@ -138,43 +109,32 @@ class NewProject extends Component{
         if(!showVideo){
             currentVid = null;
         }
-        if (projectCreated === true){
-            return <Redirect to={`/viewer/${this.state.projectID}`}/>
-        }
-
-        let nextBut = (
-            <div>
-                {confirmed && projectTitle ? <button className="new-next" onClick={() => this.createProject()} disabled={ confirmed === 'false' }><i className="fas fa-arrow-right"></i></button>
-                : <div></div>}
-            </div>
-        )
         
-
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
+                {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
-                <div className='viewer-header dash'>
+                <div className='header viewer-header dash'>
                     <div className='header-left'>
                         <h1 className='logo'>method</h1>
                         <h1 className='logo yel'>sop</h1>
-                        <h1 className='dash-title'>|   New Project</h1>
+                        <h1 className='dash-title'>|   Video Manager</h1>
                     </div>
                     <div className='header-right'>
+                        <Link to='/upload' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-upload"></i></button></Link>
+                        <button className="hamburger"><i className="fas fa-pencil-alt"></i></button>
                         <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>  
                     </div>
                 </div>
                 <div className='new-proj-body'>
                     <div className='new-proj-input-wrapper'>
-                        <h2>Project Title</h2>
-                        <input className='new-proj-input' value={projectTitle} onChange={(e) => this.handleChange('projectTitle', e.target.value)} />
                         <h2>Video URL</h2>
                         <input className='new-proj-input' value={videoURL} onChange={(e) => this.handleURL(e.target.value)} />
-                        {nextBut}
+                        {/* {nextBut} */}
                     </div>
                     {currentVid}
-                    <div className='video-lib-wrapper'>
-                        <h2>Video Library</h2>
+                    <div className='projects-container'>
                         <VideoLibrary />
                     </div>
                 </div>
@@ -191,4 +151,4 @@ function mapStateToProps(state){
     };
 };
 
-export default connect(mapStateToProps, {updateUser})(NewProject);
+export default connect(mapStateToProps, {updateUser})(VideoManager)

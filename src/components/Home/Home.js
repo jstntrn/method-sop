@@ -58,15 +58,15 @@ class Home extends Component{
         this.setState({ showMenu: false });
     }
 
-    scrollFunction = () => {
-        if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
-            document.getElementById("header").style.fontSize = "1em";
-            document.getElementById("register").style.height = "30px";
-          } else {
-            document.getElementById("header").style.fontSize = "1.5em";
-            document.getElementById("register").style.height = "40px";
-          }
-    }
+    // scrollFunction = () => {
+    //     if (document.body.scrollTop > 50 || document.documentElement.scrollTop > 50) {
+    //         document.getElementById("header").style.fontSize = "1em";
+    //         document.getElementById("register").style.height = "30px";
+    //       } else {
+    //         document.getElementById("header").style.fontSize = "1.5em";
+    //         document.getElementById("register").style.height = "40px";
+    //       }
+    // }
 
     render(){
         const { username, password } = this.state;
@@ -75,7 +75,7 @@ class Home extends Component{
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
                 {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
-                {window.onscroll = () => {this.scrollFunction()}}
+                {/* {window.onscroll = () => {this.scrollFunction()}} */}
                 <div className='header' id='header'>
                     <div className='header-left'>
                         <h1 className='logo'>method</h1>

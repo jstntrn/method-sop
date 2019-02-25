@@ -41,16 +41,17 @@ app.delete('/api/project/:id', pc.deleteProject);
 app.put('/api/project/:id', pc.editTitle);
 
 //video data
-app.post('/api/video', vc.createVideo)
+app.post('/api/video', vc.createVideo);
+app.get('/api/videos/:user', vc.getVideos);
 
 //slide data
-app.get('/api/slides/:project', sc.getSlides)
-app.post('/api/slide/:project', sc.createSlide)
+app.get('/api/slides/:project', sc.getSlides);
+app.post('/api/slide/:project', sc.createSlide);
 
 //content card data
-app.post('/api/content/:slide', cc.createContent)
-app.get('/api/content/:slide', cc.getSlideContent)
-app.delete('/api/content/:id', cc.deleteContent)
+app.post('/api/content/:slide', cc.createContent);
+app.get('/api/content/:slide', cc.getSlideContent);
+app.delete('/api/content/:id', cc.deleteContent);
 
 //aws
 //just a simple get endpoint, make sure it matches what you have on your front end. We'll write out the function here instead of putting it inside of a controller. 
