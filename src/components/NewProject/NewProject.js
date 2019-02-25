@@ -31,6 +31,7 @@ class NewProject extends Component{
             axios.get('./api/user')
             .then(res => {
                 this.props.updateUser(res.data);
+                console.log(res.data)
                 this.setState({
                     userID: id
                 })
@@ -40,6 +41,7 @@ class NewProject extends Component{
             })
         } else {
         }
+        console.log(this.props)
         this.setState({
             userID: id
         })
@@ -47,6 +49,7 @@ class NewProject extends Component{
 
     componentDidMount(){
         const {id} = this.props;
+        console.log(this.props)
         this.setState({
             userID: id
         })
@@ -58,7 +61,7 @@ class NewProject extends Component{
         })
     }
 
-    handleURL (val) {
+    handleURL = (val) => {
         this.setState({
             videoURL: val
         })
@@ -175,7 +178,7 @@ class NewProject extends Component{
                     {currentVid}
                     <div className='video-lib-wrapper'>
                         <h2>Video Library</h2>
-                        <VideoLibrary />
+                        <VideoLibrary handleURL={this.handleURL} page={this.props.match.path}/>
                     </div>
                 </div>
             </div>

@@ -32,7 +32,6 @@ class VideoLibrary extends Component{
                         videoList: res.data,
                         userID: res.data.user_id
                     })
-                    console.log(res.data)
                 })
             })
             .catch(err => {
@@ -44,7 +43,6 @@ class VideoLibrary extends Component{
                 this.setState({
                     videoList: res.data
                 })
-                console.log(res.data)
             })
         }
         this.setState({
@@ -76,6 +74,8 @@ class VideoLibrary extends Component{
                                     videoURL={video.video_url}
                                     thumbnail={video.thumbnail}
                                     title={video.title}
+                                    handleURL={this.props.handleURL}
+                                    page={this.props.page}
                                 />
                             )))
                         }

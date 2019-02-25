@@ -1,0 +1,43 @@
+@import './../variables';
+
+.vid-card-wrapper {
+    margin: 10px;
+    box-shadow: 1px 1px 100px 5px #dddddd;
+    width: 22%;
+    min-width: 200px;
+}
+
+.vid-image-wrapper {
+    position: relative;
+}
+
+.vid-image-wrapper:hover .image-overlay {
+    opacity: .8;
+}
+
+.image-overlay {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    transition: .5s ease;
+    background-color: #ffffff;
+}
+
+.vid-button {
+    width: 60px;
+    height: 60px;
+    border: 1px solid black;
+    background-color: $blue;
+    background: none;
+    border-radius: 30px;
+    font-size: 40px;
+    &:hover {
+        cursor: pointer;
+    }
+}

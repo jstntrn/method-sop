@@ -6,10 +6,10 @@ import styled from 'styled-components'
 
 export default function CountDisplay(props){
     const { slideLog, slideCounter } = props
-    const highlightCalc = -112 + 38*slideCounter
+    const highlightCalc = 38*slideCounter
     const highlightPos = highlightCalc.toString() + 'px'
     const Highlight = styled.div`
-        position: relative;
+        position: absolute;
         top: 0px;
         left: ${highlightPos};
         width: 35px;
