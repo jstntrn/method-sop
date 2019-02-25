@@ -292,7 +292,7 @@ class Viewer extends Component {
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
                 {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
                 <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
-                <div className='fixed-viewer'>
+                <div>
                     <div className='viewer-header'>
                         <div className='header-left'>
                             <h1 className='logo'>method</h1>
@@ -305,73 +305,77 @@ class Viewer extends Component {
                             <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>                            
                         </div>
                     </div>
-                    <div className='player-header'>
-                        <CountDisplay 
-                            slideLog={this.state.slideLog}
-                            slideCounter={this.state.slideCounter}
-                        />
-                        <h2>{slideTitle}</h2>
-                    </div>
-                    <div className='player-container'>
-                        <div className='nav-container'>
-                            <button className='player-nav center' onClick={() => this.handlePrevious()}><i className="fas fa-angle-left"></i></button>
-                            <button className='player-nav lower' onClick={() => this.handleZero()}><i className="fas fa-undo"></i></button>
-                        </div>
-                        <div className='player-wrapper'>
-                            <ReactPlayer
-                                ref={(player) => this.player = player}
-                                className='react-player'
-                                width='700px'
-                                height='394px'
-                                url={url}
-                                pip={pip}
-                                playing={playing}
-                                controls={controls}
-                                light={light}
-                                loop={loop}
-                                playbackRate={playbackRate}
-                                volume={volume}
-                                muted={muted}
-                                onReady={this.onReady}
-                                onStart={this.onStart}
-                                onPlay={this.onPlay}
-                                onEnablePIP={this.onEnablePIP}
-                                onDisablePIP={this.onDisablePIP}
-                                onPause={this.onPause}
-                                onSeek={e => this.onSeek(e)}
-                                onEnded={this.onEnded}
-                                onError={e => console.log('onError', e)}
-                                onProgress={this.onProgress}
-                                onDuration={this.onDuration}
-                            />
-                        </div>
-                        <div className='nav-container'>
-                            
-                            {
-                                (continueHighlight ? <button className='player-nav center continue' onClick={() => this.handleNext()}><i className="fas fa-angle-right"></i></button>
-                                : <button className='player-nav center' onClick={() => this.handleNext()}><i className="fas fa-angle-right"></i></button>)
-                            }
-                            <button className='player-nav lower' onClick={this.playPause}>{this.state.playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
-                        </div>
-                    </div>
-                    <div className='player-footer'>
-                        <div className='player-footer-left'>
-                            <input
-                            className = 'progress-bar'
-                            type='range' min={0} max={1} step='any'
-                            value={played}
-                            onMouseDown={this.onSeekMouseDown}
-                            onChange={this.onSeekChange}
-                            onMouseUp={this.onSeekMouseUp}
-                            />
-                            <p>{playedSeconds.toFixed(0)}s / </p>
-                            <p>{duration}s</p>
-                        </div>
-                        {createInput}
-                    </div>
                 </div>
-                <div className='content-container'>
-                    <ContentDisplay className='card-content-body' slideID={slideID} showCreate={showCreate} />
+                <div className='viewer-wrapper'>
+                    <div className='fixed-viewer'>
+                        <div className='player-header'>
+                            <CountDisplay 
+                                slideLog={this.state.slideLog}
+                                slideCounter={this.state.slideCounter}
+                            />
+                            <h2>{slideTitle}</h2>
+                        </div>
+                        <div className='player-container'>
+                            <div className='nav-container'>
+                                <button className='player-nav center' onClick={() => this.handlePrevious()}><i className="fas fa-angle-left"></i></button>
+                                <button className='player-nav lower' onClick={() => this.handleZero()}><i className="fas fa-undo"></i></button>
+                            </div>
+                            <div className='player-wrapper'>
+                                <ReactPlayer
+                                    ref={(player) => this.player = player}
+                                    className='react-player'
+                                    width='700px'
+                                    height='394px'
+                                    url={url}
+                                    pip={pip}
+                                    playing={playing}
+                                    controls={controls}
+                                    light={light}
+                                    loop={loop}
+                                    playbackRate={playbackRate}
+                                    volume={volume}
+                                    muted={muted}
+                                    onReady={this.onReady}
+                                    onStart={this.onStart}
+                                    onPlay={this.onPlay}
+                                    onEnablePIP={this.onEnablePIP}
+                                    onDisablePIP={this.onDisablePIP}
+                                    onPause={this.onPause}
+                                    onSeek={e => this.onSeek(e)}
+                                    onEnded={this.onEnded}
+                                    onError={e => console.log('onError', e)}
+                                    onProgress={this.onProgress}
+                                    onDuration={this.onDuration}
+                                />
+                            </div>
+                            <div className='nav-container'>
+                                
+                                {
+                                    (continueHighlight ? <button className='player-nav center continue' onClick={() => this.handleNext()}><i className="fas fa-angle-right"></i></button>
+                                    : <button className='player-nav center' onClick={() => this.handleNext()}><i className="fas fa-angle-right"></i></button>)
+                                }
+                                <button className='player-nav lower' onClick={this.playPause}>{this.state.playing ? <i className="fas fa-pause"></i> : <i className="fas fa-play"></i>}</button>
+                            </div>
+                        </div>
+                        <div className='player-footer'>
+                            <div className='player-footer-left'>
+                                <input
+                                className = 'progress-bar'
+                                type='range' min={0} max={1} step='any'
+                                value={played}
+                                onMouseDown={this.onSeekMouseDown}
+                                onChange={this.onSeekChange}
+                                onMouseUp={this.onSeekMouseUp}
+                                />
+                                <p>{playedSeconds.toFixed(0)}s / </p>
+                                <p>{duration}s</p>
+                            </div>
+                            {createInput}
+                        </div>
+                    </div>
+                    <div className='content-container'>
+                        <ContentDisplay className='card-content-body' slideID={slideID} showCreate={showCreate} />
+                    </div>
                 </div>
             </div>
         )
