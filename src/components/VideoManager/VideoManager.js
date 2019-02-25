@@ -129,7 +129,7 @@ class VideoManager extends Component{
                 </div>
                 <div className='new-proj-body'>
                     <div className='new-proj-input-wrapper'>
-                        <h2>Video URL</h2>
+                        <h2>Add Video with Vimeo URL</h2>
                         <input className='new-proj-input' value={videoURL} onChange={(e) => this.handleURL(e.target.value)} />
                         {/* {nextBut} */}
                     </div>

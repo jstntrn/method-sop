@@ -171,7 +171,7 @@ class NewProject extends Component{
                     <div className='new-proj-input-wrapper'>
                         <h2>Project Title</h2>
                         <input className='new-proj-input' value={projectTitle} onChange={(e) => this.handleChange('projectTitle', e.target.value)} />
-                        <h2>Video URL</h2>
+                        <h2>Vimeo URL</h2>
                         <input className='new-proj-input' value={videoURL} onChange={(e) => this.handleURL(e.target.value)} />
                         {nextBut}
                     </div>
