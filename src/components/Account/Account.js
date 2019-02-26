@@ -3,13 +3,23 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
+import './Account.scss'
 
 class Account extends Component{
     constructor(props){
         super(props);
-        this.state = {}
+        this.state = {
+            email: {
+                to: 'justin.tran2290@gmail.com',
+                from: 'justin@printloon.com',
+                subject: 'Test Email from Method',
+                text: 'This is plain text version of the email, will show if html not available',
+                html: '<h1>This is the html version of the email</h1>'
+            }
+        }
     }
 
+    
     componentDidMount(){
         const {id} = this.props;
         if(!id){
@@ -22,6 +32,13 @@ class Account extends Component{
             })
         } else {
         }
+    }
+    
+    sendEmail = () => {
+        const { email } = this.state;
+        axios.get(`/api/send-email?to=${email.to}&from=${email.from}&subject=${email.subject}&text=${email.text}&html=${email.html}`)
+        .then(res => console.log('email sending'))
+        .catch(err => console.loglog(err))
     }
 
     render(){
@@ -39,6 +56,9 @@ class Account extends Component{
                     <div className='header-right'>
                         <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>  
                     </div>
+                </div>
+                <div className='account-wrapper'>
+                    <button onClick={this.sendEmail}>Email Test</button>
                 </div>
             </div>
         )

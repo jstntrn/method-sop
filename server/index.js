@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const massive = require('massive');
-const { SERVER_PORT, DB_CONNECTION, SESSION_SECRET, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
+const { SERVER_PORT, DB_CONNECTION, SESSION_SECRET, SENDGRID_API_KEY, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
 const ac = require('./controllers/authController');
 const cc = require('./controllers/contentController');
 const pc = require('./controllers/projController');
@@ -9,8 +9,11 @@ const sc = require('./controllers/slideController');
 const vc = require('./controllers/vidController');
 const session = require('express-session');
 const aws = require('aws-sdk');
+const cors = require('cors');
+const sgMail = require('@sendgrid/mail');
 
 const app = express();
+sgMail.setApiKey(SENDGRID_API_KEY);
 app.use(express.json())
 app.use(session({
     secret: SESSION_SECRET,
@@ -18,6 +21,7 @@ app.use(session({
     saveUninitialized: false,
     maxAge: null
 }));
+app.use(cors());
 
 massive(DB_CONNECTION).then(db => {
     app.set('db', db)
@@ -52,6 +56,21 @@ app.post('/api/slide/:project', sc.createSlide);
 app.post('/api/content/:slide', cc.createContent);
 app.get('/api/content/:slide', cc.getSlideContent);
 app.delete('/api/content/:id', cc.deleteContent);
+
+//sendgrid
+ app.get('/api/send-email', (req, res) => {
+  const { to, from, subject, text, html } = req.query
+  const msg = {
+      to: to,
+      from: from,
+      subject: subject,
+      text: text,
+      html: html,
+    };
+    sgMail.send(msg)
+    .catch(err => console.log(err));
+  }
+)
 
 //aws
 //just a simple get endpoint, make sure it matches what you have on your front end. We'll write out the function here instead of putting it inside of a controller. 
@@ -93,3 +112,4 @@ app.get('/sign-s3', (req, res) => {
        return res.send(returnData)
      });
    });
+

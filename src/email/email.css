@@ -1,0 +1,53 @@
+body {
+    background-color: #FAFAFA;
+    height: 100vh;
+    margin: 0px;
+}
+
+.email-logo {
+    font-family: 'Do Hyeon', sans-serif;
+    text-align: center;
+}
+
+.join-header {
+    height: 50px;
+}
+
+.message-container {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    height: 60%;
+    width: 100%;
+}
+
+.email-image {
+    width: 50%;
+}
+
+.email-button {
+    background: none;
+    border-radius: 25px;
+    height: 40px;
+    width: 170px;
+    font-size: 18px;
+    font-weight: lighter;
+    font-family: Arial, Helvetica, sans-serif;
+    border: 1px solid #FFBD00;
+    background-color: #FFBD00;
+    color: #ffffff;
+}
+
+.message-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 70%;
+    padding: 50px 0;
+    font-weight: lighter;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.join-footer {
+    height: 50px;
+}
