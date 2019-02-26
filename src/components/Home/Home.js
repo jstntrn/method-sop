@@ -81,7 +81,7 @@ class Home extends Component{
                 <div className='header' id='header'>
                     <div className='header-left'>
                         <h1 className='logo'>method</h1>
-                        <h1 className='logo yel'>sop</h1>
+                        {/* <h1 className='logo yel'>sop</h1> */}
                     </div>
                     <div className='header-right'>
                         <Link to='/register'><button className='register button' id='register'>SIGN UP FREE</button></Link>
@@ -201,7 +201,7 @@ class Home extends Component{
 
                 <div className='logo-wrapper lower-logo'>
                     <h1 className='logo'>method</h1>
-                    <h1 className='logo yel'>sop</h1>
+                    {/* <h1 className='logo yel'>sop</h1> */}
                 </div>
                 <footer>
                     <div className='footer-main'>

@@ -296,7 +296,7 @@ class Viewer extends Component {
                     <div className='viewer-header'>
                         <div className='header-left'>
                             <h1 className='logo'>method</h1>
-                            <h1 className='logo yel'>sop</h1>
+                            {/* <h1 className='logo yel'>sop</h1> */}
                             <h1 className='proj-title'>|   {projectTitle}</h1>
                         </div>
                         <div className='header-right'>

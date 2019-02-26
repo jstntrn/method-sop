@@ -59,7 +59,7 @@ class Login extends Component{
                 <div className='reg-form-container'>
                     <div className='header-left reg-logo'>
                         <h1 className='logo'>method</h1>
-                        <h1 className='logo yel'>sop</h1>
+                        {/* <h1 className='logo yel'>sop</h1> */}
                     </div>
                     <div className='home-form-container reg-form'>
                         <div className='home-form'>

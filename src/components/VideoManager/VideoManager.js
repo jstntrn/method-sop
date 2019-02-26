@@ -118,7 +118,7 @@ class VideoManager extends Component{
                 <div className='header viewer-header dash'>
                     <div className='header-left'>
                         <h1 className='logo'>method</h1>
-                        <h1 className='logo yel'>sop</h1>
+                        {/* <h1 className='logo yel'>sop</h1> */}
                         <h1 className='dash-title'>|   Video Manager</h1>
                     </div>
                     <div className='header-right'>
