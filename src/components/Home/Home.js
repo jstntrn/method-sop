@@ -54,7 +54,7 @@ class Home extends Component{
 
     handleOpenMenu = () => {
         this.setState({ showMenu: true })
-      }
+    }
       
     handleCloseMenu = () => {
         this.setState({ showMenu: false });

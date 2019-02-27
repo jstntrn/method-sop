@@ -24,6 +24,8 @@ create table projects (
     foreign key(user_id) references users(id),
     title varchar(50),
     image_url varchar
+    channel_id integer
+    foreign key(channel_id) references channels(id),
 );
 
 create table slides (
@@ -43,6 +45,23 @@ create table content_cards (
     content varchar,
     url varchar
 );
+
+create table channels (
+    id serial primary key,
+    name varchar(100)
+    owner_id integer,
+    foreign key(owner_id) references users(id),
+)
+
+create table permissions (
+    id serial primary key,
+    user_id integer,
+    foreign key(user_id) references users(id),
+    channel_id integer,
+    foreign key(channel_id) references channels(id),
+    access boolean,
+    admin boolean
+)
 
 {project_id:1, title: 'Door Assembly', image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiT1rBCqDIOhVwHzQUYKnBgAyZV9zBlp5MpPAaGY0zC9JThF4Z'},
 {project_id:2, title: 'Suspension Install', image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOC1ECpbdbkTsDg2MDXRQz0cpOGsbgMDOtAMA6Zbp_Q3Y6R0AY8A'},

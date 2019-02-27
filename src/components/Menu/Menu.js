@@ -62,7 +62,7 @@ class Menu extends Component{
                     <Link to='/login' className='menu-link highlight'>Login</Link>
                     <Link to='/' className='menu-link'>Integrations</Link>
                     <Link to='/' className='menu-link'>Clients</Link>
-                    <Link to='/' className='menu-link'>Pricing</Link>
+                    <Link to='/Pricing' className='menu-link'>Pricing</Link>
                     <Link to='/' className='menu-link'>Contact</Link>
                 </MenuList>
             </MenuWrapper>

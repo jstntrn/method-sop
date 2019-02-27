@@ -1,0 +1,38 @@
+@import './../variables';
+
+.pricing-hero {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.pricing-hero-image {
+    width: 100%;
+    position: relative;
+    top: -50px;
+}
+
+.pricing-hero-text {
+    position: absolute;
+    top: 150px;
+    font-weight: lighter;
+    color: white;
+    text-align: center;
+}
+
+.pricing-option-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 50px;
+}
+
+.option-box {
+    min-width: 350px;
+    max-width: 650px;
+    height: 300px;
+    border: 10px solid $light;
+    margin: 25px;
+    font-weight: lighter;
+}

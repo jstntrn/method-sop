@@ -1,3 +1,35 @@
+@import './../variables';
+
 .account-wrapper {
     margin-top: 50px;
+    padding: 0 50px;
+}
+
+.permissions-table-wrapper {
+    overflow-x: auto;
+    width: 100%;
+
+}
+
+.permissions-table {
+}
+
+th {
+    background-color: $yellow;
+    color: white;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+    min-width: 100px;
+    height: 30px;
+}
+
+tr {
+    &:nth-child(even) {
+        background-color: $light;
+    }
+    &:hover{
+        background-color: $dark;  
+    }
 }
