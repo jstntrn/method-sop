@@ -1,7 +1,7 @@
 const express = require('express');
 require('dotenv').config();
 const massive = require('massive');
-const { SERVER_PORT, DB_CONNECTION, SESSION_SECRET, SENDGRID_API_KEY, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY } = process.env;
+const { SERVER_PORT, DB_CONNECTION, SESSION_SECRET, SENDGRID_API_KEY, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY } = process.env;
 const ac = require('./controllers/authController');
 const cc = require('./controllers/contentController');
 const pc = require('./controllers/projController');
@@ -11,17 +11,20 @@ const session = require('express-session');
 const aws = require('aws-sdk');
 const cors = require('cors');
 const sgMail = require('@sendgrid/mail');
+const stripe = require('stripe')(STRIPE_SECRET_KEY);
+
 
 const app = express();
 sgMail.setApiKey(SENDGRID_API_KEY);
 app.use(express.json())
 app.use(session({
-    secret: SESSION_SECRET,
+  secret: SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
     maxAge: null
 }));
 app.use(cors());
+app.use(require("body-parser").text());
 
 massive(DB_CONNECTION).then(db => {
     app.set('db', db)
@@ -113,3 +116,18 @@ app.get('/sign-s3', (req, res) => {
      });
    });
 
+//stripe
+app.post("/charge", async (req, res) => {
+  try {
+    let {status} = await stripe.charges.create({
+      amount: 2000,
+      currency: "usd",
+      description: "An example charge",
+      source: req.body
+    });
+
+    res.json({status});
+  } catch (err) {
+    res.status(500).end();
+  }
+});

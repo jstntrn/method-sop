@@ -4,7 +4,8 @@ import axios from 'axios';
 import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
 import './Account.scss';
-
+import {Elements} from 'react-stripe-elements';
+import CheckoutForm from './../../CheckoutForm';
 //CHANNEL AND PLAYLIST CREATOR
 
 //ADMIN CONTROLS
@@ -14,6 +15,7 @@ import './Account.scss';
 //edit check boxes and save will put changes to permissions table
 //add permissions check on project loading
 //check permission to show or hide edit functions
+//add resend email icon in table
 
 //CHARTJS
 //show progress bar of videos completed by users
@@ -173,7 +175,9 @@ class Account extends Component{
                     </div>
                     <div>
                         <h2>Payments Manager</h2>
-                        <button>PURCHASE</button>
+                        <Elements>
+                            <CheckoutForm />
+                        </Elements>
                     </div>
                 </div>
             </div>
