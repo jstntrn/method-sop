@@ -239,7 +239,7 @@ class Account extends Component{
                                 <h3>Small</h3>
                                 <h1>FREE</h1>
                                 {
-                                    (this.state.package === 'Small' ? <div style={{color: '#FFBD00'}}><h2>Selected Package</h2></div> 
+                                    (this.state.package === 'Small' ? <div style={{color: '#FFBD00'}}><h2 style={{margin: '30px 0'}}>Selected Package</h2></div> 
                                     : <button className='package-select' onClick={() => {this.handleChange('package', 'Small'); this.handleChange('price', 0.00)}}><i className="far fa-check-circle"></i></button>)
                                 }
                                 <p>Up to 5 Projects</p>
@@ -250,7 +250,7 @@ class Account extends Component{
                                 <h3>Medium</h3>
                                 <h1>$100/month</h1>
                                 {
-                                    (this.state.package === 'Medium' ? <div style={{color: '#FFBD00'}}><h2>Selected Package</h2></div> 
+                                    (this.state.package === 'Medium' ? <div style={{color: '#FFBD00'}}><h2 style={{margin: '30px 0'}}>Selected Package</h2></div> 
                                     : <button className='package-select' onClick={() => {this.handleChange('package', 'Medium'); this.handleChange('price', 100.00)}}><i className="far fa-check-circle"></i></button>)
                                 }
                                 <p>Admin Controls</p>
@@ -261,7 +261,7 @@ class Account extends Component{
                                 <h3>Large</h3>
                                 <h1>$500/month</h1>
                                 {
-                                    (this.state.package === 'Large' ? <div style={{color: '#FFBD00'}}><h2>Selected Package</h2></div> 
+                                    (this.state.package === 'Large' ? <div style={{color: '#FFBD00'}}><h2 style={{margin: '30px 0'}}>Selected Package</h2></div> 
                                     : <button className='package-select' onClick={() => {this.handleChange('package', 'Large'); this.handleChange('price', 500.00)}}><i className="far fa-check-circle"></i></button>)
                                 }
                                 <p>Unlimited Storage</p>
@@ -272,7 +272,7 @@ class Account extends Component{
                                 <h3>Enterprise</h3>
                                 <h1>CALL</h1>
                                 {
-                                    (this.state.package === 'Enterprise' ? <div style={{color: '#FFBD00'}}><h2>Selected Package</h2></div> 
+                                    (this.state.package === 'Enterprise' ? <div style={{color: '#FFBD00'}}><h2 style={{margin: '30px 0'}}>Selected Package</h2></div> 
                                     : <button className='package-select' onClick={() => {this.handleChange('package', 'Enterprise'); this.handleChange('price', 1000.00)}}><i className="far fa-check-circle"></i></button>)
                                 }
                                 <p>24/7 Customer Service</p>
