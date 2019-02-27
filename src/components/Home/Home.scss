@@ -88,6 +88,18 @@ h1 {
     min-width: 470px;
 }
 
+.comp-wrapper {
+    position: relative;
+}
+
+.gif {
+    position: absolute;
+    width: 327px;
+    right: 161px;
+    top: 72px;
+    z-index: 999;
+}
+
 .comp {
     position: relative;
     height: 350px;
@@ -317,7 +329,7 @@ h1 {
         height: 50px;
         width: 200px;
     }
-    .register {
+    .register, .gif {
         display: none;
     }
     .hero {

@@ -1,3 +1,5 @@
+@import './../variables';
+
 .dash {
     margin-bottom: 25px;
 }
@@ -13,4 +15,9 @@
 
 .dash-body {
     padding: 60px 25px;
+}
+
+.trigger {
+    z-index: 999;
+    margin-top: 5px;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Account from './components/Account/Account';
+import Channels from './components/Channels/Channels';
 import Dashboard from './components/Dashboard/Dashboard';
 import Home from './components/Home/Home';
 import Pricing from './components/Pricing/Pricing';
@@ -16,6 +17,7 @@ export default (
         <Route exact path='/' component={Home} />
         <Route path='/pricing' component={Pricing} />
         <Route path='/account' component={Account} />
+        <Route path='/channels' component={Channels} />
         <Route path='/dashboard' component={Dashboard} />
         <Route path='/videos' component={VideoManager} />
         <Route path='/login' component={Login} />

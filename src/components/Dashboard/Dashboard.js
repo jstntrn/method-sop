@@ -3,8 +3,9 @@ import './Dashboard.scss'
 import ProjectLibrary from './../ProjectLibrary/ProjectLibrary'
 import { connect } from 'react-redux';
 import axios from 'axios';
-import { updateUser } from './../../ducks/reducer'
-import { Link } from 'react-router-dom'
+import { updateUser } from './../../ducks/reducer';
+import { Link } from 'react-router-dom';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 class Dashboard extends Component{
 
@@ -66,11 +67,24 @@ class Dashboard extends Component{
                         <h1 className='dash-title'>|   Dashboard</h1>
                     </div>
                     <div className='header-right'>
-                        <Link to='/newproject' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-plus"></i></button></Link>
-                        <button className="hamburger" onClick={() => this.toggleEdit()}><i className="fas fa-pencil-alt"></i></button>
-                        <Link to='/videos' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-video"></i></button></Link>
-                        <Link to='/account' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-cog"></i></button></Link>
-                        <button className="hamburger" onClick={() => this.logout()}><i className="fas fa-sign-out-alt"></i></button>
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>New Project</Tooltip>}>
+                            <Link to='/newproject' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-plus"></i></button></Link>
+                        </OverlayTrigger>
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Edit Project Cards</Tooltip>}>
+                            <button className="hamburger" onClick={() => this.toggleEdit()}><i className="fas fa-pencil-alt"></i></button>
+                        </OverlayTrigger>
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Video Manager</Tooltip>}>
+                            <Link to='/videos' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-video"></i></button></Link>
+                        </OverlayTrigger>
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Channel Manager</Tooltip>}>
+                            <Link to='/channels' style={{ textDecoration: 'none'}}><button className="hamburger"><i class="fas fa-folder-open"></i></button></Link>
+                        </OverlayTrigger>
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Account Settings</Tooltip>}>
+                            <Link to='/account' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-cog"></i></button></Link>
+                        </OverlayTrigger>
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Logout</Tooltip>}>
+                            <button className="hamburger" onClick={() => this.logout()}><i className="fas fa-sign-out-alt"></i></button>
+                        </OverlayTrigger>
                     </div>
                 </div>
                 <div className='dash-body'>

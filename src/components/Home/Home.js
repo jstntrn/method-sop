@@ -96,7 +96,10 @@ class Home extends Component{
                             <Link to='/register'><button className='demo button'>CREATE A FREE DEMO</button></Link>
                         </div>
                     </div>
-                    <img className='comp' src={macbook} alt='macbook' />
+                    <div className='comp-wrapper'>
+                        <img className='gif' src='https://media.giphy.com/media/8mb5XMcQLiukzzj9kd/giphy.gif' alt='book-making' />
+                        <img className='comp' src={macbook} alt='macbook' />
+                    </div>
                 </div>
                 <div className='features-wrapper'>
                     <p className='yel' style={{fontWeight: 'bold', letterSpacing: '3px'}}>FEATURES</p>
