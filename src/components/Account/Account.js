@@ -7,6 +7,8 @@ import './Account.scss';
 import {Elements} from 'react-stripe-elements';
 import CheckoutForm from './../CheckoutForm/CheckoutForm';
 import {Doughnut} from 'react-chartjs-2';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+
 //CHANNEL AND PLAYLIST CREATOR
 
 //ADMIN CONTROLS
@@ -31,20 +33,17 @@ import {Doughnut} from 'react-chartjs-2';
 //VIMEO UPLOADER API
 //vimeo video uploader API
 
-//STRIPE INTEGRATION
-//get stripe working and add payments inside account underneath admin console
-//tiers can allow sharing, limit projects, or size of groups
-
 //REFACTOR CODE TO BE DRY AND USE REDUX
 
 //PULL ACUTAL EMAIL AND USERNAME DATA FROM PROPS/PARAMS/AXIOS OR WHATEVER
-
 
 
 class Account extends Component{
     constructor(props){
         super(props);
         this.state = {
+            uname: '',
+            umail: '',
             package: 'Small',
             price: 0.00,
             recipient: '',
@@ -104,6 +103,10 @@ class Account extends Component{
             axios.get('./api/user')
             .then(res => {
                 this.props.updateUser(res.data);
+                this.setState({
+                    uname: res.data.username,
+                    umail: res.data.email
+                })
             })
             .catch(err => {
                 this.props.history.push('/');
@@ -170,15 +173,19 @@ class Account extends Component{
                         <h1 className='dash-title'>|   Account</h1>
                     </div>
                     <div className='header-right'>
-                        <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>  
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
+                            <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>
+                        </OverlayTrigger>  
                     </div>
                 </div>
                 <div className='account-wrapper'>
                     <div className='info-wrapper'>
-                        <h2>Account Info</h2>
-                        <p>username: a</p>
-                        <p>email: a</p>
-                        <button className='change-password'>change password</button>
+                        <div className='info-box'>
+                            <h2>Account Info</h2>
+                            <p>username: {this.state.uname}</p>
+                            <p>email: {this.state.umail}</p>
+                            <button className='change-password'>change password</button>
+                        </div>
                     </div>
                     <div className='permissions-container'>
                         <div className='util-wrapper'>

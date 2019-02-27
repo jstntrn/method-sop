@@ -5,6 +5,8 @@ import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
 import './NewProject.scss'
 import VideoLibrary from '../VideoLibrary/VideoLibrary';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+
 
 //problems to fix: video control functions weren't working with projectID 50, also new the projectID needs to be set before link is clicked
 
@@ -164,7 +166,9 @@ class NewProject extends Component{
                         <h1 className='dash-title'>|   New Project</h1>
                     </div>
                     <div className='header-right'>
-                        <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>  
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
+                            <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>
+                        </OverlayTrigger>  
                     </div>
                 </div>
                 <div className='new-proj-body'>

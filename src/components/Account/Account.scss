@@ -53,11 +53,17 @@ tr {
 
 .info-wrapper {
     height: 250px;
-    background-color: $light;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    background-color: #f3f3f3;
+    background-image: url('./../../floating-cogs.svg');
+}
+
+.info-box {
+    padding: 20px;
+    background-color: #ffffff;
 }
 
 .permissions-container {

@@ -5,6 +5,9 @@ import { HashRouter as Router} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './ducks/store';
 import {StripeProvider} from 'react-stripe-elements';
+require('dotenv').config();
+const { STRIPE_PUBLIC_KEY } = process.env
+
 
 
 class App extends Component {
@@ -13,7 +16,7 @@ class App extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <StripeProvider apiKey="pk_test_W8O9ZGQzbkH1r4Je3zdGhTkD">
+          <StripeProvider apiKey={STRIPE_PUBLIC_KEY}>
             <div className="App">
               {routes}
             </div>

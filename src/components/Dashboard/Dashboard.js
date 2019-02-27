@@ -77,7 +77,7 @@ class Dashboard extends Component{
                             <Link to='/videos' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-video"></i></button></Link>
                         </OverlayTrigger>
                         <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Channel Manager</Tooltip>}>
-                            <Link to='/channels' style={{ textDecoration: 'none'}}><button className="hamburger"><i class="fas fa-folder-open"></i></button></Link>
+                            <Link to='/channels' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-folder-open"></i></button></Link>
                         </OverlayTrigger>
                         <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Account Settings</Tooltip>}>
                             <Link to='/account' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-cog"></i></button></Link>

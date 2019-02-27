@@ -5,6 +5,8 @@ import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
 import VideoLibrary from './../VideoLibrary/VideoLibrary'
 import './../ProjectLibrary/ProjectLibrary.scss'
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+
 
 class VideoManager extends Component{
     constructor(props){
@@ -122,9 +124,15 @@ class VideoManager extends Component{
                         <h1 className='dash-title'>|   Video Manager</h1>
                     </div>
                     <div className='header-right'>
-                        <Link to='/upload' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-upload"></i></button></Link>
-                        <button className="hamburger"><i className="fas fa-pencil-alt"></i></button>
-                        <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>  
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Upload Video</Tooltip>}>
+                            <Link to='/upload' style={{ textDecoration: 'none'}}><button className="hamburger"><i className="fas fa-upload"></i></button></Link>
+                        </OverlayTrigger>
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Edit Videos</Tooltip>}>
+                            <button className="hamburger"><i className="fas fa-pencil-alt"></i></button>
+                        </OverlayTrigger>                        
+                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
+                            <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>
+                        </OverlayTrigger>  
                     </div>
                 </div>
                 <div className='new-proj-body'>
