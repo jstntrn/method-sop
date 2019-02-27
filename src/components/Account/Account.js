@@ -72,24 +72,24 @@ class Account extends Component{
                 datasets: [{
                     data: [300, 50, 100, 30, 80, 600, 400, 150],
                     backgroundColor: [
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FF6384',
-                        '#36A2EB',
+                        '#5D91FD',
+                        '#565761',
+                        '#FFBD00',
+                        '#F3F3F3',
+                        '#5D91FD',
+                        '#565761',
+                        '#FFBD00',
+                        '#F3F3F3',
                         ],
                         hoverBackgroundColor: [
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FF6384',
-                        '#36A2EB',
+                        '#5D91FD',
+                        '#565761',
+                        '#FFBD00',
+                        '#F3F3F3',
+                        '#5D91FD',
+                        '#565761',
+                        '#FFBD00',
+                        '#F3F3F3',
                         ]
                 }],
                 
@@ -180,48 +180,49 @@ class Account extends Component{
                         <p>email: a</p>
                         <button className='change-password'>change password</button>
                     </div>
-                    <div className='permissions-wrapper'>
+                    <div className='permissions-container'>
                         <div className='util-wrapper'>
                             <h2>Channel Utilization Comparison</h2>
                             <Doughnut className='util-doughnut' data={this.state.utilData}  options={{responsive: true, maintainAspectRatio: true}}/>
                         </div>
-                        <h2>Channel Permissions</h2>
-                        <p>save changes</p>
-                        <p>just manually enter chartjs data in new sql tables. click on magnifying glass on user, get modal that shows animation progress bar with each channel they have access to as a dataset and using slides watch/all slides in channel over per month aggregated from first watch to present time</p>
-                        <div className='permissions-table-wrapper'>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>email</th>
+                        <div className='permissions-wrapper'>
+                            <h2>Channel Permissions</h2>
+                            <button className='save-perm'>save changes</button>
+                            <div className='permissions-table-wrapper'>
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>email</th>
+                                            {
+                                                this.state.channelList.map(channel => (
+                                                    <th key={channel.id}>{channel.name}</th>
+                                                ))
+                                            }
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <input style={{width: '70%'}} onChange={(e) => this.handleChange('recipient', e.target.value)} value={this.state.recipient} />
+                                                <button onClick={() => this.addPermission()}>+</button>
+                                            </td>
+                                            {this.state.channelList.map((channel) => (
+                                                <td key={channel.id}><input type='checkbox' onChange={(e) => {this.handleCheck(e.target.value)}} checked /></td>
+                                            ))}
+                                        </tr>
                                         {
-                                            this.state.channelList.map(channel => (
-                                                <th key={channel.id}>{channel.name}</th>
+                                            this.state.permList.map(user => (
+                                                <tr key={user.user_id}>
+                                                    <td>{user.email}</td>
+                                                    {user.permissions.map(channel => (
+                                                        <td key={channel.channel_id}><input type='checkbox' checked={channel.access} onChange={(e) => {this.handleCheck(e.target.value)}} /></td>
+                                                    ))}
+                                                </tr>
                                             ))
                                         }
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input style={{width: '70%'}} onChange={(e) => this.handleChange('recipient', e.target.value)} value={this.state.recipient} />
-                                            <button onClick={() => this.addPermission()}>+</button>
-                                        </td>
-                                        {this.state.channelList.map((channel) => (
-                                            <td key={channel.id}><input type='checkbox' onChange={(e) => {this.handleCheck(e.target.value)}} checked /></td>
-                                        ))}
-                                    </tr>
-                                    {
-                                        this.state.permList.map(user => (
-                                            <tr key={user.user_id}>
-                                                <td>{user.email}</td>
-                                                {user.permissions.map(channel => (
-                                                    <td key={channel.channel_id}><input type='checkbox' checked={channel.access} onChange={(e) => {this.handleCheck(e.target.value)}} /></td>
-                                                ))}
-                                            </tr>
-                                        ))
-                                    }
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         
                     </div>

@@ -4,6 +4,8 @@
     margin-top: 50px;
 }
 
+
+
 .permissions-table-wrapper {
     overflow-x: auto;
     width: 100%;
@@ -58,8 +60,30 @@ tr {
     justify-content: center;
 }
 
+.permissions-container {
+    margin: 50px 0;
+    position: relative;
+}
 .permissions-wrapper {
     margin: 50px;
+    position: relative;
+}
+
+.save-perm {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    background: none;
+    height: 20px;
+    font-size: 14px;
+    margin-top: 10px;
+    border: 1px solid $blue;
+    color: $blue;
+    &:hover{
+        background-color: $blue;
+        color: #ffffff;
+        cursor: pointer;
+    }
 }
 
 .util-wrapper {
