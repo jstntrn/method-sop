@@ -62,6 +62,20 @@ tr {
     margin: 50px;
 }
 
+.util-wrapper {
+    margin: 50px auto;
+    max-height: 450px;
+    max-width: 900px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.util-doughnut {
+    height: 300px;
+    width: 100%;
+}
 
 .payment-summary {
     display: flex;

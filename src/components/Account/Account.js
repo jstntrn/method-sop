@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import './Account.scss';
 import {Elements} from 'react-stripe-elements';
 import CheckoutForm from './../CheckoutForm/CheckoutForm';
+import {Doughnut} from 'react-chartjs-2';
 //CHANNEL AND PLAYLIST CREATOR
 
 //ADMIN CONTROLS
@@ -38,6 +39,8 @@ import CheckoutForm from './../CheckoutForm/CheckoutForm';
 
 //PULL ACUTAL EMAIL AND USERNAME DATA FROM PROPS/PARAMS/AXIOS OR WHATEVER
 
+
+
 class Account extends Component{
     constructor(props){
         super(props);
@@ -54,7 +57,43 @@ class Account extends Component{
             },
             channelList: [{id: 1, name: 'electrical'}, {id: 2, name: 'assembly'}, {id: 3, name: 'testing'}, {id: 4, name: 'packaging'}, {id: 5, name: 'shipping'}, {id: 6, name: 'lot tracking'}, {id: 7, name: 'orders'}, {id: 8, name: 'payroll'}],
             permList: [{user_id: 1, email: 'a@a.com', permissions: [{channel_id: 1, access: true}, {channel_id: 2, access: true}, {channel_id: 3, access: true}, {channel_id: 4, access: true}, {channel_id: 5, access: true}, {channel_id: 6, access: true}, {channel_id: 7, access: false}, {channel_id: 8, access: true}]},
-            {user_id: 2, email: 'bbbbbb@bbbbbb.com', permissions: [{channel_id: 1, access: false}, {channel_id: 2, access: true}, {channel_id: 3, access: false}, {channel_id: 4, access: true}, {channel_id: 5, access: true}, {channel_id: 6, access: true}, {channel_id: 7, access: false}, {channel_id: 8, access: true}]}]
+            {user_id: 2, email: 'bbbbbb@bbbbbb.com', permissions: [{channel_id: 1, access: false}, {channel_id: 2, access: true}, {channel_id: 3, access: false}, {channel_id: 4, access: true}, {channel_id: 5, access: true}, {channel_id: 6, access: true}, {channel_id: 7, access: false}, {channel_id: 8, access: true}]}],
+            utilData: {
+                labels: [
+                    'Electrical',
+                    'Assembly',
+                    'Testing',
+                    'Packaging',
+                    'Shipping',
+                    'Lot Tracking',
+                    'Orders',
+                    'Payroll'
+                ],
+                datasets: [{
+                    data: [300, 50, 100, 30, 80, 600, 400, 150],
+                    backgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FF6384',
+                        '#36A2EB',
+                        ],
+                        hoverBackgroundColor: [
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FF6384',
+                        '#36A2EB',
+                        '#FF6384',
+                        '#36A2EB',
+                        ]
+                }],
+                
+            }
         }
     }
 
@@ -78,6 +117,10 @@ class Account extends Component{
         this.setState({
             [prop]: val
         })
+    }
+
+    handleCheck (val) {
+        console.log(val)
     }
 
     addPermission(){
@@ -114,6 +157,7 @@ class Account extends Component{
     }
 
     render(){
+        
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
@@ -137,12 +181,14 @@ class Account extends Component{
                         <button className='change-password'>change password</button>
                     </div>
                     <div className='permissions-wrapper'>
-                        <h2>Channel Utilization Comparison</h2>
-                        <p>show chartjs doughnut chart showing which channels are most used</p>
+                        <div className='util-wrapper'>
+                            <h2>Channel Utilization Comparison</h2>
+                            <Doughnut className='util-doughnut' data={this.state.utilData}  options={{responsive: true, maintainAspectRatio: true}}/>
+                        </div>
                         <h2>Channel Permissions</h2>
                         <p>save changes</p>
+                        <p>just manually enter chartjs data in new sql tables. click on magnifying glass on user, get modal that shows animation progress bar with each channel they have access to as a dataset and using slides watch/all slides in channel over per month aggregated from first watch to present time</p>
                         <div className='permissions-table-wrapper'>
-                            <p>just manually enter chartjs data in new sql tables. click on magnifying glass on user, get modal that shows animation progress bar with each channel they have access to as a dataset and using slides watch/all slides in channel over per month aggregated from first watch to present time</p>
                             <table>
                                 <thead>
                                     <tr>
@@ -161,7 +207,7 @@ class Account extends Component{
                                             <button onClick={() => this.addPermission()}>+</button>
                                         </td>
                                         {this.state.channelList.map((channel) => (
-                                            <td key={channel.id}><input type='checkbox'/></td>
+                                            <td key={channel.id}><input type='checkbox' onChange={(e) => {this.handleCheck(e.target.value)}} checked /></td>
                                         ))}
                                     </tr>
                                     {
@@ -169,7 +215,7 @@ class Account extends Component{
                                             <tr key={user.user_id}>
                                                 <td>{user.email}</td>
                                                 {user.permissions.map(channel => (
-                                                    <td key={channel.channel_id}><input type='checkbox' value={channel.access}/></td>
+                                                    <td key={channel.channel_id}><input type='checkbox' checked={channel.access} onChange={(e) => {this.handleCheck(e.target.value)}} /></td>
                                                 ))}
                                             </tr>
                                         ))

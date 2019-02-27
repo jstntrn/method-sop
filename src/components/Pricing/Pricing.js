@@ -3,8 +3,6 @@ import Menu from './../Menu/Menu';
 import { Link } from 'react-router-dom';
 import pricing from './../../pricing.jpg'
 import './Pricing.scss'
-import { NONAME } from 'dns';
-// import './../Home/Home.scss'
 
 
 export default class Pricing extends Component{
