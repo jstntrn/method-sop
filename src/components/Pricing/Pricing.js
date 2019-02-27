@@ -46,33 +46,33 @@ export default class Pricing extends Component{
                         <h3>Small</h3>
                         <h1>FREE</h1>
                         <Link to='/register'><button className='register button' id='register'>GET STARTED</button></Link>
-                        <p>feature 1</p>
-                        <p>feature 1</p>
-                        <p>feature 1</p>
+                        <p>Up to 5 Projects</p>
+                        <p>Full Editing Suite</p>
+                        <p>Video Manager</p>
                     </div>
                     <div className='option-box'>
                         <h3>Medium</h3>
                         <h1>$100/month</h1>
                         <Link to='/register'><button className='register button' id='register'>GET STARTED</button></Link>
-                        <p>feature 1</p>
-                        <p>feature 1</p>
-                        <p>feature 1</p>
+                        <p>Admin Controls</p>
+                        <p>Project Sharing</p>
+                        <p>Playlists Creator</p>
                     </div>
                     <div className='option-box'>
                         <h3>Large</h3>
                         <h1>$500/month</h1>
                         <Link to='/register'><button className='register button' id='register'>GET STARTED</button></Link>
-                        <p>feature 1</p>
-                        <p>feature 1</p>
-                        <p>feature 1</p>
+                        <p>Unlimited Storage</p>
+                        <p>Onboarding Support</p>
+                        <p>Data Analytics</p>
                     </div>
                     <div className='option-box'>
                         <h3>Enterprise</h3>
                         <h1>CALL</h1>
                         <Link to='/register'><button className='register button' id='register'>GET STARTED</button></Link>
-                        <p>feature 1</p>
-                        <p>feature 1</p>
-                        <p>feature 1</p>
+                        <p>24/7 Customer Service</p>
+                        <p>Advanced Training</p>
+                        <p>Integrations</p>
                     </div>
                 </div>
 

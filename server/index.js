@@ -117,10 +117,31 @@ app.get('/sign-s3', (req, res) => {
    });
 
 //stripe
-app.post("/charge", async (req, res) => {
+app.post("/charge/:amount", async (req, res) => {
+  const amountArray = req.params.amount.toString().split('');
+  const pennies = [];
+  for (var i = 0; i < amountArray.length; i++) {
+    if(amountArray[i] === ".") {
+      if (typeof amountArray[i + 1] === "string") {
+        pennies.push(amountArray[i + 1]);
+      } else {
+        pennies.push("0");
+      }
+      if (typeof amountArray[i + 2] === "string") {
+        pennies.push(amountArray[i + 2]);
+      } else {
+        pennies.push("0");
+      }
+    	break;
+    } else {
+    	pennies.push(amountArray[i])
+    }
+  }
+  const convertedAmt = parseInt(pennies.join(''));
+
   try {
     let {status} = await stripe.charges.create({
-      amount: 2000,
+      amount: convertedAmt,
       currency: "usd",
       description: "An example charge",
       source: req.body

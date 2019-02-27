@@ -21,17 +21,23 @@
     text-align: center;
 }
 
+// .pricing-option-wrapper {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-between;
+//     padding: 0 50px;
+// }
+
+
 .pricing-option-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 30px;
     padding: 0 50px;
+    margin-bottom: 50px;
 }
 
 .option-box {
-    min-width: 350px;
-    max-width: 650px;
-    height: 300px;
     border: 10px solid $light;
     margin: 25px;
     font-weight: lighter;

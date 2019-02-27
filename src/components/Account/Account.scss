@@ -2,17 +2,26 @@
 
 .account-wrapper {
     margin-top: 50px;
-    padding: 0 50px;
 }
 
 .permissions-table-wrapper {
     overflow-x: auto;
     width: 100%;
-
 }
 
-.permissions-table {
+.change-password {
+    background: none;
+    @include y-border-button;
+    height: 25px;
+    font-size: 16px;
+    margin-top: 10px;
+    &:hover{
+        background-color: $yellow;
+        color: #ffffff;
+        cursor: pointer;
+    }
 }
+
 
 th {
     background-color: $yellow;
@@ -32,4 +41,36 @@ tr {
     &:hover{
         background-color: $dark;  
     }
+}
+
+.payments-wrapper {
+    padding: 50px;
+    background-color: $light;
+}
+
+.info-wrapper {
+    height: 250px;
+    background-color: $light;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.permissions-wrapper {
+    margin: 50px;
+}
+
+.account-pricing-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 30px;
+    margin-bottom: 50px;
+}
+
+.account-option-box {
+    border: 10px solid $yellow;
+    background-color: #ffffff;
+    margin: 25px;
+    font-weight: lighter;
 }
