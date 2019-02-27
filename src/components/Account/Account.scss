@@ -44,6 +44,7 @@ tr {
 }
 
 .payments-wrapper {
+    position: relative;
     padding: 50px;
     background-color: $light;
 }
@@ -61,6 +62,26 @@ tr {
     margin: 50px;
 }
 
+
+.payment-summary {
+    display: flex;
+    position: relative;
+    top: 12px;
+    left: 15px;
+}
+
+.summary {
+    background: none;
+    border: 1px solid $yellow;
+    padding: 0 10px;
+    height: 35px;
+    border-radius: 20px;
+    background-color: $yellow;
+    color: #ffffff;
+    font-size: 20px;
+    margin: 5px;
+}
+
 .account-pricing-wrapper {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -74,3 +95,18 @@ tr {
     margin: 25px;
     font-weight: lighter;
 }
+
+.package-select {
+    background: none;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    color: $yellow;
+    font-size: 35px;
+    &:hover{
+        cursor: pointer;
+        color: $blue;
+    }
+}
+

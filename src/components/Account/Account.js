@@ -5,7 +5,7 @@ import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
 import './Account.scss';
 import {Elements} from 'react-stripe-elements';
-import CheckoutForm from './../../CheckoutForm';
+import CheckoutForm from './../CheckoutForm/CheckoutForm';
 //CHANNEL AND PLAYLIST CREATOR
 
 //ADMIN CONTROLS
@@ -35,6 +35,8 @@ import CheckoutForm from './../../CheckoutForm';
 //tiers can allow sharing, limit projects, or size of groups
 
 //REFACTOR CODE TO BE DRY AND USE REDUX
+
+//PULL ACUTAL EMAIL AND USERNAME DATA FROM PROPS/PARAMS/AXIOS OR WHATEVER
 
 class Account extends Component{
     constructor(props){
@@ -135,9 +137,12 @@ class Account extends Component{
                         <button className='change-password'>change password</button>
                     </div>
                     <div className='permissions-wrapper'>
+                        <h2>Channel Utilization Comparison</h2>
+                        <p>show chartjs doughnut chart showing which channels are most used</p>
                         <h2>Channel Permissions</h2>
                         <p>save changes</p>
                         <div className='permissions-table-wrapper'>
+                            <p>just manually enter chartjs data in new sql tables. click on magnifying glass on user, get modal that shows animation progress bar with each channel they have access to as a dataset and using slides watch/all slides in channel over per month aggregated from first watch to present time</p>
                             <table>
                                 <thead>
                                     <tr>
@@ -176,9 +181,9 @@ class Account extends Component{
                     </div>
                     <div className='payments-wrapper'>
                         <h2>Payments</h2>
-                        <div>
-                            <p>{this.state.package}</p>
-                            <p>{this.state.price}</p>
+                        <div className='payment-summary'>
+                            <p className='summary'>Selected Package | {this.state.package}</p>
+                            <p className='summary'>Price | ${this.state.price.toFixed(2)}</p>
                         </div>
                         <Elements>
                             <CheckoutForm price={this.state.price.toFixed(2)}/>

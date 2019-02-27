@@ -3,6 +3,7 @@ import Menu from './../Menu/Menu';
 import { Link } from 'react-router-dom';
 import pricing from './../../pricing.jpg'
 import './Pricing.scss'
+import { NONAME } from 'dns';
 // import './../Home/Home.scss'
 
 
@@ -29,7 +30,7 @@ export default class Pricing extends Component{
                 {/* {window.onscroll = () => {this.scrollFunction()}} */}
                 <div className='header' id='header'>
                     <div className='header-left'>
-                        <h1 className='logo'>method</h1>
+                        <Link to='/' style={{textDecoration: 'none', color: '#000000'}}><h1 className='logo'>method</h1></Link>
                         {/* <h1 className='logo yel'>sop</h1> */}
                     </div>
                     <div className='header-right'>
