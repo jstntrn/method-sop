@@ -27,15 +27,14 @@ class NewProject extends Component{
         }
     }
     
-    componentWillMount(){
+    componentDidMount(){
         const {id} = this.props;
         if(!id){
             axios.get('./api/user')
             .then(res => {
                 this.props.updateUser(res.data);
-                console.log(res.data)
                 this.setState({
-                    userID: id
+                    userID: this.props.id
                 })
             })
             .catch(err => {
@@ -43,15 +42,6 @@ class NewProject extends Component{
             })
         } else {
         }
-        console.log(this.props)
-        this.setState({
-            userID: id
-        })
-    }
-
-    componentDidMount(){
-        const {id} = this.props;
-        console.log(this.props)
         this.setState({
             userID: id
         })

@@ -5,7 +5,6 @@ import { HashRouter as Router} from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './ducks/store';
 import {StripeProvider} from 'react-stripe-elements';
-require('dotenv').config();
 
 class App extends Component {
 

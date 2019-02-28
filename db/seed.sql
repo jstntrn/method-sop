@@ -48,10 +48,10 @@ create table content_cards (
 
 create table channels (
     id serial primary key,
-    name varchar(100)
+    name varchar(100),
     owner_id integer,
-    foreign key(owner_id) references users(id),
-)
+    foreign key(owner_id) references users(id)
+);
 
 create table permissions (
     id serial primary key,
@@ -59,9 +59,21 @@ create table permissions (
     foreign key(user_id) references users(id),
     channel_id integer,
     foreign key(channel_id) references channels(id),
-    access boolean,
-    admin boolean
-)
+    view boolean,
+    edit boolean
+);
+
+create table progression (
+    id serial primary key,
+    user_id integer,
+    foreign key(user_id) references users(id),
+    project_id integer,
+    foreign key(project_id) references projects(id),
+    completed boolean
+);
+
+alter table projects
+add column channel_id integer references channels(id);
 
 {project_id:1, title: 'Door Assembly', image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSiT1rBCqDIOhVwHzQUYKnBgAyZV9zBlp5MpPAaGY0zC9JThF4Z'},
 {project_id:2, title: 'Suspension Install', image_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOC1ECpbdbkTsDg2MDXRQz0cpOGsbgMDOtAMA6Zbp_Q3Y6R0AY8A'},
@@ -69,3 +81,9 @@ create table permissions (
 
 
 insert into content_cards ( slide_id, type, title, content ) values ( 22, 'text', 'INSTRUCTIONS', 'Use the arrows to navigate the slides. Use the restart button to jump to the beginning of the video. Use the play/pause button to pause the video. Use the create slide input to create a slide with a new title.' );
+
+
+           channelList: [{id: 1, name: 'electrical'}, {id: 2, name: 'assembly'}, {id: 3, name: 'testing'}, {id: 4, name: 'packaging'}, {id: 5, name: 'shipping'}, {id: 6, name: 'lot tracking'}, {id: 7, name: 'orders'}, {id: 8, name: 'payroll'}],
+            permList: [{user_id: 1, email: 'a@a.com', permissions: [{channel_id: 1, access: true}, {channel_id: 2, access: true}, {channel_id: 3, access: true}, {channel_id: 4, access: true}, {channel_id: 5, access: true}, {channel_id: 6, access: true}, {channel_id: 7, access: false}, {channel_id: 8, access: true}]},
+            {user_id: 2, email: 'bbbbbb@bbbbbb.com', permissions: [{channel_id: 1, access: false}, {channel_id: 2, access: true}, {channel_id: 3, access: false}, {channel_id: 4, access: true}, {channel_id: 5, access: true}, {channel_id: 6, access: true}, {channel_id: 7, access: false}, {channel_id: 8, access: true}]}],
+            

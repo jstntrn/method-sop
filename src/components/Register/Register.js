@@ -11,6 +11,7 @@ class Register extends Component{
 
         this.state = {
             username: '',
+            email: '',
             password: ''
         }
     }
@@ -38,8 +39,8 @@ class Register extends Component{
     }
 
     register = () => {
-        const { username, password } = this.state
-        axios.post('/auth/register', { username, password })
+        const { username, password, email } = this.state
+        axios.post('/auth/register', { username, password, email })
         .then(res => {
             this.props.updateUser(res.data)
             this.props.history.push('/dashboard');
@@ -48,7 +49,7 @@ class Register extends Component{
     }
 
     render(){
-        const { username, password } = this.state;
+        const { username, password, email } = this.state;
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
@@ -72,7 +73,7 @@ class Register extends Component{
                             </div>
                             <div className='input-div'>
                                 <i className="fas fa-envelope"></i>
-                                <input className='home-form-input' placeholder={'email'} />
+                                <input className='home-form-input' type='email' placeholder={'email'} value={email} onChange={(e) => this.handleChange('email', e.target.value)}/>
                             </div>
                             <div className='input-div'>
                                 <i className="fas fa-key"></i>

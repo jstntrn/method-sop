@@ -42,8 +42,6 @@ class Account extends Component{
     constructor(props){
         super(props);
         this.state = {
-            uname: '',
-            umail: '',
             package: 'Small',
             price: 0.00,
             recipient: '',
@@ -97,16 +95,13 @@ class Account extends Component{
     }
 
     
-    componentDidMount(){
+    componentWillMount(){
         const {id} = this.props;
         if(!id){
             axios.get('./api/user')
             .then(res => {
                 this.props.updateUser(res.data);
-                this.setState({
-                    uname: res.data.username,
-                    umail: res.data.email
-                })
+                console.log(res.data)
             })
             .catch(err => {
                 this.props.history.push('/');
@@ -160,7 +155,7 @@ class Account extends Component{
     }
 
     render(){
-        
+        const { username, email } = this.props
         return(
             <div>
                 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
@@ -182,8 +177,8 @@ class Account extends Component{
                     <div className='info-wrapper'>
                         <div className='info-box'>
                             <h2>Account Info</h2>
-                            <p>username: {this.state.uname}</p>
-                            <p>email: {this.state.umail}</p>
+                            <p>username: {username}</p>
+                            <p>email: {email}</p>
                             <button className='change-password'>change password</button>
                         </div>
                     </div>
@@ -234,14 +229,22 @@ class Account extends Component{
                         
                     </div>
                     <div className='payments-wrapper'>
-                        <h2>Payments</h2>
-                        <div className='payment-summary'>
-                            <p className='summary'>Selected Package | {this.state.package}</p>
-                            <p className='summary'>Price | ${this.state.price.toFixed(2)}</p>
-                        </div>
-                        <Elements>
-                            <CheckoutForm price={this.state.price.toFixed(2)}/>
-                        </Elements>
+                        
+                        
+                        {
+                            (this.state.price > 0.00 ?
+                            <div>
+                                <h2>Payments</h2>
+                                <div className='payment-summary'>
+                                    <p className='summary'>Selected Package | {this.state.package}</p>
+                                    <p className='summary'>Price | ${this.state.price.toFixed(2)}</p>
+                                </div>
+                                <Elements>
+                                    <CheckoutForm price={this.state.price.toFixed(2)}/>
+                                </Elements>
+                            </div>
+                            : <div><h2>Select a Package</h2></div>)
+                        }
                         <div className='account-pricing-wrapper'>
                             <div className='account-option-box'>
                                 <h3>Small</h3>
@@ -297,10 +300,11 @@ class Account extends Component{
 }
 
 function mapStateToProps(state){
-    const { id, username } = state
+    const { id, username, email } = state
     return {
         id,
         username,
+        email
     };
 };
 
