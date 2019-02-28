@@ -12,11 +12,12 @@ const aws = require('aws-sdk');
 const cors = require('cors');
 const sgMail = require('@sendgrid/mail');
 const stripe = require('stripe')(STRIPE_SECRET_KEY);
-
+// const path = require('path'); // Usually moved to the start of file, used for react router browser history
 
 const app = express();
 sgMail.setApiKey(SENDGRID_API_KEY);
 app.use(express.json())
+app.use( express.static( `${__dirname}/../build` ) );
 app.use(session({
   secret: SESSION_SECRET,
     resave: false,
@@ -152,3 +153,9 @@ app.post("/charge/:amount", async (req, res) => {
     res.status(500).end();
   }
 });
+
+
+//browser history react router for production
+// app.get('*', (req, res)=>{
+//     res.sendFile(path.join(__dirname, '../build/index.html'));
+// });
