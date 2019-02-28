@@ -7,14 +7,16 @@ export default class ProjectCard extends Component{
     constructor(props){
         super(props)
         this.state ={
-            cardTitle: this.props.title
+            cardTitle: this.props.title,
+            channel: 'default'
         }
     }
 
-    handleChange (val) {
+    handleChange (prop, val) {
         this.setState({
-            cardTitle: val
+            [prop]: val
         })
+        console.log(this.state)
     }
 
     saveTitle(){
@@ -25,6 +27,7 @@ export default class ProjectCard extends Component{
         })
         updateLibrary()
         toggleEdit()
+        console.log(this.state)
     }
 
     render(){
@@ -39,7 +42,21 @@ export default class ProjectCard extends Component{
                         <img className='proj-image' src={image_URL} alt='project' />
                         <div className='proj-title-wrapper'>
                             <div className='title-update-wrapper'>
-                                <input className='proj-card-input' placeholder={title} value={this.state.cardTitle} onChange={(e) => this.handleChange(e.target.value)}/>
+                                <p>Channel</p>
+                                <div className='proj-inputs'>
+                                    <select className='proj-card-input' name='type' onChange={(e) => this.handleChange('channel', e.target.value)} >
+                                        <option value='electrical'>Electrical</option>
+                                        <option value='assembly'>Assembly</option>
+                                        <option value='testing'>Testing</option>
+                                        <option value='packaging'>Packaging</option>
+                                        <option value='shipping'>Shipping</option>
+                                        <option value='lot tracking'>Lot Tracking</option>
+                                        <option value='orders'>Orders</option>
+                                        <option value='payroll'>Payroll</option>
+                                    </select>
+                                    <p>Title</p>
+                                    <input className='proj-card-input' placeholder={title} value={this.state.cardTitle} onChange={(e) => this.handleChange('cardTitle', e.target.value)}/>
+                                </div>
                                 <button className="hamburger" onClick={() => this.saveTitle()} ><i className="far fa-save"></i></button>  
                             </div>
                         </div>
