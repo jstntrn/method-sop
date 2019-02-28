@@ -43,18 +43,18 @@ export default class ContentDisplay extends Component{
     }
 
     render(){
-        const { showCreate } = this.props
+        const { showCreate, saved } = this.props
         const { showModal, slideID } = this.state
         return(
             <div className='contents-container'>
                 {
                     (showModal ?
-                    <ContentModal createModal={this.createModal} updateDisplay={this.updateDisplay} slideID={slideID} />
+                    <ContentModal createModal={this.createModal} updateDisplay={this.updateDisplay} slideID={slideID}/>
                     :
                     (showCreate ? 
-                        <button className='add-content-wrapper' onClick={() => this.createModal()}>
+                        <button className='add-content-wrapper' onClick={() => this.createModal()} disabled={!saved}>
                             <div>
-                                <h4>+ADD CONTENT CARD</h4>
+                                <h4>+ADD CONTENT CARD &#40;save first&#41;</h4>
                             </div>
                         </button>
                         :

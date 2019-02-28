@@ -33,7 +33,8 @@ class Viewer extends Component {
             showCreate: true,
             projectTitle: '',
             continueHighlight: false,
-            slideID: null
+            slideID: null,
+            saved: true
         }     
     }
 
@@ -185,7 +186,8 @@ class Viewer extends Component {
         this.setState({
             slideLog: slides,
             newTitle: '',
-            slideCounter: counter
+            slideCounter: counter,
+            saved: false
         })
     }
 
@@ -256,7 +258,7 @@ class Viewer extends Component {
                     return {
                         id: res.data.id,
                         pause_time: slide.pause_time,
-                        title: slide.title
+                        title: slide.title,
                     }
                 })
             }
@@ -266,7 +268,8 @@ class Viewer extends Component {
             return a.pause_time - b.pause_time
         })
         this.setState({
-            slideLog: newLog
+            slideLog: newLog,
+            saved: true
         })
     }
 
@@ -277,7 +280,7 @@ class Viewer extends Component {
     }
 
     render () {
-        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate, projectTitle, continueHighlight, slideID} = this.state
+        const {url, playing, duration, playedSeconds, pip, controls, light, loop, playbackRate, volume, muted, slideTitle, newTitle, played, showCreate, projectTitle, continueHighlight, slideID, saved} = this.state
         let createInput = (
             <div className='player-footer-right'>
                 <input value={newTitle} onChange={(e) => this.handleChange('newTitle', e.target.value)} />
@@ -374,7 +377,7 @@ class Viewer extends Component {
                         </div>
                     </div>
                     <div className='content-container'>
-                        <ContentDisplay className='card-content-body' slideID={slideID} showCreate={showCreate} />
+                        <ContentDisplay className='card-content-body' slideID={slideID} showCreate={showCreate} saved={saved}/>
                     </div>
                 </div>
             </div>
