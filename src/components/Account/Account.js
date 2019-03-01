@@ -49,51 +49,25 @@ class Account extends Component{
             email: {
                 to: 'justin.tran2290@gmail.com',
                 from: 'join@methodsop.com',
-                subject: 'Test Email from Method',
+                subject: 'Invite to Join Method',
                 text: 'Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.',
                 html: `<div><header><h1 style="text-align: center;">Method</h1></header><div><div style="color: black;"><img src="https://methodsop-0001.s3.amazonaws.com/macbook.png" style="display:block, align-self: center;" width="200px"/><h3>Bob Ross invited you to join Method</h3><p>Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.</p><a href="http://www.google.com/" target="_blank"><h2>Create Account</h2></a></div></div><div><p>Copyright © 2019 Method, All rights reserved.</p></div></div>`
             },
+            newPerm: [],
             channelList: [],
             permList: [],
             utilData: {
-                labels: [
-                    'Electrical',
-                    'Assembly',
-                    'Testing',
-                    'Packaging',
-                    'Shipping',
-                    'Lot Tracking',
-                    'Orders',
-                    'Payroll'
+                labels: ['Electrical','Assembly','Testing','Packaging','Shipping','Lot Tracking','Orders','Payroll'
                 ],
                 datasets: [{
                     data: [300, 50, 100, 30, 80, 600, 400, 150],
-                    backgroundColor: [
-                        '#5D91FD',
-                        '#565761',
-                        '#FFBD00',
-                        '#F3F3F3',
-                        '#5D91FD',
-                        '#565761',
-                        '#FFBD00',
-                        '#F3F3F3',
-                        ],
-                        hoverBackgroundColor: [
-                        '#5D91FD',
-                        '#565761',
-                        '#FFBD00',
-                        '#F3F3F3',
-                        '#5D91FD',
-                        '#565761',
-                        '#FFBD00',
-                        '#F3F3F3',
-                        ]
+                    backgroundColor: ['#5D91FD','#565761','#FFBD00','#F3F3F3','#5D91FD','#565761','#FFBD00','#F3F3F3'],
+                        hoverBackgroundColor: ['#5D91FD','#565761','#FFBD00','#F3F3F3','#5D91FD','#565761','#FFBD00','#F3F3F3']
                 }],
                 
             }
         }
     }
-
     
     componentWillMount(){
         const {id} = this.props;
@@ -106,10 +80,15 @@ class Account extends Component{
                 })
                 axios.get(`/api/channels/${this.props.id}`)
                 .then(res => {
+                    // const initPerm = res.data.map(channel => {
+                    //     return {channel_id: channel.id, view: false}
+                    // })
                     this.setState({
-                        channelList: res.data
+                        channelList: res.data,
+                        // newPerm: initPerm
                     })
                 })
+                console.log(this.state)
             })
             .catch(err => {
                 this.props.history.push('/');
@@ -120,14 +99,20 @@ class Account extends Component{
             })
             axios.get(`/api/channels/${this.props.id}`)
             .then(res => {
+                const initPerm = res.data.map(channel => {
+                    return {channel_id: channel.id, view: false}
+                })
                 this.setState({
-                    channelList: res.data
+                    channelList: res.data,
+                    // newPerm: initPerm
                 })
             })
+            console.log(this.state)
         }
         this.setState({
             userID: id
         })
+        console.log(this.state)
     }
 
     handleChange (prop, val) {
@@ -136,8 +121,18 @@ class Account extends Component{
         })
     }
 
-    handleCheck (val) {
-        console.log(val)
+    handleCheck (chid) {
+        const newerPerm = this.state.newPerm.map(permission => {
+            if(permission.id === chid){
+                return {channel_id: chid, view: false}
+            } else {
+                return permission
+            }
+        }) 
+        this.setState({
+            newPerm: newerPerm
+        })
+        console.log(this.state)
     }
 
     addPermission(){
@@ -146,18 +141,22 @@ class Account extends Component{
         this.setState({
             email: eml
         })
-        // axios.post('',{
-
-        // })
-        // .then(res => {
-        //     this.sendEmail
-        //     axios.get('')
-        //     .then(res => {
-        //         this.setState({
-        //             permList: res.data
-        //         })
-        //     })
-        // })
+        this.state.newPerm.map(permission => {
+            axios.post('/api/permission',{
+                user_id: this.props.id,
+                channel_id: permission.channel_id,
+                view: permission.view
+            })
+            .then(res => {
+                axios.get('')
+                .then(res => {
+                    this.setState({
+                        permList: res.data
+                    })
+                })
+            })
+            return console.log('permission added')
+        })
     }
 
     updatePermission(){
@@ -225,7 +224,7 @@ class Account extends Component{
                                                 <button onClick={() => this.addPermission()}>+</button>
                                             </td>
                                             {this.state.channelList.map((channel) => (
-                                                <td key={channel.id}><input type='checkbox' onChange={(e) => {this.handleCheck(e.target.value)}} checked /></td>
+                                                <td key={channel.channel_id}><input type='checkbox' onChange={() => {this.handleCheck(channel.id)}} checked={this.state.newPerm.view} /></td>
                                             ))}
                                         </tr>
                                         {
