@@ -1,7 +1,7 @@
-insert into channels (
-    user_id,
+insert into permissions (
     channel_id,
-    view
+    view,
+    email
 ) values (
     $1,
     $2,

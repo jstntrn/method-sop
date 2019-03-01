@@ -51,7 +51,7 @@ class Account extends Component{
                 from: 'join@methodsop.com',
                 subject: 'Invite to Join Method',
                 text: 'Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.',
-                html: `<div><header><h1 style="text-align: center;">Method</h1></header><div><div style="color: black;"><img src="https://methodsop-0001.s3.amazonaws.com/macbook.png" style="display:block, align-self: center;" width="200px"/><h3>Bob Ross invited you to join Method</h3><p>Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.</p><a href="http://www.google.com/" target="_blank"><h2>Create Account</h2></a></div></div><div><p>Copyright © 2019 Method, All rights reserved.</p></div></div>`
+                html: `<div><header><h1 style="text-align: center;">Method</h1></header><div><div style="color: black;"><img src="https://methodsop-0001.s3.amazonaws.com/macbook.png" style="display:block, align-self: center;" width="200px"/><h3>Bob Ross invited you to join Method</h3><p>Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.</p><a href="http://method.com/#/register" target="_blank"><h2>Create Account</h2></a></div></div><div><p>Copyright © 2019 Method, All rights reserved.</p></div></div>`
             },
             newPerm: [],
             channelList: [],
@@ -80,12 +80,12 @@ class Account extends Component{
                 })
                 axios.get(`/api/channels/${this.props.id}`)
                 .then(res => {
-                    // const initPerm = res.data.map(channel => {
-                    //     return {channel_id: channel.id, view: false}
-                    // })
+                    const initPerm = res.data.map(channel => {
+                        return {channel_id: channel.id, view: true}
+                    })
                     this.setState({
                         channelList: res.data,
-                        // newPerm: initPerm
+                        newPerm: initPerm
                     })
                 })
                 console.log(this.state)
@@ -100,11 +100,11 @@ class Account extends Component{
             axios.get(`/api/channels/${this.props.id}`)
             .then(res => {
                 const initPerm = res.data.map(channel => {
-                    return {channel_id: channel.id, view: false}
+                    return {channel_id: channel.id, view: true}
                 })
                 this.setState({
                     channelList: res.data,
-                    // newPerm: initPerm
+                    newPerm: initPerm
                 })
             })
             console.log(this.state)
@@ -122,9 +122,11 @@ class Account extends Component{
     }
 
     handleCheck (chid) {
+        console.log(chid)
         const newerPerm = this.state.newPerm.map(permission => {
-            if(permission.id === chid){
-                return {channel_id: chid, view: false}
+            if(permission.channel_id === chid){
+                console.log(permission)
+                return {channel_id: chid, view: !permission.view}
             } else {
                 return permission
             }
@@ -143,20 +145,21 @@ class Account extends Component{
         })
         this.state.newPerm.map(permission => {
             axios.post('/api/permission',{
-                user_id: this.props.id,
+                email: this.state.recipient,
                 channel_id: permission.channel_id,
                 view: permission.view
             })
             .then(res => {
-                axios.get('')
-                .then(res => {
-                    this.setState({
-                        permList: res.data
-                    })
-                })
+                // axios.get('')
+                // .then(res => {
+                //     this.setState({
+                //         permList: res.data
+                //     })
+                // })
             })
             return console.log('permission added')
         })
+        this.sendEmail()
     }
 
     updatePermission(){
@@ -223,8 +226,8 @@ class Account extends Component{
                                                 <input style={{width: '70%'}} onChange={(e) => this.handleChange('recipient', e.target.value)} value={this.state.recipient} />
                                                 <button onClick={() => this.addPermission()}>+</button>
                                             </td>
-                                            {this.state.channelList.map((channel) => (
-                                                <td key={channel.channel_id}><input type='checkbox' onChange={() => {this.handleCheck(channel.id)}} checked={this.state.newPerm.view} /></td>
+                                            {this.state.newPerm.map((channel, index) => (
+                                                <td key={index}><input type='checkbox' onChange={() => {this.handleCheck(channel.channel_id)}} checked={channel.view} /></td>
                                             ))}
                                         </tr>
                                         {

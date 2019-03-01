@@ -8,8 +8,8 @@ module.exports = {
     },
     createPermission: (req, res) => {
         const db = req.app.get('db');
-        const { userID, channelID, view } = req.body;
-        db.permission.create_permission([userID, channelID, view])
+        const { channel_id, view, email } = req.body;
+        db.permission.create_permission([channel_id, view, email])
         .then((permission) => res.status(200).send(permission))
         .catch((err) => console.log(err))
     },

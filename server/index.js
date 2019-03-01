@@ -70,7 +70,7 @@ app.post('/api/channels', chc.createChannel)
 
 //permissions data
 app.get('/api/permissions/:user', pec.getPermissions);
-app.post('/api/permissions/', pec.createPermission);
+app.post('/api/permission/', pec.createPermission);
 // app.put('/api/permissions/:id', pec.editPermission)
 
 //sendgrid
