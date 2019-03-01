@@ -51,10 +51,7 @@ class Register extends Component{
     render(){
         const { username, password, email } = this.state;
         return(
-            <div>
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
-                {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
-                <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>   
+            <div>  
                 <div className='reg-form-header'>
                     <Link to='/' style={{ textDecoration: 'none', color: '#565761' }}><i className="fa fa-times"></i></Link>
                 </div>             

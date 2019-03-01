@@ -28,7 +28,7 @@ class CheckoutForm extends Component {
           <CardElement className='card-element-wrapper'/>
           <button className='payment-button' onClick={this.submit}>Pay</button>
         </div>
-        <p className='instruction'>Once a package is selected, you may complete your purchase.</p>
+        {/* <p className='instruction'>Once a package is selected, you may complete your purchase.</p> */}
       </div>
     );
   }

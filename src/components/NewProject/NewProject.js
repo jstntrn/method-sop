@@ -147,8 +147,6 @@ class NewProject extends Component{
 
         return(
             <div>
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
-                <link href="https://fonts.googleapis.com/css?family=Do+Hyeon" rel="stylesheet"></link>
                 <div className='viewer-header dash'>
                     <div className='header-left'>
                         <h1 className='logo'>method</h1>

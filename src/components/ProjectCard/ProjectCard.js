@@ -2,14 +2,54 @@ import React, { Component } from 'react'
 import './ProjectCard.scss'
 import { Link } from 'react-router-dom'
 import axios from 'axios';
+import { updateUser } from './../../ducks/reducer';
+import { connect } from 'react-redux';
+import ProjectEdit from './../ProjectEdit/ProjectEdit'
 
-export default class ProjectCard extends Component{
+class ProjectCard extends Component{
     constructor(props){
         super(props)
         this.state ={
+            userID: null,
             cardTitle: this.props.title,
-            channel: 'default'
+            channel: 'default',
+            channelList: []
         }
+    }
+
+    componentDidMount(){
+        const {id} = this.props;
+        if(!id){
+            axios.get('./api/user')
+            .then(res => {
+                this.props.updateUser(res.data);
+                this.setState({
+                    userID: this.props.id
+                })
+                axios.get(`/api/channels/${this.props.id}`)
+                .then(res => {
+                    this.setState({
+                        channelList: res.data
+                    })
+                })
+            })
+            .catch(err => {
+                this.props.history.push('/');
+            })
+        } else {
+            this.setState({
+                userID: id
+            })
+            axios.get(`/api/channels/${this.props.id}`)
+            .then(res => {
+                this.setState({
+                    channelList: res.data
+                })
+            })
+        }
+        this.setState({
+            userID: id
+        })
     }
 
     handleChange (prop, val) {
@@ -34,33 +74,10 @@ export default class ProjectCard extends Component{
         const { title, image_URL, project_id, editing, deleteProjFn } = this.props
         return(
             <div className='proj-card-wrapper'>
-                <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossOrigin="anonymous"/>
-                {/* <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"></link> */}
                 {
                     (editing ? 
                     <div>
-                        <img className='proj-image' src={image_URL} alt='project' />
-                        <div className='proj-title-wrapper'>
-                            <div className='title-update-wrapper'>
-                                <p>Channel</p>
-                                <div className='proj-inputs'>
-                                    <select className='proj-card-input' name='type' onChange={(e) => this.handleChange('channel', e.target.value)} >
-                                        <option value='electrical'>Electrical</option>
-                                        <option value='assembly'>Assembly</option>
-                                        <option value='testing'>Testing</option>
-                                        <option value='packaging'>Packaging</option>
-                                        <option value='shipping'>Shipping</option>
-                                        <option value='lot tracking'>Lot Tracking</option>
-                                        <option value='orders'>Orders</option>
-                                        <option value='payroll'>Payroll</option>
-                                    </select>
-                                    <p>Title</p>
-                                    <input className='proj-card-input' placeholder={title} value={this.state.cardTitle} onChange={(e) => this.handleChange('cardTitle', e.target.value)}/>
-                                </div>
-                                <button className="hamburger" onClick={() => this.saveTitle()} ><i className="far fa-save"></i></button>  
-                            </div>
-                        </div>
-                        <button className='proj-delete' onClick={() => deleteProjFn(project_id)}><i className="fa fa-trash" aria-hidden="true"></i></button>
+                        <ProjectEdit channelList={this.state.channelList} deleteProjFn={deleteProjFn} title={title} image_URL={image_URL} project_id={project_id} />
                     </div>
                     :
                     <div>
@@ -79,3 +96,12 @@ export default class ProjectCard extends Component{
         )
     }
 }
+
+function mapStateToProps(state){
+    const { id } = state
+    return {
+        id
+    };
+};
+
+export default connect(mapStateToProps, {updateUser})(ProjectCard);

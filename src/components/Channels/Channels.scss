@@ -1,0 +1,48 @@
+@import './../variables';
+
+.channel-wrapper {
+    margin: 100px auto;
+    width: 50%
+}
+
+.channel-input {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border: 1px solid $dark;
+    background-color: $blue
+}
+
+.channel-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.list-item {
+    position: relative;
+    display: inline-block;
+    border: 1px solid $dark;
+    border-radius: 1px;
+    &:hover{
+        background-color: $light;
+    }
+}
+
+.list-item:hover .list-edit{
+    display: block;
+}
+
+
+.list-edit {
+    position: absolute;
+    background: none;
+    border: none;
+    top: 15px;
+    right: 10px;
+    display: none;
+    color: #000;
+    font-size: 20px;
+    &:hover {
+        cursor: pointer;
+    }
+}

@@ -3,7 +3,9 @@ require('dotenv').config();
 const massive = require('massive');
 const { SERVER_PORT, DB_CONNECTION, SESSION_SECRET, SENDGRID_API_KEY, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY } = process.env;
 const ac = require('./controllers/authController');
+const chc = require('./controllers/channelController');
 const cc = require('./controllers/contentController');
+const pec = require('./controllers/permissionsController');
 const pc = require('./controllers/projController');
 const sc = require('./controllers/slideController');
 const vc = require('./controllers/vidController');
@@ -60,6 +62,14 @@ app.post('/api/slide/:project', sc.createSlide);
 app.post('/api/content/:slide', cc.createContent);
 app.get('/api/content/:slide', cc.getSlideContent);
 app.delete('/api/content/:id', cc.deleteContent);
+
+//channel data
+app.get('/api/channels/:user', chc.getChannels);
+app.post('/api/channels', chc.createChannel)
+
+
+//permissions data
+
 
 //sendgrid
  app.get('/api/send-email', (req, res) => {
