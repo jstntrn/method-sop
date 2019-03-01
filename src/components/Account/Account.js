@@ -87,6 +87,15 @@ class Account extends Component{
                         channelList: res.data,
                         newPerm: initPerm
                     })
+                    const permissionList = res.data.map(channel => {
+                        axios.get(`/api/permissions/${channel.id}`)
+                        .then(res => {
+                            return res.data
+                        })
+                    })
+                    this.setState({
+                        permList: permissionList
+                    })
                 })
                 console.log(this.state)
             })
@@ -105,6 +114,15 @@ class Account extends Component{
                 this.setState({
                     channelList: res.data,
                     newPerm: initPerm
+                })
+                const permissionList = res.data.map(channel => {
+                    axios.get(`/api/permissions/${channel.id}`)
+                    .then(res => {
+                        return res.data
+                    })
+                })
+                this.setState({
+                    permList: permissionList
                 })
             })
             console.log(this.state)
@@ -150,12 +168,15 @@ class Account extends Component{
                 view: permission.view
             })
             .then(res => {
-                // axios.get('')
-                // .then(res => {
-                //     this.setState({
-                //         permList: res.data
-                //     })
-                // })
+                const permissionList = this.state.channelList.map(channel => {
+                    axios.get(`/api/permissions/${channel.id}`)
+                    .then(res => {
+                        return res.data
+                    })
+                })
+                this.setState({
+                    permList: permissionList
+                })
             })
             return console.log('permission added')
         })
