@@ -9,6 +9,7 @@ import CheckoutForm from './../CheckoutForm/CheckoutForm';
 import {Doughnut} from 'react-chartjs-2';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
+
 //CHANNEL AND PLAYLIST CREATOR
 
 //ADMIN CONTROLS
@@ -52,9 +53,8 @@ class Account extends Component{
                 text: 'Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.',
                 html: `<div><header><h1 style="text-align: center;">Method</h1></header><div><div style="color: black;"><img src="https://methodsop-0001.s3.amazonaws.com/macbook.png" style="display:block, align-self: center;" width="200px"/><h3>Bob Ross invited you to join Method</h3><p>Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.</p><a href="http://www.google.com/" target="_blank"><h2>Create Account</h2></a></div></div><div><p>Copyright © 2019 Method, All rights reserved.</p></div></div>`
             },
-            channelList: [{id: 1, name: 'electrical'}, {id: 2, name: 'assembly'}, {id: 3, name: 'testing'}, {id: 4, name: 'packaging'}, {id: 5, name: 'shipping'}, {id: 6, name: 'lot tracking'}, {id: 7, name: 'orders'}, {id: 8, name: 'payroll'}],
-            permList: [{user_id: 1, email: 'a@a.com', permissions: [{channel_id: 1, access: true}, {channel_id: 2, access: true}, {channel_id: 3, access: true}, {channel_id: 4, access: true}, {channel_id: 5, access: true}, {channel_id: 6, access: true}, {channel_id: 7, access: false}, {channel_id: 8, access: true}]},
-            {user_id: 2, email: 'bbbbbb@bbbbbb.com', permissions: [{channel_id: 1, access: false}, {channel_id: 2, access: true}, {channel_id: 3, access: false}, {channel_id: 4, access: true}, {channel_id: 5, access: true}, {channel_id: 6, access: true}, {channel_id: 7, access: false}, {channel_id: 8, access: true}]}],
+            channelList: [],
+            permList: [],
             utilData: {
                 labels: [
                     'Electrical',
@@ -101,14 +101,33 @@ class Account extends Component{
             axios.get('./api/user')
             .then(res => {
                 this.props.updateUser(res.data);
-                console.log(res.data)
+                this.setState({
+                    userID: this.props.id
+                })
+                axios.get(`/api/channels/${this.props.id}`)
+                .then(res => {
+                    this.setState({
+                        channelList: res.data
+                    })
+                })
             })
             .catch(err => {
                 this.props.history.push('/');
             })
         } else {
+            this.setState({
+                userID: id
+            })
+            axios.get(`/api/channels/${this.props.id}`)
+            .then(res => {
+                this.setState({
+                    channelList: res.data
+                })
+            })
         }
-
+        this.setState({
+            userID: id
+        })
     }
 
     handleChange (prop, val) {

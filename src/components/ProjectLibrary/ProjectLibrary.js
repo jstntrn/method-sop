@@ -76,26 +76,28 @@ class ProjectLibrary extends Component{
             <div className='projects-container'>
                 {
                     this.state.channelList.map((channel, index) => (
-                        <div key={index}>
-                            <h3>{channel.name}</h3>
-                            {
-                                this.state.projectList.map((project) => (
-                                    (project.channel_id === channel.id ? 
-                                        <ProjectCard
-                                        key={project.id}
-                                        project_id={project.id}
-                                        title={project.title}
-                                        image_URL={project.image_url}
-                                        editing={this.props.editing}
-                                        deleteProjFn={this.deleteProject}
-                                        toggleEdit={this.props.toggleEdit}
-                                        updateLibrary={this.updateLibrary}
-                                    />
-                                    :
-                                    <div key={project.id}></div>
-                                    )
-                                ))
-                            }
+                        <div key={index} className='channel-projects'>
+                            <h3 style={{textAlign: 'left'}} >{channel.name}</h3>
+                            <div className='projects-wrapper'>
+                                {
+                                    this.state.projectList.map((project, index) => (
+                                        (project.channel_id === channel.id ? 
+                                            <ProjectCard
+                                            key={project.id}
+                                            project_id={project.id}
+                                            title={project.title}
+                                            image_URL={project.image_url}
+                                            editing={this.props.editing}
+                                            deleteProjFn={this.deleteProject}
+                                            toggleEdit={this.props.toggleEdit}
+                                            updateLibrary={this.updateLibrary}
+                                            />
+                                            :
+                                            <div key={index}></div>
+                                        )
+                                    ))
+                                }
+                            </div>
                         </div>
                     ))
                 }

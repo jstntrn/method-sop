@@ -69,7 +69,9 @@ app.post('/api/channels', chc.createChannel)
 
 
 //permissions data
-
+app.get('/api/permissions/:user', pec.getPermissions);
+app.post('/api/permissions/', pec.createPermission);
+app.put('/api/permissions/:id', pec.editPermission)
 
 //sendgrid
  app.get('/api/send-email', (req, res) => {

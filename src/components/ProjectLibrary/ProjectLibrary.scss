@@ -1,5 +1,21 @@
+@import './../variables';
+
 .projects-container {
+    margin: 0px 20px;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: flex-start;
+    align-items: baseline;
+}
+
+.channel-projects {
+    border-bottom: 1px solid $dark;
+    width: 100%;
+}
+
+.projects-wrapper {
+    display: flex;
+    overflow-x: auto;
+    width: 100%;
+    padding: 0px 20px 20px;
 }
