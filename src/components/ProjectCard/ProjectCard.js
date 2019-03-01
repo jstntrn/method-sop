@@ -60,7 +60,6 @@ class ProjectCard extends Component{
             [prop]: val,
             channelID: this.state.channelList[channelIndex].id
         })
-        console.log(this.state)
     }
 
     saveTitle(){
@@ -72,7 +71,6 @@ class ProjectCard extends Component{
         })
         updateLibrary()
         toggleEdit()
-        console.log(this.state)
     }
 
     render(){

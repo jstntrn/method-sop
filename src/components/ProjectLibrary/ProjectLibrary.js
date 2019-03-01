@@ -2,13 +2,16 @@ import React, { Component } from 'react'
 import ProjectCard from './../ProjectCard/ProjectCard'
 import './ProjectLibrary.scss'
 import axios from 'axios'
+import { updateUser } from './../../ducks/reducer';
+import { connect } from 'react-redux';
 
 class ProjectLibrary extends Component{
     constructor(props){
         super(props)
 
         this.state = {
-            projectList: []
+            projectList: [],
+            channelList: []
         }
     }
 
@@ -24,6 +27,12 @@ class ProjectLibrary extends Component{
                         projectList: res.data
                     })
                 })
+                axios.get(`/api/channels/${this.props.id}`)
+                .then(res => {
+                    this.setState({
+                        channelList: res.data
+                    })
+                })
             })
         } else {
             axios.get(`/api/projects/${id}`)
@@ -32,6 +41,12 @@ class ProjectLibrary extends Component{
                     projectList: res.data
                 })
             })
+            axios.get(`/api/channels/${this.props.id}`)
+                .then(res => {
+                    this.setState({
+                        channelList: res.data
+                    })
+                })
         }
     }
 
@@ -60,17 +75,28 @@ class ProjectLibrary extends Component{
         return(
             <div className='projects-container'>
                 {
-                    this.state.projectList.map((project) => (
-                        <ProjectCard
-                            key={project.id}
-                            project_id={project.id}
-                            title={project.title}
-                            image_URL={project.image_url}
-                            editing={this.props.editing}
-                            deleteProjFn={this.deleteProject}
-                            toggleEdit={this.props.toggleEdit}
-                            updateLibrary={this.updateLibrary}
-                        />
+                    this.state.channelList.map((channel, index) => (
+                        <div key={index}>
+                            <h3>{channel.name}</h3>
+                            {
+                                this.state.projectList.map((project) => (
+                                    (project.channel_id === channel.id ? 
+                                        <ProjectCard
+                                        key={project.id}
+                                        project_id={project.id}
+                                        title={project.title}
+                                        image_URL={project.image_url}
+                                        editing={this.props.editing}
+                                        deleteProjFn={this.deleteProject}
+                                        toggleEdit={this.props.toggleEdit}
+                                        updateLibrary={this.updateLibrary}
+                                    />
+                                    :
+                                    <div key={project.id}></div>
+                                    )
+                                ))
+                            }
+                        </div>
                     ))
                 }
             </div>
@@ -78,4 +104,11 @@ class ProjectLibrary extends Component{
     }
 }
 
-export default ProjectLibrary;
+function mapStateToProps(state){
+    const { id } = state
+    return {
+        id
+    };
+};
+
+export default connect(mapStateToProps, {updateUser})(ProjectLibrary);

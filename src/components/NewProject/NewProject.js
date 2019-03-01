@@ -23,7 +23,10 @@ class NewProject extends Component{
             showVideo: false,
             confirmed: false,
             userID: null,
-            projectCreated: false
+            projectCreated: false,
+            channel: 'default',
+            channelID: null,
+            channelList: []
         }
     }
     
@@ -36,14 +39,39 @@ class NewProject extends Component{
                 this.setState({
                     userID: this.props.id
                 })
+                axios.get(`/api/channels/${this.props.id}`)
+                .then(res => {
+                    this.setState({
+                        channelList: res.data
+                    })
+                })
             })
             .catch(err => {
                 this.props.history.push('/');
             })
         } else {
+            this.setState({
+                userID: id
+            })
+            axios.get(`/api/channels/${this.props.id}`)
+            .then(res => {
+                this.setState({
+                    channelList: res.data
+                })
+            })
         }
         this.setState({
             userID: id
+        })
+    }
+
+    channelUpdate (prop, val) {
+        const channelIndex = this.state.channelList.findIndex(channel => {
+            return channel.name === val
+        })
+        this.setState({
+            [prop]: val,
+            channelID: this.state.channelList[channelIndex].id
         })
     }
 
@@ -100,12 +128,13 @@ class NewProject extends Component{
     createProject () {
         //next button is invoked and prject data is posted to table
         //routed to viewer which pulls project id data
-        const { projectTitle, videoID, userID, videoImage } = this.state;
+        const { projectTitle, videoID, userID, videoImage, channelID } = this.state;
         axios.post('/api/project', {
             video_id: videoID,
             user_id: userID,
             title: projectTitle,
-            image_url: videoImage
+            image_url: videoImage,
+            channel_id: channelID
         })
         .then(res => {
             this.setState({
@@ -161,6 +190,14 @@ class NewProject extends Component{
                 </div>
                 <div className='new-proj-body'>
                     <div className='new-proj-input-wrapper'>
+                        <h2>Channel</h2>
+                        <select className='new-proj-input' name='type' onChange={(e) => this.channelUpdate('channel', e.target.value)} >
+                            {
+                                this.state.channelList.map((channel, index) => (
+                                    <option value={channel.name} key={index}>{channel.name}</option>
+                                ))
+                            }
+                        </select>
                         <h2>Project Title</h2>
                         <input className='new-proj-input' value={projectTitle} onChange={(e) => this.handleChange('projectTitle', e.target.value)} />
                         <h2>Vimeo URL</h2>
