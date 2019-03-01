@@ -7,8 +7,14 @@ export default class ProjectEdit extends Component{
             userID: null,
             cardTitle: this.props.title,
             channel: 'default',
-            channelList: []
+            channelID: null
         }
+    }
+
+    componentDidMount(){
+        this.setState({
+            channel: ch
+        })
     }
 
     handleChange (prop, val) {
@@ -37,7 +43,7 @@ export default class ProjectEdit extends Component{
                             <p>Title</p>
                             <input className='proj-card-input' placeholder={title} value={this.state.cardTitle} onChange={(e) => this.handleChange('cardTitle', e.target.value)}/>
                         </div>
-                        <button className="hamburger" onClick={() => this.saveTitle()} ><i className="far fa-save"></i></button>  
+                        <button className="hamburger" onClick={() => this.saveTitle(this.state.channelID)} ><i className="far fa-save"></i></button>  
                     </div>
                 </div>
                 <button className='proj-delete' onClick={() => deleteProjFn(project_id)}><i className="fa fa-trash" aria-hidden="true"></i></button>

@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { updateUser } from './../../ducks/reducer';
 import { connect } from 'react-redux';
-import ProjectEdit from './../ProjectEdit/ProjectEdit'
 
 class ProjectCard extends Component{
     constructor(props){
@@ -13,6 +12,7 @@ class ProjectCard extends Component{
             userID: null,
             cardTitle: this.props.title,
             channel: 'default',
+            channelID: null,
             channelList: []
         }
     }
@@ -52,18 +52,23 @@ class ProjectCard extends Component{
         })
     }
 
-    handleChange (prop, val) {
+    channelUpdate (prop, val) {
+        const channelIndex = this.state.channelList.findIndex(channel => {
+            return channel.name === val
+        })
         this.setState({
-            [prop]: val
+            [prop]: val,
+            channelID: this.state.channelList[channelIndex].id
         })
         console.log(this.state)
     }
 
     saveTitle(){
         const { project_id, updateLibrary, toggleEdit } = this.props
-        const { cardTitle } = this.state
+        const { cardTitle, channelID } = this.state
         axios.put(`/api/project/${project_id}`, {
-            title: cardTitle
+            title: cardTitle,
+            channelID: channelID
         })
         updateLibrary()
         toggleEdit()
@@ -77,7 +82,25 @@ class ProjectCard extends Component{
                 {
                     (editing ? 
                     <div>
-                        <ProjectEdit channelList={this.state.channelList} deleteProjFn={deleteProjFn} title={title} image_URL={image_URL} project_id={project_id} />
+                        <img className='proj-image' src={image_URL} alt='project' />
+                        <div className='proj-title-wrapper'>
+                            <div className='title-update-wrapper'>
+                                <p>Channel</p>
+                                <div className='proj-inputs'>
+                                    <select className='proj-card-input' name='type' onChange={(e) => this.channelUpdate('channel', e.target.value)} >
+                                        {
+                                            this.state.channelList.map((channel, index) => (
+                                                <option value={channel.name} key={index}>{channel.name}</option>
+                                            ))
+                                        }
+                                    </select>
+                                    <p>Title</p>
+                                    <input className='proj-card-input' placeholder={title} value={this.state.cardTitle} onChange={(e) => this.handleChange('cardTitle', e.target.value)}/>
+                                </div>
+                                <button className="hamburger" onClick={() => this.saveTitle()} ><i className="far fa-save"></i></button>  
+                            </div>
+                        </div>
+                        <button className='proj-delete' onClick={() => deleteProjFn(project_id)}><i className="fa fa-trash" aria-hidden="true"></i></button>
                     </div>
                     :
                     <div>

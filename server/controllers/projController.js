@@ -30,8 +30,8 @@ module.exports = {
     editTitle: (req, res) => {
         const db = req.app.get('db');
         const projectID = Number(req.params.id);
-        const { title } = req.body;
-        db.project.edit_project_title([title, projectID])
+        const { title, channelID } = req.body;
+        db.project.edit_project_title([title, channelID, projectID])
         .then(projects => {res.status(200).send(projects)})
         .catch(err => {console.log(err)})
     }
