@@ -1,8 +1,8 @@
 module.exports = {
     getPermissions: (req, res) => {
         const db = req.app.get('db');
-        const { user } = req.params;
-        db.permission.get_permissions([user])
+        const { email } = req.params;
+        db.permission.get_permissions([email])
         .then(permissions => {res.status(200).send(permissions)})
         .catch(err => {res.status(500).send(err)})
     },

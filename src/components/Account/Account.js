@@ -51,9 +51,10 @@ class Account extends Component{
                 from: 'join@methodsop.com',
                 subject: 'Invite to Join Method',
                 text: 'Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.',
-                html: `<div><header><h1 style="text-align: center;">Method</h1></header><div><div style="color: black;"><img src="https://methodsop-0001.s3.amazonaws.com/macbook.png" style="display:block, align-self: center;" width="200px"/><h3>Bob Ross invited you to join Method</h3><p>Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.</p><a href="http://method.com/#/register" target="_blank"><h2>Create Account</h2></a></div></div><div><p>Copyright © 2019 Method, All rights reserved.</p></div></div>`
+                html: `<div><header><h1 style="text-align: center;">Method</h1></header><div><div style="color: black;"><img src="https://methodsop-0001.s3.amazonaws.com/macbook.png" style="display:block, align-self: center;" width="200px"/><h3>Bob Ross invited you to join Method</h3><p>Method is a video-based procedure implementation platform. With Method, you and your colleagues can easily create, share, and implement standard operating procedures better than ever before.</p><a href="http://134.209.14.200:4000/" target="_blank"><h2>Create Account</h2></a></div></div><div><p>Copyright © 2019 Method, All rights reserved.</p></div></div>`
             },
             newPerm: [],
+            accessList: [],
             channelList: [],
             permList: [],
             utilData: {
@@ -69,7 +70,7 @@ class Account extends Component{
         }
     }
     
-    componentWillMount(){
+    componentDidMount(){
         const {id} = this.props;
         if(!id){
             axios.get('./api/user')
@@ -87,17 +88,30 @@ class Account extends Component{
                         channelList: res.data,
                         newPerm: initPerm
                     })
-                    const permissionList = res.data.map(channel => {
-                        axios.get(`/api/permissions/${channel.id}`)
-                        .then(res => {
-                            return res.data
-                        })
-                    })
-                    this.setState({
-                        permList: permissionList
-                    })
                 })
-                console.log(this.state)
+                // axios.get(`/api/access/${this.props.id}`)
+                // .then(res => {
+                //     console.log(res.data)
+                //     this.setState({
+                //         accessList: res.data
+                //     })
+                //     const permArr = []
+                //     res.data.forEach(access => {
+                //         axios.get(`/api/permissions/${access.user_email}`)
+                //         .then(res => {
+                //             res.data.map(perm => {
+                //                 permArr.push(perm)
+                //             })
+                //         })
+                //     })
+                //     console.log(permArr)
+                //     permArr.sort((a, b) => {
+                //         return a.channel_id - b.channel_id
+                //     })
+                //     this.setState({
+                //         permList: permArr
+                //     })
+                // })
             })
             .catch(err => {
                 this.props.history.push('/');
@@ -115,22 +129,34 @@ class Account extends Component{
                     channelList: res.data,
                     newPerm: initPerm
                 })
-                const permissionList = res.data.map(channel => {
-                    axios.get(`/api/permissions/${channel.id}`)
-                    .then(res => {
-                        return res.data
-                    })
-                })
-                this.setState({
-                    permList: permissionList
-                })
+                // axios.get(`/api/access/${this.props.id}`)
+                // .then(res => {
+                //     console.log(res.data)
+                //     this.setState({
+                //         accessList: res.data
+                //     })
+                //     const permArr = []
+                //     res.data.forEach(access => {
+                //         axios.get(`/api/permissions/${access.user_email}`)
+                //         .then(res => {
+                //             res.data.map(perm => {
+                //                 permArr.push(perm)
+                //             })
+                //         })
+                //     })
+                //     console.log(permArr)
+                //     permArr.sort((a, b) => {
+                //         return a.channel_id - b.channel_id
+                //     })
+                //     this.setState({
+                //         permList: permArr
+                //     })
+                // })
             })
-            console.log(this.state)
         }
         this.setState({
             userID: id
         })
-        console.log(this.state)
     }
 
     handleChange (prop, val) {
@@ -161,26 +187,32 @@ class Account extends Component{
         this.setState({
             email: eml
         })
-        this.state.newPerm.map(permission => {
-            axios.post('/api/permission',{
-                email: this.state.recipient,
-                channel_id: permission.channel_id,
-                view: permission.view
-            })
-            .then(res => {
-                const permissionList = this.state.channelList.map(channel => {
-                    axios.get(`/api/permissions/${channel.id}`)
-                    .then(res => {
-                        return res.data
-                    })
+        axios.post('/api/access', {
+            owner_id: this.props.id,
+            user_email: this.state.recipient
+        })
+        .then(res => {
+            this.state.newPerm.map(permission => {
+                axios.post('/api/permission',{
+                    email: this.state.recipient,
+                    channel_id: permission.channel_id,
+                    view: permission.view
                 })
-                this.setState({
-                    permList: permissionList
-                })
+                .then(res => {console.log(this.state)})
+                return console.log('permission added')
             })
-            return console.log('permission added')
+        })
+        this.setState({
+            recipient: ''
         })
         this.sendEmail()
+    }
+
+    changePassword(){
+        // this.state.permList[0].map(perm => {
+        //     console.log(perm)
+        // })
+        console.log(this.state.permList)
     }
 
     updatePermission(){
@@ -197,6 +229,7 @@ class Account extends Component{
     }
 
     render(){
+        const { permList } = this.state
         const { username, email } = this.props
         return(
             <div>
@@ -207,7 +240,7 @@ class Account extends Component{
                         <h1 className='dash-title'>|   Account</h1>
                     </div>
                     <div className='header-right'>
-                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
+                        <OverlayTrigger placement='left' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
                             <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>
                         </OverlayTrigger>  
                     </div>
@@ -218,7 +251,7 @@ class Account extends Component{
                             <h2>Account Info</h2>
                             <p>username: {username}</p>
                             <p>email: {email}</p>
-                            <button className='change-password'>change password</button>
+                            <button className='change-password' onClick={() => {this.changePassword()}}>change password</button>
                         </div>
                     </div>
                     <div className='permissions-container'>
@@ -230,6 +263,7 @@ class Account extends Component{
                             <h2>Channel Permissions</h2>
                             <button className='save-perm'>save changes</button>
                             <div className='permissions-table-wrapper'>
+                                <p>{permList[0]}</p>
                                 <table>
                                     <thead>
                                         <tr>
@@ -251,16 +285,21 @@ class Account extends Component{
                                                 <td key={index}><input type='checkbox' onChange={() => {this.handleCheck(channel.channel_id)}} checked={channel.view} /></td>
                                             ))}
                                         </tr>
-                                        {
-                                            this.state.permList.map(user => (
-                                                <tr key={user.user_id}>
-                                                    <td>{user.email}</td>
-                                                    {user.permissions.map(channel => (
-                                                        <td key={channel.channel_id}><input type='checkbox' checked={channel.access} onChange={(e) => {this.handleCheck(e.target.value)}} /></td>
-                                                    ))}
+                                        {/* {
+                                            
+                                            accessList.map((user, index) => (
+                                                <tr key={user.id}>
+                                                    <td>{user.user_email}</td>
+                                                    {
+                                                        permList.map(channel => (
+                                                        <td key={channel.channel_id}>
+                                                            <input type='checkbox' checked={channel.view} onChange={(e) => {this.handleCheck(e.target.value)}} />
+                                                        </td>
+                                                        ))
+                                                    }
                                                 </tr>
                                             ))
-                                        }
+                                        } */}
                                     </tbody>
                                 </table>
                             </div>

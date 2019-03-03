@@ -21,7 +21,7 @@ class ProjectLibrary extends Component{
         if(!id){
             axios.get('./api/user')
             .then(res => {
-                axios.get(`/api/projects/${res.data.id}`)
+                axios.get(`/api/projects`)
                 .then(res => {
                     this.setState({
                         projectList: res.data
@@ -35,7 +35,7 @@ class ProjectLibrary extends Component{
                 })
             })
         } else {
-            axios.get(`/api/projects/${id}`)
+            axios.get(`/api/projects`)
             .then(res => {
                 this.setState({
                     projectList: res.data
@@ -53,7 +53,7 @@ class ProjectLibrary extends Component{
     deleteProject = (id) => {
         axios.delete(`/api/project/${id}`)
         .then(res => {
-            axios.get(`/api/projects/${this.props.userID}`)
+            axios.get(`/api/projects`)
             .then(res => {
             this.setState({
                 projectList: res.data
@@ -63,7 +63,7 @@ class ProjectLibrary extends Component{
     }
 
     updateLibrary = () => {
-        axios.get(`/api/projects/${this.props.userID}`)
+        axios.get(`/api/projects`)
         .then(res => {
             this.setState({
                 projectList: res.data

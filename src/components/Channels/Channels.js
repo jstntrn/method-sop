@@ -86,7 +86,7 @@ class Channels extends Component{
                         <h1 className='dash-title'>|   Channel Manager</h1>
                     </div>
                     <div className='header-right'>                       
-                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
+                        <OverlayTrigger placement='left' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
                             <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>
                         </OverlayTrigger>  
                     </div>

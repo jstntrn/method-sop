@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
+import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 class Viewer extends Component {
     constructor(props){
@@ -18,7 +19,7 @@ class Viewer extends Component {
             controls: false,
             light: false,
             volume: 0.8,
-            muted: true,
+            muted: false,
             played: 0,
             playedSeconds: 0,
             loaded: 0,
@@ -300,9 +301,15 @@ class Viewer extends Component {
                             <h1 className='proj-title'>|   {projectTitle}</h1>
                         </div>
                         <div className='header-right'>
-                        <button className="hamburger" onClick={() => this.toggleCreate()}><i className="fas fa-pencil-alt"></i></button>
-                            <button className="hamburger" onClick={() => this.handleSave()} ><i className="far fa-save"></i></button>                          
-                            <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>                            
+                            <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Toggle Edit</Tooltip>}>
+                                <button className="hamburger" onClick={() => this.toggleCreate()}><i className="fas fa-pencil-alt"></i></button>
+                            </OverlayTrigger>
+                            <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Save</Tooltip>}>
+                                <button className="hamburger" onClick={() => this.handleSave()} ><i className="far fa-save"></i></button>
+                            </OverlayTrigger>
+                            <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
+                                <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>
+                            </OverlayTrigger>                     
                         </div>
                     </div>
                 </div>

@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const massive = require('massive');
 const { SERVER_PORT, DB_CONNECTION, SESSION_SECRET, SENDGRID_API_KEY, S3_BUCKET, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, STRIPE_PUBLIC_KEY, STRIPE_SECRET_KEY } = process.env;
+const asc = require('./controllers/accessController');
 const ac = require('./controllers/authController');
 const chc = require('./controllers/channelController');
 const cc = require('./controllers/contentController');
@@ -34,6 +35,11 @@ massive(DB_CONNECTION).then(db => {
     app.listen(SERVER_PORT, () => console.log(`The ship is sailing from port ${SERVER_PORT}`))
 })
 
+//access
+app.get('/api/access/:owner', asc.getAccess)
+app.post('/api/access', asc.createAccess)
+app.delete('/api/access/:id', asc.deleteAccess)
+
 //authentication
 app.post('/auth/login', ac.login);
 app.post('/auth/register', ac.register);
@@ -45,8 +51,8 @@ app.get('/api/user', ac.getUser);
 //project data
 // app.get('/api/projects/:id', pc.getProjects);
 app.post('/api/project', pc.createProject);
-app.get('/api/viewer/', pc.getProjectVid);
-app.get('/api/projects/:user', pc.getProjects);
+app.get('/api/viewer', pc.getProjectVid);
+app.get('/api/projects', pc.getProjects);
 app.delete('/api/project/:id', pc.deleteProject);
 app.put('/api/project/:id', pc.editTitle);
 
@@ -69,7 +75,7 @@ app.post('/api/channels', chc.createChannel)
 
 
 //permissions data
-app.get('/api/permissions/:channel', pec.getPermissions);
+app.get('/api/permissions/:email', pec.getPermissions);
 app.post('/api/permission/', pec.createPermission);
 // app.put('/api/permissions/:id', pec.editPermission)
 

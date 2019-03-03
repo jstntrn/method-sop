@@ -53,10 +53,16 @@ create table channels (
     foreign key(owner_id) references users(id)
 );
 
+create table access (
+    id serial primary key,
+    owner_id integer,
+    user_email varchar
+)
+
 create table permissions (
     id serial primary key,
-    user_id integer,
-    foreign key(user_id) references users(id),
+    email varchar,
+    foreign key(email) references access(user_email),
     channel_id integer,
     foreign key(channel_id) references channels(id),
     view boolean,

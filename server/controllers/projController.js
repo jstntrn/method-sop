@@ -1,15 +1,16 @@
 module.exports = {
     createProject: (req, res) => {
         const db = req.app.get('db');
-        const { video_id, user_id, title, image_url, channel_id } = req.body;
-        db.project.create_project([video_id, user_id, title, image_url, channel_id])
+        const { id } = req.session.user
+        const { video_id, title, image_url, channel_id } = req.body;
+        db.project.create_project([video_id, id, title, image_url, channel_id])
         .then((project) => res.status(200).send(project))
         .catch((err) => console.log(err))
     },
     getProjects: (req, res) => {
         const db = req.app.get('db');
-        const { user } = req.params;
-        db.project.get_projects([user])
+        const { id } = req.session.user
+        db.project.get_projects([id])
         .then(projects => {res.status(200).send(projects)})
         .catch(err => {res.status(500).send('error getting projects')})
     },

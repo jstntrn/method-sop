@@ -103,6 +103,7 @@ class ProjectCard extends Component{
                     :
                     <div>
                         <Link to={`/viewer/${project_id}`} style={{ textDecoration: 'none', color: '#565761' }}>
+                            {/* <button><i className="icon-move"></i></button> */}
                             <img className='proj-image' src={image_URL} alt='project' />
                             <div className='proj-title-wrapper'>
                                 <h3 className='proj-card-title'>{title}</h3>

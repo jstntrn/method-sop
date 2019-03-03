@@ -9,7 +9,7 @@ export default class ContentDisplay extends Component{
         super(props)
 
         this.state = {
-            slideID: 22,
+            slideID: null,
             contentList: [],
             showModal: false
         }

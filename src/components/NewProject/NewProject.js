@@ -32,6 +32,7 @@ class NewProject extends Component{
     
     componentDidMount(){
         const {id} = this.props;
+        console.log(this.props)
         if(!id){
             axios.get('./api/user')
             .then(res => {
@@ -42,7 +43,9 @@ class NewProject extends Component{
                 axios.get(`/api/channels/${this.props.id}`)
                 .then(res => {
                     this.setState({
-                        channelList: res.data
+                        channelList: res.data,
+                        channelID: res.data[0].id,
+                        channel: res.data[0].name
                     })
                 })
             })
@@ -56,7 +59,9 @@ class NewProject extends Component{
             axios.get(`/api/channels/${this.props.id}`)
             .then(res => {
                 this.setState({
-                    channelList: res.data
+                    channelList: res.data,
+                    channelID: res.data[0].id,
+                    channel: res.data[0].name
                 })
             })
         }
@@ -65,13 +70,9 @@ class NewProject extends Component{
         })
     }
 
-    channelUpdate (prop, val) {
-        const channelIndex = this.state.channelList.findIndex(channel => {
-            return channel.name === val
-        })
+    channelUpdate (val) {
         this.setState({
-            [prop]: val,
-            channelID: this.state.channelList[channelIndex].id
+            channelID: val
         })
     }
 
@@ -128,10 +129,9 @@ class NewProject extends Component{
     createProject () {
         //next button is invoked and prject data is posted to table
         //routed to viewer which pulls project id data
-        const { projectTitle, videoID, userID, videoImage, channelID } = this.state;
+        const { projectTitle, videoID, videoImage, channelID } = this.state;
         axios.post('/api/project', {
             video_id: videoID,
-            user_id: userID,
             title: projectTitle,
             image_url: videoImage,
             channel_id: channelID
@@ -183,7 +183,7 @@ class NewProject extends Component{
                         <h1 className='dash-title'>|   New Project</h1>
                     </div>
                     <div className='header-right'>
-                        <OverlayTrigger placement='bottom' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
+                        <OverlayTrigger placement='left' overlay={<Tooltip id={`tooltip-bottom`} className='trigger'>Dashboard</Tooltip>}>
                             <Link to='/dashboard' style={{ textDecoration: 'none' }}><button className="hamburger"><i className="fas fa-arrow-alt-circle-left"></i></button></Link>
                         </OverlayTrigger>  
                     </div>
@@ -194,7 +194,7 @@ class NewProject extends Component{
                         <select className='new-proj-input' name='type' onChange={(e) => this.channelUpdate('channel', e.target.value)} >
                             {
                                 this.state.channelList.map((channel, index) => (
-                                    <option value={channel.name} key={index}>{channel.name}</option>
+                                    <option value={channel.id} key={index}>{channel.name}</option>
                                 ))
                             }
                         </select>
