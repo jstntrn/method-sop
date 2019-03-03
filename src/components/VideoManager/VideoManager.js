@@ -29,11 +29,24 @@ class VideoManager extends Component{
             axios.get('./api/user')
             .then(res => {
                 this.props.updateUser(res.data);
+                axios.get(`/api/videos/${res.data.id}`)
+                .then(res => {
+                    this.setState({
+                        videoList: res.data,
+                        userID: res.data.user_id
+                    })
+                })
             })
             .catch(err => {
                 this.props.history.push('/');
             })
         } else {
+            axios.get(`/api/videos/${id}`)
+            .then(res => {
+                this.setState({
+                    videoList: res.data
+                })
+            })
         }
         this.setState({
             userID: id
@@ -80,23 +93,28 @@ class VideoManager extends Component{
         //**** fix userID load time null value
         //have confirm video button appear
         //if yes, post video to video table and show next button
-        const { videoURL, videoTitle, videoImage, userID } = this.state;
+        const { id } = this.props
+        const { videoURL, videoTitle, videoImage } = this.state;
         axios.post('/api/video', {
             videoURL,
             videoTitle,
             videoImage,
-            userID
+            userID: id
         })
         .then(res => {
-            this.setState({
-                videoID: res.data[0].id,
-                confirmed: true
+            axios.get(`/api/videos/${id}`)
+            .then(res => {
+                this.setState({
+                    videoList: res.data,
+                    videoURL: '',
+                    showVideo: false
+                })
             })
         })
     }
 
     render(){
-        const { videoURL, videoImage, videoTitle, showVideo, confirmed, vidAdded } = this.state;
+        const { videoURL, videoImage, videoTitle, showVideo, confirmed, vidAdded, videoList } = this.state;
         
         let currentVid = (
             <div>
@@ -140,7 +158,7 @@ class VideoManager extends Component{
                     </div>
                     {currentVid}
                     <div className='projects-container'>
-                        <VideoLibrary />
+                        <VideoLibrary videoList={videoList}/>
                     </div>
                 </div>
             </div>

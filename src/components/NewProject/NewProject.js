@@ -26,13 +26,13 @@ class NewProject extends Component{
             projectCreated: false,
             channel: 'default',
             channelID: null,
-            channelList: []
+            channelList: [],
+            videoList: []
         }
     }
     
     componentDidMount(){
         const {id} = this.props;
-        console.log(this.props)
         if(!id){
             axios.get('./api/user')
             .then(res => {
@@ -46,6 +46,13 @@ class NewProject extends Component{
                         channelList: res.data,
                         channelID: res.data[0].id,
                         channel: res.data[0].name
+                    })
+                })
+                axios.get(`/api/videos/${this.props.id}`)
+                .then(res => {
+                    this.setState({
+                        videoList: res.data,
+                        userID: res.data.user_id
                     })
                 })
             })
@@ -62,6 +69,13 @@ class NewProject extends Component{
                     channelList: res.data,
                     channelID: res.data[0].id,
                     channel: res.data[0].name
+                })
+            })
+            axios.get(`/api/videos/${this.props.id}`)
+            .then(res => {
+                this.setState({
+                    videoList: res.data,
+                    userID: res.data.user_id
                 })
             })
         }
@@ -147,7 +161,7 @@ class NewProject extends Component{
     }
 
     render(){
-        const { projectTitle, videoURL, videoImage, videoTitle, showVideo, confirmed, projectCreated} = this.state;
+        const { projectTitle, videoURL, videoImage, videoTitle, showVideo, confirmed, projectCreated, videoList} = this.state;
 
         let currentVid = (
             <div>
@@ -191,7 +205,7 @@ class NewProject extends Component{
                 <div className='new-proj-body'>
                     <div className='new-proj-input-wrapper'>
                         <h2>Channel</h2>
-                        <select className='new-proj-input' name='type' onChange={(e) => this.channelUpdate('channel', e.target.value)} >
+                        <select className='new-proj-input' name='type' onChange={(e) => this.channelUpdate(e.target.value)} >
                             {
                                 this.state.channelList.map((channel, index) => (
                                     <option value={channel.id} key={index}>{channel.name}</option>
@@ -207,7 +221,7 @@ class NewProject extends Component{
                     {currentVid}
                     <div className='video-lib-wrapper'>
                         <h2>Video Library</h2>
-                        <VideoLibrary handleURL={this.handleURL} page={this.props.match.path}/>
+                        <VideoLibrary handleURL={this.handleURL} page={this.props.match.path} videoList={videoList} />
                     </div>
                 </div>
             </div>

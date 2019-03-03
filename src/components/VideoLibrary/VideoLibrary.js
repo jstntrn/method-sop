@@ -3,7 +3,8 @@ import axios from 'axios';
 import { updateUser } from './../../ducks/reducer'
 import { connect } from 'react-redux';
 import VideoCard from './../VideoCard/VideoCard'
-import './../ProjectLibrary/ProjectLibrary.scss'
+import './VideoLibrary.scss'
+
 
 class VideoLibrary extends Component{
     constructor(props){
@@ -20,50 +21,13 @@ class VideoLibrary extends Component{
         }
     }
 
-    componentWillMount(){
-        const {id} = this.props;
-        if(!id){
-            axios.get('./api/user')
-            .then(res => {
-                this.props.updateUser(res.data);
-                axios.get(`/api/videos/${res.data.id}`)
-                .then(res => {
-                    this.setState({
-                        videoList: res.data,
-                        userID: res.data.user_id
-                    })
-                })
-            })
-            .catch(err => {
-                this.props.history.push('/');
-            })
-        } else {
-            axios.get(`/api/videos/${id}`)
-            .then(res => {
-                this.setState({
-                    videoList: res.data
-                })
-            })
-        }
-        this.setState({
-            userID: id
-        })
-    }
-
-    componentDidMount(){
-        const {id} = this.props;
-        this.setState({
-            userID: id
-        })
-    }
-
     render(){
-        const {videoList} = this.state;
+        const {videoList} = this.props;
         
         return(
             <div>
                 <div className='new-proj-body'>
-                    <div className='projects-container'>
+                    <div className='videos-container'>
                         {
                             (videoList.map(video => (
                                 <VideoCard 
