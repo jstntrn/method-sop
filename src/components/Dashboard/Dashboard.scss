@@ -21,3 +21,9 @@
     z-index: 999;
     margin-top: 5px;
 }
+
+@media (max-width: 450px) {
+    .dash-title{
+        display: none;
+    }
+}

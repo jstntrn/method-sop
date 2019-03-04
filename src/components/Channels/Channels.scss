@@ -46,3 +46,9 @@
         cursor: pointer;
     }
 }
+
+@media (max-width: 450px) {
+    .channel-input {
+        flex-direction: column;
+    }
+}

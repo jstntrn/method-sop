@@ -154,3 +154,10 @@ tr {
     }
 }
 
+@media (max-width: 450px) {
+    .save-perm {
+        position: absolute;
+        left: 100px;
+        top: 20px;
+    }
+}

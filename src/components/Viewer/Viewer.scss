@@ -162,3 +162,12 @@ h2 {
         left:150px;
     }
 }
+
+@media (max-width: 450px) {
+    // .proj-title {
+    //     display: none;
+    // }
+    .viewer-container {
+        zoom: 45%
+    }
+}

@@ -292,7 +292,7 @@ class Viewer extends Component {
             createInput = null;
         }
         return(
-            <div>
+            <div className='viewer-container'>
                 <div>
                     <div className='viewer-header'>
                         <div className='header-left'>
