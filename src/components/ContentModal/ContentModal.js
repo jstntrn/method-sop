@@ -29,6 +29,7 @@ export default class ContentModal extends Component{
     handleCreate(){
         const { slideID, createModal, updateDisplay } = this.props
         const { type, title, content, url } = this.state
+        console.log(this.state)
         axios.post(`/api/content/${slideID}`, {
             type: type,
             title: title,
@@ -53,6 +54,7 @@ export default class ContentModal extends Component{
          axios
          .put(signedRequest, file, options)
          .then(response => {
+            console.log(response, url)
            this.setState({ url });
            // Here we can do anything with the URL, setting state isn't required - but you may want to put this URL in your database.
          })

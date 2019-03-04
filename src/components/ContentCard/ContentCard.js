@@ -37,7 +37,6 @@ export default class ContentCard extends Component{
             case 'pdf':
                 cardBody = (
                     <div>
-                        <p className='content-text'>{content}</p>
                         <a href={url} target='_blank' rel='noopener noreferrer'><p className='content-text'>{content}</p></a>
                     </div>
                 );
@@ -56,7 +55,9 @@ export default class ContentCard extends Component{
                         ( showCreate ? <button className='content-delete' onClick={() => this.handleDelete()}><i className="fa fa-trash" aria-hidden="true"></i></button> : <div></div>)
                     }
                     <h3 className='content-title'>{title}</h3>
-                    {cardBody}
+                    <div className='card-body-wrapper'>
+                        {cardBody}
+                    </div>
                 </div>
             </div>
         )
