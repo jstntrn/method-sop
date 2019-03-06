@@ -29,7 +29,9 @@ class ProjectCard extends Component{
                 axios.get(`/api/channels/${this.props.id}`)
                 .then(res => {
                     this.setState({
-                        channelList: res.data
+                        channelList: res.data,
+                        channel: res.data[0].name,
+                        channelID: res.data[0].id
                     })
                 })
             })
@@ -43,12 +45,20 @@ class ProjectCard extends Component{
             axios.get(`/api/channels/${this.props.id}`)
             .then(res => {
                 this.setState({
-                    channelList: res.data
+                    channelList: res.data,
+                    channel: res.data[0].name,
+                    channelID: res.data[0].id
                 })
             })
         }
         this.setState({
             userID: id
+        })
+    }
+
+    handleChange (prop, val) {
+        this.setState({
+            [prop]: val
         })
     }
 

@@ -166,10 +166,8 @@ class Account extends Component{
     }
 
     handleCheck (chid) {
-        console.log(chid)
         const newerPerm = this.state.newPerm.map(permission => {
             if(permission.channel_id === chid){
-                console.log(permission)
                 return {channel_id: chid, view: !permission.view}
             } else {
                 return permission
@@ -178,7 +176,6 @@ class Account extends Component{
         this.setState({
             newPerm: newerPerm
         })
-        console.log(this.state)
     }
 
     addPermission(){
@@ -212,7 +209,7 @@ class Account extends Component{
         // this.state.permList[0].map(perm => {
         //     console.log(perm)
         // })
-        console.log(this.state.permList)
+        // console.log(this.state.permList)
     }
 
     updatePermission(){

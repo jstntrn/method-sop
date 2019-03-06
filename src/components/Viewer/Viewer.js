@@ -97,7 +97,7 @@ class Viewer extends Component {
     }
 
     onStart = () => {
-        console.log('onStart')
+        // console.log('onStart')
     }
 
     handleChange(prop, val){

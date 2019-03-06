@@ -21,7 +21,6 @@ export default class ProjectEdit extends Component{
         this.setState({
             [prop]: val
         })
-        console.log(this.state)
     }
 
     render(){
